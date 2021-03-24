@@ -1,1 +1,1 @@
-web: gunicorn things-library:app
+web: gunicorn things-library.__init__:app
