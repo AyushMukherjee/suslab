@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+
+{% block title %}
+Things Library
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<h1>Things Library</h1>
+
+<table class="center">
+    <tr>
+        <th>Index</th>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Date Created</th>
+        <th>Actions</th>
+    </tr>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date_created.date() }}</td>
+            <td>
+                <a href="">Update</a>
+                &nbsp;
+                <a href="/library/delete/{{item.id}}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<hr></hr>
+<div>
+    <form action="/library/" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="item">Item Name</label><br>
+        <input type="text" name="item" id="item"><br>
+        <label for="description">Description</label><br>
+        <textarea name="description" id="description">Good Umbrella</textarea><br>
+        <input type="submit" value="Post">
+    </form>
+</div>
+{% endblock %}
