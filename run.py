@@ -1,3 +1,6 @@
-from things_library import app
+from suslab import app, get_app()
 
-app.run(debug=True)
+handler = app.get_app()
+
+if __name__ == '__main__':
+    app.run(debug=True)

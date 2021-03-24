@@ -1,4 +1,4 @@
-from things_library import db
+from suslab import db
 
 
 class Base(db.Model):

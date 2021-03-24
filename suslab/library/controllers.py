@@ -1,5 +1,5 @@
 from flask import request, render_template, Blueprint, url_for, redirect
-from things_library.products.forms import ProductForm
+from suslab.library.forms import ProductForm
 
 
 library = Blueprint('library', __name__, url_prefix='/library')
