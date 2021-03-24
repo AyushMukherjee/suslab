@@ -1,1 +1,1 @@
-web: gunicorn suslab.things-library.__init__:app
+web: gunicorn __init__:app
