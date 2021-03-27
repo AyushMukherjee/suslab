@@ -6,7 +6,7 @@ library = Blueprint('library', __name__, url_prefix='/library')
 
 
 def _db_conn():
-    from suslab.library.models import Product
+    from suslab.users.models import Product
     from suslab import db
 
     return Product, db

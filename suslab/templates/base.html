@@ -37,6 +37,11 @@
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
 
+  {% if current_user.is_authenticated %}
+    <h4>{{ current_user.email }}</h4>
+    <h4><a href="/logout">Logout</a></h4>
+  {% endif %}
+
   {% block body %}{% endblock %}
 </body>
 

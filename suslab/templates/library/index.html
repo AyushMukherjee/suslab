@@ -33,14 +33,16 @@ Things Library
     {% endfor %}
 </table>
 <hr></hr>
-<div>
-    <form action="/library/" method="POST">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <label for="item">Item Name</label><br>
-        <input type="text" name="item" id="item"><br>
-        <label for="description">Description</label><br>
-        <textarea name="description" id="description">Good Umbrella</textarea><br>
-        <input type="submit" value="Post">
-    </form>
-</div>
+{% if current_user.is_authenticated %}
+    <div>
+        <form action="/library/" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <label for="item">Item Name</label><br>
+            <input type="text" name="item" id="item"><br>
+            <label for="description">Description</label><br>
+            <textarea name="description" id="description">Good Umbrella</textarea><br>
+            <input type="submit" value="Post">
+        </form>
+    </div>
+{% endif %}
 {% endblock %}

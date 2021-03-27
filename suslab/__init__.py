@@ -1,13 +1,18 @@
-from flask import Flask, render_template, Blueprint
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_security import Security
 from flask_wtf.csrf import CSRFProtect
+
 from suslab.library.controllers import library
+from suslab.users.controllers import get_user_datastore
 
 app = Flask(__name__)
 app.config.from_object('config')
+
 app.register_blueprint(library)
 
 db = SQLAlchemy(app)
+security = Security(app, get_user_datastore())
 
 csrf = CSRFProtect(app)
 
