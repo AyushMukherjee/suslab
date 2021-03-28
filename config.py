@@ -30,4 +30,5 @@ SECRET_KEY = "secret"
 
 # Security login and registration
 SECURITY_REGISTERABLE = True
-SECURITY_PASSWORD_SALT = bytes(secrets.SystemRandom().getrandbits(32))
+SECURITY_SEND_REGISTER_EMAIL = False
+SECURITY_PASSWORD_SALT = bytes(231297738)

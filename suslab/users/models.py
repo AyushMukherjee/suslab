@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from flask_security import RoleMixin, UserMixin
+from flask_security import RoleMixin, UserMixin, current_user
 from suslab import db
 
 
@@ -30,6 +30,8 @@ class User(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    products = db.relationship('Product',
+                               backref=db.backref('user'))
 
 
 # Library Tables
@@ -54,10 +56,4 @@ class Product(ProductBase):
 
     name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(512), nullable=False)
-
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
-
-    def __repr__(self):
-        return '<Product %r>' % self.name
+    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))

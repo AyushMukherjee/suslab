@@ -40,6 +40,7 @@
   {% if current_user.is_authenticated %}
     <h4>{{ current_user.email }}</h4>
     <h4><a href="/logout">Logout</a></h4>
+    <h5>Your details: {{ current_user.name }}, {{ current_user.active }}, {{ current_user.confirmed_at }}</h5>
   {% endif %}
 
   {% block body %}{% endblock %}

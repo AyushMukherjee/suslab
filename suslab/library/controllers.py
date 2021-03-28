@@ -1,4 +1,5 @@
 from flask import request, render_template, Blueprint, url_for, redirect
+from flask_security import current_user
 from suslab.library.forms import ProductForm
 
 
@@ -19,7 +20,11 @@ def index():
 
     # Verify the form
     if form.validate_on_submit():
-        item = Product(name=form.item.data, description=form.description.data)
+        item = Product(
+            name=form.item.data,
+            description=form.description.data,
+            user=current_user,
+        )
         try:
             db.session.add(item)
             db.session.commit()

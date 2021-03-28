@@ -16,6 +16,7 @@ Things Library
         <th>Item</th>
         <th>Description</th>
         <th>Date Created</th>
+        <th>Contact</th>
         <th>Actions</th>
     </tr>
     {% for item in items %}
@@ -24,6 +25,7 @@ Things Library
             <td>{{ item.name }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.date_created.date() }}</td>
+            <td>{{ item.user.email }}</td>
             <td>
                 <a href="">Update</a>
                 &nbsp;
