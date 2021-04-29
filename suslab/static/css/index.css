@@ -1,6 +1,62 @@
+:root{
+    --section-height-primary: 70vh;
+    --section-height-reduced: 40vh;
+    --section-height-strip: 20vh;
+}
+
 .background {
     width: max(750px, var(--max-width));
     height: 200vh;
     background: url('https://wallpapercave.com/wp/wp4676582.jpg'), #FFFFFF;
     background-position: center center;
+}
+
+.window {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3)
+}
+
+.window-top {
+    height: calc(var(--nav-height) + var(--section-height-primary));
+}
+
+.app-section {
+    height: var(--section-height-primary);
+    background: var(--colour-accent);
+}
+
+.app-section {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5em;
+}
+
+.card {
+    background: var(--colour-white);
+    height: 80%;
+    border-radius: 20px;
+}
+
+.card-spacer {
+    flex: 1;
+}
+
+.card-description {
+    visibility: hidden;
+    flex: 3;
+    transition: visibility 300ms ease-in-out;
+}
+
+.card-app-icon {
+    flex: 2;
+}
+
+.card-app-icon:hover ~ .card-description {
+    visibility: initial;
+}
+
+.card:first-child {
+    margin-right: 2%;
 }

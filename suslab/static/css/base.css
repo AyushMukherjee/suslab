@@ -30,7 +30,7 @@
         width: max(750px, var(--max-width));
         height: var(--nav-height);
         left: 50%;
-        transform: translate(-50%, 0);
+        transform: translateX(-50%);
         background: var(--colour-accent);
         z-index: 99;
     }
