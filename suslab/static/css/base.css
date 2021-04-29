@@ -22,6 +22,14 @@
     --section-height-strip: 10vh;
 }
 
+.flex-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
 .navbar {
     display: none
 }
@@ -56,18 +64,16 @@
 
     .nav-group{
         flex: 5;
-        display: flex;
-        align-items: center;
         justify-content: flex-end;
     }
 
-    .nav-group-list{
+    .flex-group-list{
         display: flex;
         list-style: none;
         margin-bottom: 0;
     }
 
-    .nav-item {
+    .flex-text-item {
         margin: 0 1em 0 0;
     }
 
@@ -89,11 +95,6 @@
 }
 
 .social-media {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
     width: max(var(--switch-width), var(--max-width));
     height: var(--section-height-strip);
     background: var(--colour-white);
@@ -101,5 +102,18 @@
 
 .social-media-icon > a {
     font-size: 3rem;
+    text-decoration: none;
+}
+
+.footer-group-list {
+    height: var(--section-height-strip);
+    background: var(--colour-black);
+    gap: 1rem;
+}
+
+.footer-item-link {
+    font-family: var(--ff-accent);
+    font-size: 1.5em;
+    line-height: 1.6;
     text-decoration: none;
 }

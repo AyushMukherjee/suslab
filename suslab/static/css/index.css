@@ -23,9 +23,7 @@
 }
 
 .app-section {
-    display: flex;
     flex-direction: row-reverse;
-    align-items: center;
     justify-content: flex-end;
     gap: 0.5em;
 }
@@ -34,6 +32,8 @@
     background: var(--colour-white);
     height: 80%;
     border-radius: 20px;
+    font-family: var(--ff-sans);
+    font-size: 2em;
 }
 
 .card-spacer {
