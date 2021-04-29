@@ -5,29 +5,9 @@ SusLab
 {% endblock %}
 
 {% block head %}
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Jomhuria&family=Yanone+Kaffeesatz:wght@400;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <nav class="navbar">
-        <div class="home" id="home">
-            <img class="logo" id="logo" src="https://picsum.photos/200">
-        </div>
-        <div class="nav-group">
-            <ul class="nav-group-list">
-                <li class="nav-item"><a class="nav-item-link">ABOUT</a></li>
-                <li class="nav-item"><a class="nav-item-link">FAQ</a></li>
-                <li class="nav-item"><a class="nav-item-link">CONTACT</a></li>
-                <li class="nav-item"><a class="nav-item-link">LOGIN</a></li>
-                <li class="nav-item"><a class="nav-item-link">SIGNUP</a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
 
 <h1 style="text-align:center">SusLab</h1>
 
@@ -48,7 +28,4 @@ SusLab
         <td>Restore: Cleanup Drives</td>
     </tr>
 </table>
-
-<h2 style="text-align:center"><a href="/login">Login</a></h2>
-<h2 style="text-align:center"><a href="/register">Signup</a></h2>
 {% endblock %}
