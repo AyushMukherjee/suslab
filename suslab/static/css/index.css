@@ -1,0 +1,6 @@
+.background {
+    width: max(750px, var(--max-width));
+    height: 200vh;
+    background: url('https://wallpapercave.com/wp/wp4676582.jpg'), #FFFFFF;
+    background-position: center center;
+}

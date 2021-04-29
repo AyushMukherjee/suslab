@@ -13,6 +13,9 @@
 
     /* nav height */
     --nav-height: 5em;
+    
+    /* max-width */
+    --max-width: 80%;
 }
 
 .navbar {
@@ -24,7 +27,7 @@
         display: flex;
         gap: 2em;
         position: fixed;
-        width: clamp(750px, 100%, 960px);
+        width: max(750px, var(--max-width));
         height: var(--nav-height);
         left: 50%;
         transform: translate(-50%, 0);
@@ -32,7 +35,7 @@
         z-index: 99;
     }
 
-    .navbar:last-child {
+    .navbar> div:last-child {
         margin-right: 5%;
     }
 
@@ -68,6 +71,7 @@
         font-family: var(--ff-accent);
         font-size: 2em;
         line-height: 1.6;
+        text-decoration: none;
     }
 
     .user-info {
@@ -77,6 +81,5 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        margin: 0 1em 0 0;
     }
 }
