@@ -1,5 +1,5 @@
 :root {
-    /* colour scheme for the index. consider moving to base. */
+    /* colour scheme for the index*/
     --colour-primary: white;
     --colour-accent: lightgrey;
     --colour-dark: black;
@@ -7,9 +7,12 @@
     --colour-white: white;
     --colour-black: black;
 
-    /* font scheme for the index. consider moving to base. */
+    /* font scheme for the index*/
     --ff-accent: 'Jomhuria', cursive;
     --ff-sans: 'Yanone Kaffeesatz', sans-serif;
+
+    /* nav height */
+    --nav-height: 5em;
 }
 
 .navbar {
@@ -22,7 +25,7 @@
         gap: 2em;
         position: fixed;
         width: clamp(750px, 100%, 960px);
-        height: 5em;
+        height: var(--nav-height);
         left: 50%;
         transform: translate(-50%, 0);
         background: var(--colour-accent);
