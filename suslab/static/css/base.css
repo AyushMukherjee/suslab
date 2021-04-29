@@ -14,8 +14,12 @@
     /* nav height */
     --nav-height: 5em;
     
-    /* max-width */
+    /* dimension params */
     --max-width: 80%;
+    --switch-width: 750px;
+    --section-height-primary: 70vh;
+    --section-height-reduced: 40vh;
+    --section-height-strip: 10vh;
 }
 
 .navbar {
@@ -27,7 +31,7 @@
         display: flex;
         gap: 2em;
         position: fixed;
-        width: max(750px, var(--max-width));
+        width: max(var(--switch-width), var(--max-width));
         height: var(--nav-height);
         left: 50%;
         transform: translateX(-50%);
@@ -82,4 +86,20 @@
         align-items: center;
         justify-content: flex-end;
     }
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    width: max(var(--switch-width), var(--max-width));
+    height: var(--section-height-strip);
+    background: var(--colour-white);
+}
+
+.social-media-icon > a {
+    font-size: 3rem;
+    text-decoration: none;
 }

@@ -17,10 +17,12 @@
   <!-- Place favicon.ico in the root directory -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&family=Yanone+Kaffeesatz:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   <meta name="theme-color" content="#fafafa">
   {% block head %}{% endblock %}
 </head>
@@ -64,6 +66,16 @@
   </div>
 
   {% block body %}{% endblock %}
+
+  <section class="container social-media">
+      <div class="social-media-icon facebook"><a href="#" class="fa fa-facebook"></a></div>
+      <div class="social-media-icon twitter"><a href="#" class="fa fa-twitter"></a></div>
+      <div class="social-media-icon instagram"><a href="#" class="fa fa-instagram"></a></div>
+  </section>
+
+  <footer>
+    <div></div>
+  </footer>
 </body>
 
 </html>

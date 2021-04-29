@@ -1,12 +1,5 @@
-:root{
-    --section-height-primary: 70vh;
-    --section-height-reduced: 40vh;
-    --section-height-strip: 20vh;
-}
-
 .background {
-    width: max(750px, var(--max-width));
-    height: 200vh;
+    width: max(var(--switch-width), var(--max-width));
     background: url('https://wallpapercave.com/wp/wp4676582.jpg'), #FFFFFF;
     background-position: center center;
 }
@@ -18,6 +11,10 @@
 
 .window-top {
     height: calc(var(--nav-height) + var(--section-height-primary));
+}
+
+.window-bottom {
+    height: calc(var(--nav-height) + var(--section-height-reduced));
 }
 
 .app-section {
