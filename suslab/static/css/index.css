@@ -1,5 +1,9 @@
+main {
+    --border-radius: 30px;
+}
+
 .background {
-    width: max(var(--switch-width), var(--max-width));
+    width: min(80%, var(--max-width));
     background: url('https://wallpapercave.com/wp/wp4676582.jpg'), #FFFFFF;
     background-position: center center;
 }
@@ -20,40 +24,54 @@
 .app-section {
     height: var(--section-height-primary);
     background: var(--colour-accent);
+    gap: 0.5em;
+    padding: 0 10% 0 15%;
 }
 
-.app-section {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 0.5em;
+.app-component {
+    height: 80%;
+}
+
+.app-spacer {
+    flex: 1;
+}
+
+.app-slider {
+    flex: 20;
+}
+
+.app-buttons {
+    flex: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {
     background: var(--colour-white);
-    height: 80%;
-    border-radius: 20px;
+    height: 100%;
+    border-radius: var(--border-radius);
     font-family: var(--ff-sans);
     font-size: 2em;
 }
 
-.card-spacer {
-    flex: 1;
+.card-description > * {
+    padding-left: 30px;
 }
 
-.card-description {
-    visibility: hidden;
-    flex: 3;
-    transition: visibility 300ms ease-in-out;
+.card-description > h2 {
+    padding-top: 30px;
 }
 
 .card-app-icon {
-    flex: 2;
+    width: 70px;
+    height: 70px;
 }
 
-.card-app-icon:hover ~ .card-description {
-    visibility: initial;
-}
-
-.card:first-child {
-    margin-right: 2%;
+.app-icon-img {
+    height: 100%;
+    text-align: center;
+    border-radius: var(--border-radius);
 }

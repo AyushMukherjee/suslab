@@ -15,10 +15,10 @@
     --nav-height: 5em;
     
     /* dimension params */
-    --max-width: 80%;
+    --max-width: 960px;
     --switch-width: 750px;
-    --section-height-primary: 70vh;
-    --section-height-reduced: 40vh;
+    --section-height-primary: 50vh;
+    --section-height-reduced: 30vh;
     --section-height-strip: 10vh;
 }
 
@@ -39,7 +39,7 @@
         display: flex;
         gap: 2em;
         position: fixed;
-        width: max(var(--switch-width), var(--max-width));
+        width: min(80%, var(--max-width));
         height: var(--nav-height);
         left: 50%;
         transform: translateX(-50%);
@@ -95,7 +95,7 @@
 }
 
 .social-media {
-    width: max(var(--switch-width), var(--max-width));
+    width: min(80%, var(--max-width));
     height: var(--section-height-strip);
     background: var(--colour-white);
 }
