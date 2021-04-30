@@ -25,7 +25,6 @@ main {
     height: var(--section-height-primary);
     background: var(--colour-accent);
     gap: 0.5em;
-    padding: 0 10% 0 15%;
 }
 
 .app-component {
@@ -36,8 +35,55 @@ main {
     flex: 1;
 }
 
-.app-slider {
+.app-slider-wrapper {
     flex: 20;
+    margin-left: 10%;
+    height: 80%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.app-slide-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20%);
+    transition: all 0.6s cubic-bezier(0, 0, 0.2, 0.8);
+}
+
+.app-slide-content.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.app-slide-content.leave {
+    opacity: 0;
+    transform: translateY(20%);
+    transition: all 0.4s cubic-bezier(0, 0, 0.7, -0.1);
+}
+
+.app-slide-content img {
+    display: block;
+    width: 100%;
+    border-radius: 0 0.5rem 0 0.5rem;
+    box-shadow: -0.6rem 0.4rem 0 #5a5b3f, 0.2rem -0.2rem 0 #ccc;
+}
+
+.app-slide-content .name {
+    position: absolute;
+    bottom: -0.1rem;
+    left: -0.3rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    mix-blend-mode: overlay;
 }
 
 .app-buttons {
@@ -49,12 +95,60 @@ main {
     justify-content: center;
 }
 
+.app-buttons {
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .app-buttons {
+        flex-direction: row;
+        margin: 0;
+        margin-top: 0.5rem;
+   }
+}
+
+.app-buttons .app-button {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.app-buttons .app-button:hover {
+    transform: scale(1.1);
+}
+
+.app-buttons .app-button:after {
+    content: '';
+    position: absolute;
+    top: 0.03rem;
+    left: -0.03rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    box-shadow: 0.03rem -0.03rem 0 #5a5b3f;
+}
+.app-buttons .app-button img {
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .card {
     background: var(--colour-white);
     height: 100%;
     border-radius: var(--border-radius);
     font-family: var(--ff-sans);
     font-size: 2em;
+}
+
+.card-description {
+    border-radius: 0 1em 0 1em;
+    box-shadow: -0.6em 0.5em 0 #5a5b3f, 0.3em -0.3em 0 #ccc;
 }
 
 .card-description > * {
@@ -66,8 +160,8 @@ main {
 }
 
 .card-app-icon {
-    width: 70px;
-    height: 70px;
+    width: min(5vw, 10vh);
+    height: min(5vw, 10vh);
 }
 
 .app-icon-img {
