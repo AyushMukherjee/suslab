@@ -1,5 +1,19 @@
+section, main {
+    position: relative;
+}
+
 main {
     --border-radius: 30px;
+}
+
+.arrow {
+    position: absolute;
+    border-color: var(--color-black);
+    border-style: solid;
+    border-width: 3px;
+    cursor: pointer;
+    transform: rotate(45deg);
+    z-index: 99;
 }
 
 .background {
@@ -14,11 +28,29 @@ main {
 }
 
 .window-top {
-    height: calc(var(--nav-height) + var(--section-height-primary));
+    height: calc(var(--section-height-primary));
 }
 
 .window-bottom {
-    height: calc(var(--nav-height) + var(--section-height-reduced));
+    height: calc(var(--section-height-reduced));
+}
+
+.next-section {
+    bottom: 10px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-top: 0;
+    border-left: 0;
+}
+
+.next-section-before {
+    bottom: 10px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-top: 0;
+    border-left: 0;
 }
 
 .app-section {
@@ -29,6 +61,7 @@ main {
 
 .app-component {
     height: 80%;
+    margin-top: var(--nav-height);
 }
 
 .app-spacer {
@@ -38,7 +71,6 @@ main {
 .app-slider-wrapper {
     flex: 20;
     margin-left: 10%;
-    height: 80%;
     position: relative;
     display: flex;
     align-items: center;
@@ -77,15 +109,8 @@ main {
 }
 
 .app-slide-nav {
-    position: absolute;
     width: 20px;
     height: 20px;
-    transform: rotate(45deg);
-    z-index: 99;
-    border-color: var(--color-black);
-    border-style: solid;
-    border-width: 3px;
-    cursor: pointer;
 }
 
 .app-slide-nav-before {

@@ -18,7 +18,7 @@
     --max-width: 960px;
     --switch-width: 750px;
     --section-height-primary: 100vh;
-    --section-height-reduced: 30vh;
+    --section-height-reduced: 50vh;
     --section-height-strip: 10vh;
 }
 
@@ -44,7 +44,7 @@
         left: 50%;
         transform: translateX(-50%);
         background: var(--colour-accent);
-        z-index: 99;
+        z-index: 999;
     }
 
     .navbar> div:last-child {
