@@ -7,12 +7,13 @@ main {
 }
 
 .arrow {
+    --transform: rotate(45deg);
     position: absolute;
     border-color: var(--color-black);
     border-style: solid;
     border-width: 3px;
     cursor: pointer;
-    transform: rotate(45deg);
+    transform: var(--transform);
     z-index: 99;
 }
 
@@ -36,21 +37,75 @@ main {
 }
 
 .next-section {
-    bottom: 10px;
+    position: absolute;
+    bottom: 20px;
     left: 50%;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+}
+
+.next-section-arrow {
+    --animation-time: 1s;
+    width: 20px;
+    height: 20px;
     border-top: 0;
     border-left: 0;
 }
 
-.next-section-before {
-    bottom: 10px;
-    left: 50%;
-    width: 50px;
-    height: 50px;
-    border-top: 0;
-    border-left: 0;
+#arrow1 {
+    display: none;
+    transform: var(--transform) translate(-20px, -20px);
+}
+
+@media(hover: hover) {
+    @keyframes divein {
+        0% {
+            opacity: 0;
+        }
+
+        25% {
+            opacity: 0.5;
+            transform: var(--transform) translate(-15px, -15px);
+        }
+
+        50% {
+            opacity: 1;
+            transform: var(--transform) translate(-10px, -10px);
+        }
+
+        100% {
+            transform: var(--transform) translate(0px, 0px);
+        }
+    }
+
+    @keyframes diveout {
+        0% {
+            opacity: 1;
+        }
+
+        25% {
+            opacity: 0.5;
+            transform: var(--transform) translate(10px, 10px);
+        }
+
+        50% {
+            opacity: 0;
+            transform: var(--transform) translate(15px, 15px);
+        }
+
+        100% {
+            transform: var(--transform) translate(20px, 20px);
+        }
+    }
+
+    #arrow1{
+        display: block;
+        animation: divein var(--animation-time) ease-in-out infinite
+    }
+
+    #arrow2{
+        animation: diveout var(--animation-time) ease-in-out infinite
+    }
 }
 
 .app-section {
@@ -125,6 +180,10 @@ main {
     border-bottom: 0;
 }
 
+.app-buttons {
+    display: none;
+}
+
 .app-slide-content .name {
     position: absolute;
     bottom: -0.1rem;
@@ -133,40 +192,6 @@ main {
     font-weight: bold;
     color: #fff;
     mix-blend-mode: overlay;
-}
-
-.app-buttons {
-    flex: 20;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-left: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .app-buttons {
-        flex-direction: row;
-        margin: 0;
-        margin-top: 0.5rem;
-   }
-}
-
-.app-buttons .app-button {
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.app-buttons .app-button:hover {
-    transform: scale(1.1);
-}
-
-.app-buttons .app-button img {
-    display: block;
-    object-fit: cover;
-    border-radius: var(--border-radius) 0;
 }
 
 .card {
@@ -183,20 +208,47 @@ main {
 }
 
 .card-description > * {
-    padding-left: 30px;
+    padding: 0 30px;
 }
 
 .card-description > h2 {
     padding-top: 30px;
 }
 
-.card-app-icon {
-    width: min(10vw, 15vh);
-    height: min(10vw, 15vh);
-}
+@media (min-width: 750px) {
+    .app-buttons {
+        flex: 15;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-right: 2rem;
+    }
+    
+    .app-buttons .app-button {
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .app-buttons .app-button:hover {
+        transform: scale(1.1);
+    }
+    
+    .app-buttons .app-button img {
+        display: block;
+        object-fit: cover;
+        border-radius: var(--border-radius) 0;
+    }
 
-.app-icon-img {
-    height: 100%;
-    text-align: center;
-    border-radius: var(--border-radius);
+    .card-app-icon {
+        height: min(10vw, 15vh);
+    }
+    
+    .app-icon-img {
+        height: 100%;
+        text-align: center;
+        border-radius: var(--border-radius);
+    }
 }
