@@ -47,3 +47,9 @@ def delete(id):
         return redirect(url_for('library.index'))
     except:
         return 'There was a problem deleting that task'
+
+@library.route('/admin')
+def admin():
+    Product, db = _db_conn()
+    items = Product.query.order_by(Product.date_created).all()
+    return render_template('library/admin_dummy.html', items=items)
