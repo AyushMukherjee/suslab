@@ -17,7 +17,7 @@
     /* dimension params */
     --max-width: 960px;
     --switch-width: 750px;
-    --section-height-primary: 50vh;
+    --section-height-primary: 100vh;
     --section-height-reduced: 30vh;
     --section-height-strip: 10vh;
 }
