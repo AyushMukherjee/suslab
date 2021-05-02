@@ -1,11 +1,12 @@
 :root {
     /* colour scheme for the index*/
-    --colour-primary: white;
-    --colour-accent: lightgrey;
-    --colour-dark: black;
+    --colour-primary: rgba(125, 188, 119, 0.65);;
+    --colour-accent: rgba(23, 101, 54, 0.66);
+    --colour-dark: rgba(117, 59, 6, 0.8);
 
     --colour-white: white;
     --colour-black: black;
+    --colour-transparent: rgba(0, 0, 0, 0.3);
 
     /* font scheme for the index*/
     --ff-accent: 'Jomhuria', cursive;
@@ -38,6 +39,7 @@
     left: 50%;
     transform: translateX(-50%);
     background: var(--colour-accent);
+    opacity: 0.8;
     z-index: 999;
 }
 
@@ -77,6 +79,7 @@
         font-size: 2em;
         line-height: 1.6;
         text-decoration: none;
+        color: #D5C42A;
     }
 
     .user-info {
@@ -92,17 +95,21 @@
 .social-media {
     width: 100%;
     height: var(--section-height-strip);
-    background: var(--colour-white);
+    background: var(--colour-accent);
 }
 
 .social-media-icon > a {
     font-size: 3rem;
     text-decoration: none;
+    color: var(--colour-white);
+}
+
+footer {
+    background: var(--colour-black);
 }
 
 .footer-group-list {
     height: var(--section-height-strip);
-    background: var(--colour-black);
     gap: 1rem;
 }
 
@@ -111,4 +118,5 @@
     font-size: 1.5em;
     line-height: 1.6;
     text-decoration: none;
+    color: var(--colour-white);
 }
