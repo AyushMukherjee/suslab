@@ -15,7 +15,6 @@
     --nav-height: 5em;
     
     /* dimension params */
-    --max-width: 960px;
     --switch-width: 750px;
     --section-height-primary: 100vh;
     --section-height-reduced: 50vh;
@@ -31,42 +30,38 @@
 }
 
 .navbar {
-    display: none
+    display: flex;
+    gap: 2em;
+    position: fixed;
+    width: 100%;
+    height: var(--nav-height);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--colour-accent);
+    z-index: 999;
+}
+
+.navbar> div:last-child {
+    margin-right: 5%;
+}
+
+.home {
+    flex: 1;
+}
+
+.logo {
+    height: 120%;
+    text-align: center;
+    margin: 0 1em -2em 1em;
+    border-radius: 50%;
+}
+
+.nav-group{
+    flex: 5;
+    justify-content: flex-end;
 }
 
 @media (min-width: 750px) {
-    .navbar {
-        display: flex;
-        gap: 2em;
-        position: fixed;
-        width: min(80%, var(--max-width));
-        height: var(--nav-height);
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--colour-accent);
-        z-index: 999;
-    }
-
-    .navbar> div:last-child {
-        margin-right: 5%;
-    }
-
-    .home {
-        flex: 1;
-    }
-
-    .logo {
-        height: 120%;
-        text-align: center;
-        margin: 0 1em -2em 1em;
-        border-radius: 50%;
-    }
-
-    .nav-group{
-        flex: 5;
-        justify-content: flex-end;
-    }
-
     .flex-group-list{
         display: flex;
         list-style: none;
@@ -95,7 +90,7 @@
 }
 
 .social-media {
-    width: min(80%, var(--max-width));
+    width: 100%;
     height: var(--section-height-strip);
     background: var(--colour-white);
 }

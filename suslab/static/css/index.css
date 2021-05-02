@@ -18,7 +18,7 @@ main {
 }
 
 .background {
-    width: min(80%, var(--max-width));
+    width: 100%;
     background: url('https://wallpapercave.com/wp/wp4676582.jpg'), #FFFFFF;
     background-position: center center;
 }

@@ -41,33 +41,33 @@
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
 
-  <div class="container">
-    <nav class="navbar">
-      <div class="home" id="home">
-        <img class="logo" id="logo" src="https://picsum.photos/200">
-      </div>
-      <div class="nav-group flex-horizontal">
-        <ul class="nav-group-list flex-group-list">
-          <li class="nav-item flex-text-item"><a class="nav-item-link">ABOUT</a></li>
-          <li class="nav-item flex-text-item"><a class="nav-item-link">FAQ</a></li>
-          <li class="nav-item flex-text-item"><a class="nav-item-link">CONTACT</a></li>
-          {% if current_user.is_authenticated %}
-          <li class="nav-item flex-text-item"><a href="/logout"class="nav-item-link">LOGOUT</a></li>
-        </ul>
-      </div>
-      <div class="user-info" id="user-info">{{ current_user.email }}</div>
-          {% else %}
-            <li class="nav-item flex-text-item"><a href="/login" class="nav-item-link">LOGIN</a></li>
-            <li class="nav-item flex-text-item"><a href="/register" class="nav-item-link">SIGNUP</a></li>
-            {% endif %}
-        </ul>
-      </div>
-    </nav>
-  </div>
+  
+  <nav class="navbar">
+    <div class="home" id="home">
+      <img class="logo" id="logo" src="https://picsum.photos/200">
+    </div>
+    <div class="nav-group flex-horizontal">
+      <ul class="nav-group-list flex-group-list">
+        <li class="nav-item flex-text-item"><a class="nav-item-link">ABOUT</a></li>
+        <li class="nav-item flex-text-item"><a class="nav-item-link">FAQ</a></li>
+        <li class="nav-item flex-text-item"><a class="nav-item-link">CONTACT</a></li>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item flex-text-item"><a href="/logout"class="nav-item-link">LOGOUT</a></li>
+      </ul>
+    </div>
+    <div class="user-info" id="user-info">{{ current_user.email }}</div>
+        {% else %}
+          <li class="nav-item flex-text-item"><a href="/login" class="nav-item-link">LOGIN</a></li>
+          <li class="nav-item flex-text-item"><a href="/register" class="nav-item-link">SIGNUP</a></li>
+          {% endif %}
+      </ul>
+    </div>
+  </nav>
+  
 
   {% block body %}{% endblock %}
 
-  <section class="container social-media flex-horizontal">
+  <section class="social-media flex-horizontal">
       <div class="social-media-icon facebook"><a href="#" class="fa fa-facebook"></a></div>
       <div class="social-media-icon twitter"><a href="#" class="fa fa-twitter"></a></div>
       <div class="social-media-icon instagram"><a href="#" class="fa fa-instagram"></a></div>
@@ -75,7 +75,7 @@
   </section>
 
   <footer>
-    <div class="container footer-links">
+    <div class="footer-links">
       <ul class="footer-group-list flex-horizontal flex-group-list">
         <li class="footer-item flex-text-item"><a class="footer-item-link">Meet The Team</a></li>
         <li class="footer-item flex-text-item"><a class="footer-item-link">Volunteer</a></li>
