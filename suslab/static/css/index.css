@@ -74,6 +74,7 @@ main {
         }
 
         100% {
+            opacity: 1;
             transform: var(--transform) translate(0px, 0px);
         }
     }
@@ -94,17 +95,18 @@ main {
         }
 
         100% {
+            opacity: 0;
             transform: var(--transform) translate(20px, 20px);
         }
     }
 
     #arrow1{
         display: block;
-        animation: divein var(--animation-time) ease-in-out infinite
+        animation: divein var(--animation-time) linear infinite
     }
 
     #arrow2{
-        animation: diveout var(--animation-time) ease-in-out infinite
+        animation: diveout var(--animation-time) linear infinite
     }
 }
 

@@ -43,10 +43,6 @@
     z-index: 999;
 }
 
-.navbar> div:last-child {
-    margin-right: 5%;
-}
-
 .home {
     flex: 1;
 }
@@ -54,13 +50,14 @@
 .logo {
     height: 120%;
     text-align: center;
-    margin: 0 1em -2em 1em;
+    margin: 0 auto -2em 3em;
     border-radius: 50%;
 }
 
 .nav-group{
     flex: 5;
     justify-content: flex-end;
+    margin-right: 5%;
 }
 
 @media (min-width: 750px) {
