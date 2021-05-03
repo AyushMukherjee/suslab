@@ -47,7 +47,7 @@
     flex: 1;
 }
 
-.logo {
+#logo {
     height: 120%;
     text-align: center;
     margin: 0 auto -2em 3em;
