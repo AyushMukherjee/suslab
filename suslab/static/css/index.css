@@ -19,8 +19,80 @@ main {
 
 .background {
     width: 100%;
-    background: url('https://wallpapercave.com/wp/wp4676582.jpg'), #FFFFFF;
+    background: #FFFFFF;
     background-position: center center;
+}
+
+@keyframes imageAnimation { 
+    0% {
+        opacity: 0;
+        animation-timing-function: ease-in;
+    }
+    16.67% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    33.33% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.slideshow,
+.slideshow:after { 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 0; 
+    list-style: none;
+    --animation-delay: 6s;
+}
+
+.slideshow:after { 
+    content: '';
+    /* background: transparent url(../images/pattern.png) repeat top left;  */
+}
+
+.slideshow > li > span { 
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: transparent;
+    object-fit: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation-name: imageAnimation;
+    animation-duration: calc(var(--animation-delay) * 3);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+}
+
+.slideshow li:nth-child(1) span { 
+    background-image: url('https://wallpapercave.com/wp/wp4676582.jpg');
+    animation-delay: calc(var(--animation-delay) * 0)
+}
+
+.slideshow li:nth-child(2) span { 
+    background-image: url('https://wallpapercave.com/wp/wp9064392.jpg');
+    animation-delay: calc(var(--animation-delay) * 1);
+}
+
+.slideshow li:nth-child(3) span { 
+    background-image: url('https://wallpapercave.com/wp/wp5716268.jpg');
+    animation-delay: calc(var(--animation-delay) * 2);
 }
 
 .window {
