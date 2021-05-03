@@ -184,12 +184,14 @@ main {
 
 .app-section {
     background: var(--colour-accent);
-    gap: 0.5em;
+    padding-top: var(--nav-height);
+    padding-bottom: var(--nav-height);
 }
 
 .app-component {
     height: 80%;
-    margin-top: var(--nav-height);
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .card {
