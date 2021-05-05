@@ -129,57 +129,55 @@ main {
     transform: var(--transform) translate(-20px, -20px);
 }
 
-@media(hover: hover) {
-    @keyframes divein {
-        0% {
-            opacity: 0;
-        }
-
-        25% {
-            opacity: 0.5;
-            transform: var(--transform) translate(-15px, -15px);
-        }
-
-        50% {
-            opacity: 1;
-            transform: var(--transform) translate(-10px, -10px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: var(--transform) translate(0px, 0px);
-        }
+@keyframes divein {
+    0% {
+        opacity: 0;
     }
 
-    @keyframes diveout {
-        0% {
-            opacity: 1;
-        }
-
-        25% {
-            opacity: 0.5;
-            transform: var(--transform) translate(10px, 10px);
-        }
-
-        50% {
-            opacity: 0;
-            transform: var(--transform) translate(15px, 15px);
-        }
-
-        100% {
-            opacity: 0;
-            transform: var(--transform) translate(20px, 20px);
-        }
+    25% {
+        opacity: 0.5;
+        transform: var(--transform) translate(-15px, -15px);
     }
 
-    #arrow1{
-        display: block;
-        animation: divein var(--animation-time) linear infinite
+    50% {
+        opacity: 1;
+        transform: var(--transform) translate(-10px, -10px);
     }
 
-    #arrow2{
-        animation: diveout var(--animation-time) linear infinite
+    100% {
+        opacity: 1;
+        transform: var(--transform) translate(0px, 0px);
     }
+}
+
+@keyframes diveout {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.5;
+        transform: var(--transform) translate(10px, 10px);
+    }
+
+    50% {
+        opacity: 0;
+        transform: var(--transform) translate(15px, 15px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: var(--transform) translate(20px, 20px);
+    }
+}
+
+#arrow1{
+    display: block;
+    animation: divein var(--animation-time) linear infinite
+}
+
+#arrow2{
+    animation: diveout var(--animation-time) linear infinite
 }
 
 .app-section {
@@ -229,6 +227,7 @@ main {
     transition: 0.5s;
 }
 
-:is(.app-component:hover, .app-component:focus-within, .app-component:active) .app-icon{
+:is(.app-component:hover, .app-component:focus-within) .app-icon,
+.app-select {
     transform: rotateY(90deg) translateX(-50%);
 }
