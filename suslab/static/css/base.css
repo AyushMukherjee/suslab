@@ -16,7 +16,6 @@
     --nav-height: 5em;
     
     /* dimension params */
-    --switch-width: 700px;
     --section-height-primary: 100vh;
     --section-height-reduced: 50vh;
     --section-height-strip: 8vh;
@@ -166,14 +165,14 @@ body {
 }
 
 .nav-toggle:hover .hamburger::before {
-    transform: rotate(-45deg);
+    transform: rotate(-50deg);
 }
 
 .nav-toggle:hover .hamburger::after {
-    transform: rotate(45deg);
+    transform: rotate(50deg);
 }
 
-@media (min-width: var(--switch-width)) {
+@media (min-width: 700px) {
     .nav-group{
         flex: 5;
         justify-content: flex-end;
@@ -195,6 +194,7 @@ body {
         margin-right: 5%;
         transform: none;
         box-shadow: none;
+        background: none;
     }
 
     .nav-group-list{

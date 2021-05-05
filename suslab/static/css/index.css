@@ -206,7 +206,7 @@ main {
     color: var(--colour-white);
 }
 
-@media screen and (max-width: 960px) {
+@media (max-width: 960px) {
     .card h2 {
         overflow-wrap: break-word;
     }
