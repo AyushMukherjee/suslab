@@ -144,8 +144,8 @@ body {
 .nav-open .nav-toggle .hamburger::after,
 .nav-open .nav-toggle:hover .hamburger::before,
 .nav-open .nav-toggle:hover .hamburger::after {
-    width: 1em;
-    left: 1.2em;
+    width: 1.5em;
+    left: 0.9em;
 }
 
 .nav-open .nav-toggle .hamburger::before,
@@ -160,7 +160,7 @@ body {
 
 .nav-toggle:hover .hamburger::before,
 .nav-toggle:hover .hamburger::after {
-    width: 1em;
+    width: 1.5em;
     left: -.2em;
 }
 
