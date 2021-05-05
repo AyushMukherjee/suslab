@@ -101,11 +101,11 @@ main {
 }
 
 .window-top {
-    height: calc(var(--section-height-primary));
+    height: var(--section-height-primary);
 }
 
 .window-bottom {
-    height: calc(var(--section-height-reduced));
+    height: var(--section-height-reduced);
 }
 
 .next-section {
@@ -229,6 +229,6 @@ main {
     transition: 0.5s;
 }
 
-.app-component:hover .app-icon{
+:is(.app-component:hover, .app-component:focus-within, .app-component:active) .app-icon{
     transform: rotateY(90deg) translateX(-50%);
 }
