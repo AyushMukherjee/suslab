@@ -1,0 +1,257 @@
+section, main {
+    position: relative;
+}
+
+main {
+    --border-radius: 30px;
+}
+
+.window-top > header {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -40%);
+    text-align: center;
+}
+
+.window-top :is(h1, h2) {
+    font-family: var(--ff-sans);
+    color: var(--colour-white);
+}
+
+.arrow {
+    --transform: rotate(45deg);
+    position: absolute;
+    border-color: var(--colour-white);
+    border-style: solid;
+    border-width: 3px;
+    cursor: pointer;
+    transform: var(--transform);
+    z-index: 99;
+}
+
+.background {
+    width: 100%;
+    background: #FFFFFF;
+    background-position: center center;
+}
+
+.slideshow,
+.slideshow:after { 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 0; 
+    list-style: none;
+}
+
+.slideshow > li > span { 
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: transparent;
+    object-fit: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.slideshow li:nth-child(1) span { 
+    background-image: url('https://wallpapercave.com/wp/wp4676582.jpg');
+}
+
+@media (min-width: 700px) {
+    @keyframes imageAnimation { 
+        0% {
+            opacity: 0;
+            animation-timing-function: ease-in;
+        }
+        16.67% {
+            opacity: 1;
+            animation-timing-function: ease-out;
+        }
+        33.33% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .slideshow,
+    .slideshow:after {
+        --animation-delay: 6s;
+    }
+
+    .slideshow:after { 
+        content: '';
+    }
+
+    .slideshow > li > span {
+        opacity: 0;
+        animation-name: imageAnimation;
+        animation-duration: calc(var(--animation-delay) * 3);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-delay: 0s;
+    }
+
+    .slideshow li:nth-child(1) span {
+        animation-delay: calc(var(--animation-delay) * 0);
+    }
+
+    .slideshow li:nth-child(2) span { 
+        background-image: url('https://wallpapercave.com/wp/wp9064392.jpg');
+        animation-delay: calc(var(--animation-delay) * 1);
+    }
+    
+    .slideshow li:nth-child(3) span { 
+        background-image: url('https://wallpapercave.com/wp/wp5716268.jpg');
+        animation-delay: calc(var(--animation-delay) * 2);
+    }
+}
+
+.window {
+    width: 100%;
+    background: var(--colour-transparent);
+}
+
+.window-top {
+    height: var(--section-height-primary);
+}
+
+.window-bottom {
+    height: var(--section-height-reduced);
+}
+
+.next-section {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.next-section-arrow {
+    --animation-time: 1s;
+    width: 20px;
+    height: 20px;
+    border-top: 0;
+    border-left: 0;
+}
+
+#arrow1 {
+    display: none;
+    transform: var(--transform) translate(-20px, -20px);
+}
+
+@keyframes divein {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.5;
+        transform: var(--transform) translate(-15px, -15px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: var(--transform) translate(-10px, -10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: var(--transform) translate(0px, 0px);
+    }
+}
+
+@keyframes diveout {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.5;
+        transform: var(--transform) translate(10px, 10px);
+    }
+
+    50% {
+        opacity: 0;
+        transform: var(--transform) translate(15px, 15px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: var(--transform) translate(20px, 20px);
+    }
+}
+
+#arrow1{
+    display: block;
+    animation: divein var(--animation-time) linear infinite
+}
+
+#arrow2{
+    animation: diveout var(--animation-time) linear infinite
+}
+
+.app-section {
+    background: var(--colour-accent);
+    padding-top: var(--nav-height);
+    padding-bottom: var(--nav-height);
+}
+
+.app-component {
+    position: relative;
+    height: 80%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.card {
+    background: var(--colour-dark);
+    height: 30rem;
+    border-radius: 0 var(--border-radius);
+    padding: 30px;
+    font-family: var(--ff-sans);
+    font-size: 3rem;
+}
+
+.card * {
+    color: var(--colour-white);
+}
+
+@media (max-width: 960px) {
+    .card h2 {
+        overflow-wrap: break-word;
+    }
+}
+
+.app-icon {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 var(--border-radius);
+    background: url('https://picsum.photos/400/800');
+    background-position: 0 100%;
+    background-size: 100% 200%;
+    transform-origin: left;
+    transition: 0.5s;
+}
+
+:is(.app-component:hover, .app-component:focus-within) .app-icon,
+.app-select {
+    transform: rotateY(90deg) translateX(-50%);
+}

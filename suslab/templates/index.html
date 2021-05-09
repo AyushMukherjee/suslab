@@ -5,29 +5,90 @@ SusLab
 {% endblock %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align:center">SusLab</h1>
 
-<table class="center">
-    <tr>
-        <td><a href="/library">ExChange: Things Library</a></td>
-        <td>ExChange: Swap Shop</td>
-        <td>Sustainnovation</td>
-    </tr>
-    <tr>
-        <td>SusShop</td>
-        <td>SLC</td>
-        <td>Pool Sports</td>
-    </tr>
-    <tr>
-        <td>ReStore: Mending</td>
-        <td>ReStore: Recycling</td>
-        <td>Restore: Cleanup Drives</td>
-    </tr>
-</table>
+<script src="{{ url_for('static', filename='js/appicon.js') }}"></script>
 
-<h2 style="text-align:center"><a href="/login">Login</a></h2>
-<h2 style="text-align:center"><a href="/register">Signup</a></h2>
+<div class="background">
+    <ul class="slideshow">
+        <li><span><!--Image 1--></span></li>
+        <li><span><!--Image 2--></span></li>
+        <li><span><!--Image 3--></span></li>
+    </ul>
+    <section class="window window-top">
+        <header>
+            <h1 class="main-line">Sustainability Lab</h1>
+            <h2 class="tag-line">Do we want a tagline here?</h2>
+            <a href="#" class="button button-primary join-us">Join Us</a>
+        </header>
+        <div class="next-section">
+            <a href="#app-section">
+                <div class="arrow next-section-arrow" id="arrow1"></div>
+                <div class="arrow next-section-arrow" id="arrow2"></div>
+            </a>
+        </div>
+    </section>
+
+    <main class="app-section" id="app-section">
+        <div class="container">
+            <div class="row">
+                <div class="four columns app-component">
+                    <div class="card">
+                        <h2>ExChange</h2>
+                        <p>App Description</p>
+                    </div>
+                    <div class="app-icon">
+                    </div>
+                </div>
+                <div class="four columns app-component">
+                    <div class="card">
+                        <h2>Sustainnovation</h2>
+                        <p>App Description</p>
+                    </div>
+                    <div class="app-icon">
+                    </div>
+                </div>
+                <div class="four columns app-component">
+                    <div class="card">
+                        <h2>Sus Shop</h2>
+                        <p>App Description</p>
+                    </div>
+                    <div class="app-icon">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns app-component">
+                    <div class="card">
+                        <h2>SLC</h2>
+                        <p>App Description</p>
+                    </div>
+                    <div class="app-icon">
+                    </div>
+                </div>
+                <div class="four columns app-component">
+                    <div class="card">
+                        <h2>Pool Spots</h2>
+                        <p>App Description</p>
+                    </div>
+                    <div class="app-icon">
+                    </div>
+                </div>
+                <div class="four columns app-component">
+                    <div class="card">
+                        <h2>ReStore</h2>
+                        <p>App Description</p>
+                    </div>
+                    <div class="app-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="window window-bottom" id="footer"><!--This is a window view--></section>
+</div>
 {% endblock %}
