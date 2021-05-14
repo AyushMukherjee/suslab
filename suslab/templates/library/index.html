@@ -28,8 +28,10 @@ Things Library
             <td>{{ item.user.email }}</td>
             <td>
                 <a href="">Update</a>
-                &nbsp;
-                <a href="/library/delete/{{item.id}}">Delete</a>
+                {% if current_user.has_role('admin') or item in current_user.products%}
+                    &nbsp;
+                    <a href="/library/delete/{{item.id}}">Delete</a>
+                {% endif %}
             </td>
         </tr>
     {% endfor %}
