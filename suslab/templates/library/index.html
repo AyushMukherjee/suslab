@@ -27,8 +27,8 @@ Things Library
             <td>{{ item.date_created.date() }}</td>
             <td>{{ item.user.email }}</td>
             <td>
-                <a href="">Update</a>
                 {% if current_user.has_role('admin') or item in current_user.products%}
+                    <a href="">Update</a>
                     &nbsp;
                     <a href="/library/delete/{{item.id}}">Delete</a>
                 {% endif %}

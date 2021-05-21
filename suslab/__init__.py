@@ -16,22 +16,6 @@ security = Security(app, get_user_datastore())
 
 csrf = CSRFProtect(app)
 
-'''
-get_user_datastore().find_or_create_role('admin')
-
-
-#creating admin-level user
-adminUser = get_user_datastore().create_user(
-    id = 999, 
-    email = 'admin@example.com',
-    password = 'password',
-    name = 'Admin',
-    active = True,
-    roles = ['admin']
-)
-'''
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
