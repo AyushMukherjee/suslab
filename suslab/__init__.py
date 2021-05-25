@@ -16,7 +16,6 @@ security = Security(app, get_user_datastore())
 
 csrf = CSRFProtect(app)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
