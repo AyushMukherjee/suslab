@@ -17,7 +17,11 @@ Things Library
         <th>Description</th>
         <th>Date Created</th>
         <th>Contact</th>
-        <th>Actions</th>
+
+        {# Displays Actions column only if user is authenticated (may become obsolete with UI update). #}
+        {% if current_user.is_authenticated %}
+            <th>Actions</th>
+        {% endif %}
     </tr>
     {% for item in items %}
         <tr>
@@ -26,13 +30,18 @@ Things Library
             <td>{{ item.description }}</td>
             <td>{{ item.date_created.date() }}</td>
             <td>{{ item.user.email }}</td>
-            <td>
-                {% if current_user.has_role('admin') or item in current_user.products%}
-                    <a href="">Update</a>
-                    &nbsp;
-                    <a href="/library/delete/{{item.id}}">Delete</a>
-                {% endif %}
-            </td>
+            {% if current_user.is_authenticated %}
+                <td>
+                    {# Only the requester and the admin can perform actions. #}
+                    {% if current_user.has_role('admin') or item in current_user.products %}
+                        <a href="">Update</a>
+                        &nbsp;
+                        <a href="/library/delete/{{item.id}}">Delete</a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+            {% endif %}
         </tr>
     {% endfor %}
 </table>
