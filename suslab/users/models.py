@@ -1,9 +1,12 @@
+from sqlalchemy.ext.declarative import declared_attr
 from flask_login import UserMixin
 from flask_security import RoleMixin, UserMixin, current_user
+
 from suslab import db
 
 
 # User Tables
+# Same user can have many roles and same role can have many users
 roles_users = db.Table(
     'roles_users',
     db.Column('users', db.Integer(), db.ForeignKey('users.id')),
@@ -30,18 +33,52 @@ class User(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
-    products = db.relationship('Product',
-                               backref=db.backref('user'))
 
+# Library User Tables
+# Same borrower can have many lenders and same lender can have many borrowers
+class LibraryUser(User):
+    # @declared_attr
+    # def products(cls):
+    #     return db.relationship('Product', backref=db.backref(cls.__tablename__))
+    
+    loan_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+    due_date = db.Column(db.DateTime, default=db.func.current_timestamp())
 
-# Library Tables
-products_users = db.Table(
-    'products_users',
-    db.Column('users', db.Integer(), db.ForeignKey('users.id')),
-    db.Column('products', db.Integer(), db.ForeignKey('products.id'))
+borrowers_lenders = db.Table(
+    'borrowers_lenders',
+    db.Column('borrowers', db.Integer(), db.ForeignKey('borrowers.id')),
+    db.Column('lenders', db.Integer(), db.ForeignKey('lenders.id'))
 )
 
+# TODO: abstract to mixin
+class Borrower(db.Model):
+    __tablename__ = 'borrowers'
+    
+    # borrower-user relationship
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship("User", backref=db.backref("borrower", uselist=False))
 
+    # borrower-product relationship
+    products = db.relationship('Product', backref=db.backref('borrower'))
+
+# TODO: abstract to mixin
+class Lender(db.Model):
+    __tablename__ = 'lenders'
+
+    # lender-user relationship
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship("User", backref=db.backref("lender", uselist=False))
+
+    # lender-product relationship
+    products = db.relationship('Product', backref=db.backref('lender'))
+
+    # lender-borrower relationship
+    borrowers = db.relationship('Borrower', secondary='borrowers_lenders',
+                                backref=db.backref('lenders'))
+
+# Library Tables
 class ProductBase(db.Model):
     __abstract__ = True
 
@@ -56,4 +93,6 @@ class Product(ProductBase):
 
     name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(512), nullable=False)
-    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
+
+    borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'))
+    lender_id = db.Column(db.Integer, db.ForeignKey('lenders.id'))
