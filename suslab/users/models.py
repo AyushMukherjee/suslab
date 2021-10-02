@@ -96,3 +96,25 @@ class Product(ProductBase):
 
     borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'))
     lender_id = db.Column(db.Integer, db.ForeignKey('lenders.id'))
+
+
+# Pool Tables
+class Pooler(db.Model):
+    __tablename__ = 'poolers'
+
+    # pooler-user relationship
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship("User", backref=db.backref("pooler", uselist=False))
+
+    # pooler-pool relationship
+    pool = db.relationship('Pool', backref=db.backref('pooler'))
+
+
+class Pool(Productbase):
+    __abstract__ = True
+
+    place = db.Column(db.String(32), nullable=False)
+    description = db.Column(db.String(512))
+
+    pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
