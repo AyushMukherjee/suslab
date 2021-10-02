@@ -1,0 +1,54 @@
+{% extends './base.html' %}
+
+{% block title %}
+Pool Spots
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<h1>Pool Spots</h1>
+
+<table class="center">
+    <tr>
+        <th>Index</th>
+        <th>Pool From</th>
+        <th>Pool To</th>
+        <th>Pool Time</th>
+        <th>Pooler</th>
+        <th>Signups</th>
+        <th>Actions</th>
+    </tr>
+    {% for pool in pools %}
+        <tr>
+            <td>{{ pool.id }}</td>
+            <td>{{ pool.from_ }}</td>
+            <td>{{ pool.to_ }}</td>
+            <td>{{ pool.time }}</td>
+            <td>{{ pool.pooler.user.email }}</td>
+            <td>{%if pool.signups %}{{ pool.signups[0].user.email }}{% endif %}</td>
+            <td>
+                <a href="/pool/signup/{{pool.id}}">Signup</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<hr></hr>
+{% if current_user.is_authenticated %}
+    <div>
+        <form action="/pool/" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <label for="from_">From</label><br>
+            <input type="text" name="from_" id="from_" required><br>
+            <label for="to_">To</label><br>
+            <input type="text" name="to_" id="to_" required><br>
+            <label for="date">Date</label><br>
+            <input type="date" name="date" id="date" required><br>
+            <label for="time">Time</label><br>
+            <input type="time" name="time" id="time" required><br>
+            <input type="submit" value="Post">
+        </form>
+    </div>
+{% endif %}
+{% endblock %}

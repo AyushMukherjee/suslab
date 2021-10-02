@@ -1,36 +1,57 @@
+from datetime import datetime as dt
+
 from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
+from suslab.pool.forms import PoolForm
 
 pool = Blueprint('pool', __name__, url_prefix='/pool')
 
 def _db_conn():
-    from suslab.users.models import Pool, Pooler
+    from suslab.users.models import Pool, Pooler, Signup
     from suslab import db
 
-    return Pool, Pooler, db
+    return Pool, Pooler, Signup, db
 
-@pool.route('/')
+@pool.route('/', methods=['GET', 'POST'])
 def index():
-    Pool, Pooler, db = _db_conn()
-    form = ProductForm()
+    Pool, Pooler, _, db = _db_conn()
+    form = PoolForm()
 
     # Verify the form
     if form.validate_on_submit():
+        pool_datetime = dt.strptime(f'{form.date.data} {form.time.data}', '%Y-%m-%d %H:%M:%S')
         pooler = Pooler(
             user = current_user,
         )
-        item = Product(
-            name=form.item.data,
-            description=form.description.data,
-            borrower = borrower,
+        pool = Pool(
+            from_=form.from_.data,
+            to_=form.to_.data,
+            time=pool_datetime,
+            pooler = pooler,
         )
         try:
-            db.session.add(borrower)
-            db.session.add(item)
+            db.session.add(pooler)
+            db.session.add(pool)
             db.session.commit()
-            return redirect(url_for('library.index'))
+            return redirect(url_for('pool.index'))
         except:
             return 'There was an issue adding your item'
 
-    items = Product.query.order_by(Product.date_created).all()
-    return render_template('library/index.html', items=items)
+    pools = Pool.query.order_by(Pool.time).all()
+    return render_template('pool/index.html', pools=pools)
+
+@pool.route('/signup/<int:id>')
+def signup(id):
+    Pool, _, Signup, db = _db_conn()
+    pool = Pool.query.get_or_404(id)
+    signup = Signup(
+        user = current_user,
+    )
+    pool.signups = [signup]
+
+    try:
+        db.session.add(signup)
+        db.session.commit()
+        return redirect(url_for('pool.index'))
+    except:
+        return 'There was a problem signing up'

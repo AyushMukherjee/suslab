@@ -111,15 +111,28 @@ class Pooler(db.Model):
     # pooler-pool relationship
     pool = db.relationship('Pool', backref=db.backref('pooler'))
 
-    # pooler-signup relationship
-    signup_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
-    signup = db.relationship('Pooler')
+
+class Signup(db.Model):
+    __tablename__ = 'signups'
+
+    # signup-user relationship
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship("User", backref=db.backref("signup", uselist=False))
+
+    # pool-signup relationship
+    signup_id = db.Column(db.Integer, db.ForeignKey('pools.id'))
 
 
 class Pool(ProductBase):
-    __abstract__ = True
+    __tablename__ = 'pools'
 
-    place = db.Column(db.String(32), nullable=False)
-    description = db.Column(db.String(512))
+    from_ = db.Column(db.String(32), nullable=False)
+    to_ = db.Column(db.String(32), nullable=False)
+    time = db.Column(db.DateTime)
 
+    # pooler-pool relationship
     pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
+
+    # pool-signup relationship
+    signups = db.relationship('Signup', backref=db.backref('pooler'))
