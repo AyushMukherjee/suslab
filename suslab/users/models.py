@@ -4,6 +4,7 @@ from flask_security import RoleMixin, UserMixin, current_user
 
 from suslab import db
 
+# TODO: Split files
 
 # User Tables
 # Same user can have many roles and same role can have many users
@@ -110,8 +111,12 @@ class Pooler(db.Model):
     # pooler-pool relationship
     pool = db.relationship('Pool', backref=db.backref('pooler'))
 
+    # pooler-signup relationship
+    signup_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
+    signup = db.relationship('Pooler')
 
-class Pool(Productbase):
+
+class Pool(ProductBase):
     __abstract__ = True
 
     place = db.Column(db.String(32), nullable=False)
