@@ -4,12 +4,15 @@ from flask_security import Security
 from flask_wtf.csrf import CSRFProtect
 
 from suslab.library.controllers import library
+from suslab.pool.controllers import pool
 from suslab.users.controllers import get_user_datastore
 
 app = Flask(__name__)
 app.config.from_object('config')
 
+# register apps
 app.register_blueprint(library)
+app.register_blueprint(pool)
 
 db = SQLAlchemy(app)
 security = Security(app, get_user_datastore())
