@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <!--link rel="manifest" href="site.webmanifest"-->
+    <!--link rel="apple-touch-icon" href="icon.png"-->
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jomhuria&family=Yanone+Kaffeesatz:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/security/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <meta name="theme-color" content="#fafafa">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <!-- Add your site or application content here -->
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-3.11.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+  
+    <div class="action-box">
+        <div class="box-section">
+            <div class="title-bar flex-horizontal">
+                <div class="logo">Logo</div>
+                <h1 class="title">Suslab</h1>
+            </div>
+            <div class="subtitle">Share, Save and Sustain</div>
+        </div>
+        <div class="box-section">Middle</div>
+        <div class="box-section">Bottom</div>
+    </div>
+  
+
+  {% block body %}{% endblock %}
+</body>
+
+</html>
