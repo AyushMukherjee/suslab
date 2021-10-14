@@ -10,8 +10,77 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
 }
 
 .title{
-    
+    line-height: 2;
+    margin: auto;
+}
+
+#logo{
+    height: 120px;
+    margin: auto;
+}
+
+.login-form{
+    flex-direction: column;
+}
+
+.form-fields label{
+    display: none;
+}
+
+.form-fields input[type="text"],
+.form-fields input[type="password"]{
+    width: clamp(350px, 20vw, 500px);
+    border-radius: 20px;
+}
+
+.form-fields input::placeholder{
+    content: "Email";
+    color: var(--colour-accent);
+    opacity: 0.8;
+    font-family: var(--ff-sans);
+}
+
+.form-links{
+    font-family: var(--ff-sans);
+    font-size: 2rem;
+    gap: 6em;
+}
+
+.form-links *{
+    margin: 0;
+}
+
+.remember-field{
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.5em;
+}
+
+.remember-field > input{
+    flex: 0.1;
+}
+
+.forgot-field{
+    justify-content: flex-end;
+}
+
+#forgot-password{
+    color: var(--colour-accent);
+    text-decoration: none;
+}
+
+@media (min-width: 700px) {
+    #forgot-password:hover{
+        color: var(--colour-dark);
+        text-decoration: underline;
+    }
+
+    .form-register > .button:hover{
+        color: var(--colour-white);
+        background-color: var(--colour-accent);
+    }
 }

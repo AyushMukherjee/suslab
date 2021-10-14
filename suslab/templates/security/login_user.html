@@ -1,1 +1,29 @@
 {% extends './security/login_base.html' %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+
+{%block formarea %}
+{% include "security/_messages.html" %}
+<form class="login-form flex-horizontal" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+    <div class="form-fields">
+        {{ login_user_form.hidden_tag() }}
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" placeholder="Email Address:" required=""><br>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Password:" required=""><br>
+    </div>
+    <div class="form-links flex-horizontal">
+        <div class="remember-field flex-horizontal">
+            <label for="remember" id="label-remember">Remember Me</label>
+            <input type="checkbox" name="remember" id="remember" value="y"><br>
+        </div>
+        <div class="forgot-field flex-horizontal">
+            <a href="/login" id="forgot-password">Forgot Password?</a>
+        </div>
+    </div>
+    <input type="submit" class="button-primary" value="Login">
+</form>
+{% endblock %}
+
+{% block altlogin %}
+New to SusLab? Create An Account.
+{% endblock %}
