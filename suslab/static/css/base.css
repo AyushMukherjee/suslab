@@ -26,9 +26,15 @@ body {
     overflow-x: hidden;
 }
 
-h1{
+h1, h2, h3, h4, h5, h6{
     font-family: var(--ff-sans);
     color: var(--colour-black);
+}
+
+input[type="submit"].button-primary,
+.button-primary{
+    background-color: var(--colour-accent);
+    border-color: var(--colour-accent);
 }
 
 .flex-horizontal {
@@ -222,6 +228,12 @@ h1{
         display: flex;
         align-items: center;
         justify-content: flex-end;
+    }
+
+    input[type="submit"].button-primary:hover,
+    .button-primary:hover{
+        background-color: var(--colour-dark);
+        border-color: var(--colour-dark);
     }
 }
 
