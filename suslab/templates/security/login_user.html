@@ -12,7 +12,7 @@
     </div>
 {% endif %}
 
-<form class="login-form flex-horizontal" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+<form class="login-form flex-horizontal" action="{{ url_for_security('login') }}" method="POST" name="login_user_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ login_user_form.hidden_tag() }}
         <label for="email">Email</label>

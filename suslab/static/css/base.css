@@ -12,8 +12,7 @@
 
     /* font scheme for the index*/
     --ff-accent: 'Jomhuria', cursive;
-    --ff-sans: 'Yanone Kaffeesatz', sans-serif;
-    --ff-sans-alt: 'Source Sans Pro', sans-serif;
+    --ff-sans: 'Source Sans Pro', sans-serif;
 
     /* nav height */
     --nav-height: 5em;
