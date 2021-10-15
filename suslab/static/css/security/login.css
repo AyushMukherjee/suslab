@@ -18,6 +18,10 @@
     margin: auto;
 }
 
+.subtitle{
+    font-family: var(--ff-sans-alt);
+}
+
 #logo{
     height: 120px;
     margin: auto;
@@ -25,6 +29,26 @@
 
 .login-form{
     flex-direction: column;
+}
+
+.form-errors{
+    width: 20vw;
+    flex-direction: column;
+    background-color: #F8F1AE;
+}
+
+.form-errors > h6{
+    margin: 0;
+    padding-left: 20px;
+    font-family: var(--ff-sans-alt);
+    color: var(--colour-warn);
+    text-align: left;
+    width: 20vw;
+}
+
+.form-fields{
+    flex-direction: column;
+    gap: 5px;
 }
 
 .form-fields label{
@@ -38,7 +62,6 @@
 }
 
 .form-fields input::placeholder{
-    content: "Email";
     color: var(--colour-accent);
     opacity: 0.8;
     font-family: var(--ff-sans);
