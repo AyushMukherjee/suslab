@@ -8,9 +8,12 @@
     --colour-black: black;
     --colour-transparent: rgba(0, 0, 0, 0.3);
 
+    --colour-warn: red;
+
     /* font scheme for the index*/
     --ff-accent: 'Jomhuria', cursive;
     --ff-sans: 'Yanone Kaffeesatz', sans-serif;
+    --ff-sans-alt: 'Source Sans Pro', sans-serif;
 
     /* nav height */
     --nav-height: 5em;
