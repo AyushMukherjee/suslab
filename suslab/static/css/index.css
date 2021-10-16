@@ -218,9 +218,8 @@ main {
 }
 
 .card {
-    background: var(--colour-dark);
+    flex-direction: column;
     height: 30rem;
-    border-radius: 0 var(--border-radius);
     padding: 30px;
     font-family: var(--ff-sans);
     font-size: 3rem;
@@ -238,20 +237,10 @@ main {
 
 .app-icon {
     content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0 var(--border-radius);
+    width: 80%;
+    aspect-ratio: 4/3;
+    border-radius: var(--border-radius);
     background: url('https://picsum.photos/400/800');
     background-position: 0 100%;
     background-size: 100% 200%;
-    transform-origin: left;
-    transition: 0.5s;
-}
-
-:is(.app-component:hover, .app-component:focus-within) .app-icon,
-.app-select {
-    transform: rotateY(90deg) translateX(-50%);
 }
