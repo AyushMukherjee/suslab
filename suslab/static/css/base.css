@@ -1,21 +1,21 @@
 :root {
     /* colour scheme for the index*/
-    --colour-primary: rgba(125, 188, 119, 0.65);;
-    --colour-accent: rgba(23, 101, 54, 0.8);
-    --colour-dark: rgba(117, 59, 6, 0.8);
+    --colour-primary: rgba(236, 255, 220, 0.33);
+    --colour-accent: rgba(120, 103, 88, 0.8);
+    --colour-dark: rgba(56, 31, 7, 0.7);
 
     --colour-white: white;
     --colour-black: black;
-    --colour-transparent: rgba(0, 0, 0, 0.3);
+    --colour-transparent: rgba(255, 255, 255, 0.16);
 
     --colour-warn: red;
 
     /* font scheme for the index*/
-    --ff-accent: 'Jomhuria', cursive;
+    --ff-accent: 'Open Sans', sans-serif;
     --ff-sans: 'Source Sans Pro', sans-serif;
 
     /* nav height */
-    --nav-height: 5em;
+    --nav-height: 8vh;
     
     /* dimension params */
     --section-height-primary: 100vh;
@@ -33,10 +33,11 @@ h1, h2, h3, h4, h5, h6{
     color: var(--colour-black);
 }
 
-input[type="submit"].button-primary,
-.button-primary{
-    background-color: var(--colour-accent);
-    border-color: var(--colour-accent);
+button,
+.button-primary,
+input[type="submit"].button-primary{
+    background-color: var(--colour-dark) !important;
+    border-color: var(--colour-dark) !important;
 }
 
 .flex-horizontal {
@@ -65,7 +66,7 @@ input[type="submit"].button-primary,
     height: var(--nav-height);
     left: 50%;
     transform: translateX(-50%);
-    background: var(--colour-accent);
+    background: var(--colour-primary);
     opacity: 0.8;
     z-index: 999;
 }
@@ -110,12 +111,14 @@ input[type="submit"].button-primary,
 
 .nav-item-link {
     text-decoration: none;
-    color: #D5C42A;
+    font-weight: 600;
+    color: var(--colour-dark);
+    letter-spacing: 0.05em;
 }
 
 .nav-toggle {
     position: absolute;
-    top: 1.5em;
+    top: 1em;
     right: 0;
     transform: translateX(-100%);
     background: var(--colour-white);
@@ -217,16 +220,18 @@ input[type="submit"].button-primary,
         margin-bottom: 0;
         height: auto;
         padding: initial;
+        gap: 4em;
     }
     
     .nav-item {
         margin: 0 1em 0 0;
+        font-size: 1em;
     }
 
     .user-info {
         flex: 1;
         font-family: var(--ff-accent);
-        font-size: 3em;
+        font-size: 1em;
         display: flex;
         align-items: center;
         justify-content: flex-end;

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta property="og:title" content="">
   <meta property="og:type" content="">
@@ -15,16 +15,13 @@
   <!--link rel="manifest" href="site.webmanifest"-->
   <!--link rel="apple-touch-icon" href="icon.png"-->
   <!-- Place favicon.ico in the root directory -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Jomhuria&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   <meta name="theme-color" content="#fafafa">
   {% block head %}{% endblock %}
@@ -50,17 +47,17 @@
     </button>
     <div class="nav-group flex-horizontal">
       <ul class="nav-group-list flex-group-list">
-        <li class="nav-item flex-text-item"><a class="nav-item-link">ABOUT</a></li>
-        <li class="nav-item flex-text-item"><a class="nav-item-link">FAQ</a></li>
-        <li class="nav-item flex-text-item"><a class="nav-item-link">CONTACT</a></li>
+        <li class="nav-item flex-text-item"><a class="nav-item-link">about</a></li>
+        <li class="nav-item flex-text-item"><a class="nav-item-link">faq</a></li>
+        <li class="nav-item flex-text-item"><a class="nav-item-link">contact</a></li>
         {% if current_user.is_authenticated %}
-        <li class="nav-item flex-text-item"><a href="/logout"class="nav-item-link">LOGOUT</a></li>
+        <li class="nav-item flex-text-item"><a href="/logout"class="nav-item-link">logout</a></li>
       </ul>
     </div>
     <div class="user-info" id="user-info">{{ current_user.email }}</div>
         {% else %}
-          <li class="nav-item flex-text-item"><a href="/login" class="nav-item-link">LOGIN</a></li>
-          <li class="nav-item flex-text-item"><a href="/register" class="nav-item-link">SIGNUP</a></li>
+          <li class="nav-item flex-text-item"><a href="/login" class="nav-item-link">login</a></li>
+          <li class="nav-item flex-text-item"><a href="/register" class="nav-item-link">signup</a></li>
           {% endif %}
       </ul>
     </div>

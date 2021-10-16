@@ -14,9 +14,11 @@ main {
     text-align: center;
 }
 
-.window-top :is(h1, h2) {
+.window-top :is(h1, h2, h3, h4, h5, h6) {
     font-family: var(--ff-sans);
-    color: var(--colour-white);
+    font-weight: 600;
+    color: var(--colour-dark);
+    letter-spacing: 0.01em;
 }
 
 .arrow {
@@ -50,19 +52,19 @@ main {
 .slideshow > li > span { 
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     color: transparent;
     object-fit: cover;
     background-size: cover;
-    background-position: 50% 50%;
+    background-position: 0% 0%;
     background-repeat: no-repeat;
     z-index: 0;
 }
 
 .slideshow li:nth-child(1) span { 
-    background-image: url('https://wallpapercave.com/wp/wp4676582.jpg');
+    background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
 }
 
 @media (min-width: 700px) {
@@ -109,19 +111,20 @@ main {
     }
 
     .slideshow li:nth-child(2) span { 
-        background-image: url('https://wallpapercave.com/wp/wp9064392.jpg');
+        /* background-image: url('https://wallpapercave.com/wp/wp9064392.jpg'); */
+        background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
         animation-delay: calc(var(--animation-delay) * 1);
     }
     
     .slideshow li:nth-child(3) span { 
-        background-image: url('https://wallpapercave.com/wp/wp5716268.jpg');
+        /* background-image: url('https://wallpapercave.com/wp/wp5716268.jpg'); */
+        background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
         animation-delay: calc(var(--animation-delay) * 2);
     }
 }
 
 .window {
     width: 100%;
-    background: var(--colour-transparent);
 }
 
 .window-top {
@@ -205,7 +208,8 @@ main {
 }
 
 .app-section {
-    background: var(--colour-accent);
+    background: var(--colour-transparent);
+    height: var(--section-height-primary);
     padding-top: var(--nav-height);
     padding-bottom: var(--nav-height);
 }
@@ -226,12 +230,24 @@ main {
 }
 
 .card * {
-    color: var(--colour-white);
+    color: var(--colour-dark);
 }
 
 @media (max-width: 960px) {
     .card h2 {
         overflow-wrap: break-word;
+    }
+}
+
+@media (min-width: 700px){
+    .slideshow,
+    .slideshow:after { 
+        position: absolute;
+        height: calc(var(--nav-height) + 2 * var(--section-height-primary) + var(--section-height-reduced) + var(--section-height-strip));
+    }
+
+    .slideshow > li > span { 
+        position: absolute;
     }
 }
 
