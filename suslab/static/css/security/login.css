@@ -1,0 +1,124 @@
+.action-box{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+.box-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.title{
+    line-height: 2;
+    margin: auto;
+}
+
+.subtitle{
+    font-family: var(--ff-sans);
+}
+
+#logo{
+    height: 120px;
+    margin: auto;
+}
+
+.login-form{
+    flex-direction: column;
+}
+
+.form-errors{
+    width: 20vw;
+    flex-direction: column;
+    background-color: #F8F1AE;
+    gap: 0;
+}
+
+.form-errors > h6{
+    margin: 0;
+    padding-left: 20px;
+    font-family: var(--ff-sans);
+    color: var(--colour-warn);
+    text-align: left;
+    width: 20vw;
+}
+
+.form-fields{
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-fields label{
+    display: none;
+}
+
+.form-fields input[type="text"],
+.form-fields input[type="password"]{
+    width: clamp(350px, 20vw, 500px);
+    border-radius: 20px;
+}
+
+.form-fields input::placeholder{
+    color: var(--colour-accent);
+    opacity: 0.8;
+    font-family: var(--ff-sans);
+}
+
+.form-links{
+    font-family: var(--ff-sans);
+    gap: 4em;
+}
+
+.form-links *{
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.form-links *{
+    margin: 0;
+}
+
+.remember-field{
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.5em;
+}
+
+.remember-field > input{
+    flex: 0.1;
+}
+
+.forgot-field{
+    justify-content: flex-end;
+}
+
+#forgot-password{
+    color: var(--colour-accent);
+    text-decoration: none;
+}
+
+@media (min-width: 700px) {
+    @keyframes shake{
+        0%, 100% {transform: translateX(0);} 
+        10%, 50% {transform: translateX(-10px);} 
+        25%, 75% {transform: translateX(10px);} 
+    }
+
+    #forgot-password:hover{
+        color: var(--colour-dark);
+        text-decoration: underline;
+    }
+
+    .form-register > .button:hover{
+        color: var(--colour-white);
+        background-color: var(--colour-accent);
+    }
+
+    .form-errors{
+        animation: shake 0.5s ease-in-out;
+    }
+}

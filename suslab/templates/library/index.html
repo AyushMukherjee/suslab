@@ -16,7 +16,8 @@ Things Library
         <th>Item</th>
         <th>Description</th>
         <th>Date Created</th>
-        <th>Contact</th>
+        <th>Borrower</th>
+        <th>Lender</th>
         <th>Actions</th>
     </tr>
     {% for item in items %}
@@ -25,11 +26,10 @@ Things Library
             <td>{{ item.name }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.date_created.date() }}</td>
-            <td>{{ item.user.email }}</td>
+            <td>{{ item.borrower.user.email }}</td>
+            <td>{%if item.lender %}{{ item.lender.user.email }}{% endif %}</td>
             <td>
-                <a href="">Update</a>
-                &nbsp;
-                <a href="/library/delete/{{item.id}}">Delete</a>
+                <a href="/library/lend/{{item.id}}">Lend</a>
             </td>
         </tr>
     {% endfor %}
@@ -42,7 +42,7 @@ Things Library
             <label for="item">Item Name</label><br>
             <input type="text" name="item" id="item"><br>
             <label for="description">Description</label><br>
-            <textarea name="description" id="description">Good Umbrella</textarea><br>
+            <textarea name="description" id="description">Please describe the item</textarea><br>
             <input type="submit" value="Post">
         </form>
     </div>

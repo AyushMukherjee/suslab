@@ -7,25 +7,29 @@ library = Blueprint('library', __name__, url_prefix='/library')
 
 
 def _db_conn():
-    from suslab.users.models import Product
+    from suslab.users.models import Product, Borrower, Lender
     from suslab import db
 
-    return Product, db
+    return Product, Borrower, Lender, db
 
 
 @library.route('/', methods=['GET', 'POST'])
 def index():
-    Product, db = _db_conn()
+    Product, Borrower, _, db = _db_conn()
     form = ProductForm()
 
     # Verify the form
     if form.validate_on_submit():
+        borrower = Borrower(
+            user = current_user,
+        )
         item = Product(
             name=form.item.data,
             description=form.description.data,
-            user=current_user,
+            borrower = borrower,
         )
         try:
+            db.session.add(borrower)
             db.session.add(item)
             db.session.commit()
             return redirect(url_for('library.index'))
@@ -38,11 +42,31 @@ def index():
 
 @library.route('/delete/<int:id>')
 def delete(id):
-    Product, db = _db_conn()
+    Product, Borrower, _, db = _db_conn()
     item = Product.query.get_or_404(id)
 
     try:
         db.session.delete(item)
+        db.session.commit()
+        return redirect(url_for('library.index'))
+    except:
+        return 'There was a problem deleting that task'
+
+
+@library.route('/lend/<int:id>')
+def lend(id):
+    Product, Borrower, Lender, db = _db_conn()
+    item = Product.query.get_or_404(id)
+    borrower = item.borrower
+    lender = Lender(
+        user = current_user,
+        borrowers = [borrower],
+    )
+
+    item.lender = lender
+
+    try:
+        db.session.add(lender)
         db.session.commit()
         return redirect(url_for('library.index'))
     except:
