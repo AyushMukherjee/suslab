@@ -199,23 +199,27 @@ input[type="submit"].button-primary{
     transform: rotate(50deg);
 }
 
+.username{
+    font-weight: 900;
+    color: var(--colour-dark);
+    white-space: nowrap;
+}
+
+#user-image {
+    height: 80%;
+    text-align: center;
+    margin-right: 5vw;
+    border-radius: 50%;
+    background-color: var(--colour-white);
+}
+
 @media (min-width: 700px) {
-    .nav-group{
-        flex: 5;
-        justify-content: flex-end;
-        margin-right: 5%;
-    }
-
-    .nav-item{
-        margin-bottom: 0;
-    }
-
     .nav-toggle{
         display: none;
     }
 
     .nav-group{
-        flex: 5;
+        flex: 4;
         position: relative;
         justify-content: flex-end;
         margin-right: 5%;

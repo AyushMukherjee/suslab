@@ -15,6 +15,8 @@
 <form class="login-form flex-horizontal" action="{{ url_for_security('register') }}" method="POST" name="register_user_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ register_user_form.hidden_tag() }}
+        <label for="name">Email</label>
+        <input type="text" name="name" id="name" placeholder="Name:" required="">
         <label for="email">Email</label>
         <input type="text" name="email" id="email" placeholder="Email Address:" required="">
         <label for="password">Password</label>
