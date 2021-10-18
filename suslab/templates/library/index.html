@@ -8,8 +8,34 @@ Things Library
 {% endblock %}
 
 {% block body %}
+<head>
+    <style>
+       form{
+            border-width: 10px;
+            border: grey;
+            border-style: dotted;
+            width: 400px;
+            text-align: center;
+            padding: 20px;
+            margin-left: 200px;
+            background-color: rgba(127, 255, 212, 0.719);
+            background-image: url('./suslab/static/image/cod.jpg');
+        }
+        .formclass{ 
+            background-image: url('suslab/suslab//library/static/image/cod.jpg');
+        }
+        input[type="submit"]{
+            background-color: rgba(0, 0, 0, 0.26);
+        }
+        .topnav{
+            font-size: large;
+            text-decoration:aqua;
+        }
+    </style>
+</head>
+<main>
+    <body>
 <h1>Things Library</h1>
-
 <table class="center">
     <tr border="7">
         <th>Index</th>
@@ -36,7 +62,7 @@ Things Library
 </table>
 <hr></hr>
 {% if current_user.is_authenticated %}
-    <div>
+    <div class="formclass">
         <form action="/library/" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <label for="item">Item Name</label><br>
@@ -49,9 +75,11 @@ Things Library
     <nav>
     <div class="topnav">
         <a class="active href="#Items">Items</a>
-        <a href="suslab\suslab\templates\library\Lent.html" target="_blank">Lent</a>
-        <a href="C:\Users\memon\project\suslab\suslab\templates\library\Borrowed.html" target="_blank">Borrowed</a>
+        <a href="http://127.0.0.1:5500/suslab/suslab/templates/library/Lent.html" target="_blank">Lent</a>
+        <a href="http://127.0.0.1:5500/suslab/suslab/templates/library/Borrowed.html" target="_blank">Borrowed</a>
     </div>
     </nav>
+</body>
+
 {% endif %}
 {% endblock %}
