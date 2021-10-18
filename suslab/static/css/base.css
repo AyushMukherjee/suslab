@@ -19,8 +19,8 @@
     
     /* dimension params */
     --section-height-primary: 100vh;
-    --section-height-reduced: 50vh;
-    --section-height-strip: 8vh;
+    --section-height-reduced: 55vh;
+    --section-height-strip: 4vh;
 }
 
 body {
@@ -246,7 +246,7 @@ input[type="submit"].button-primary{
 
 .social-media {
     width: 100%;
-    font-size: max(1em, 3vh);
+    font-size: max(1em, 2vh);
     height: var(--section-height-strip);
     background: var(--colour-accent);
 }
@@ -268,7 +268,7 @@ footer {
 
 .footer-item {
     font-family: var(--ff-accent);
-    font-size: 1.5em;
+    font-size: max(1em, 2vh);
     line-height: 1.6;
     text-decoration: none;
     color: var(--colour-white);
