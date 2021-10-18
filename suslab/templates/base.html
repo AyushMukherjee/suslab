@@ -54,7 +54,10 @@
         <li class="nav-item flex-text-item"><a href="/logout"class="nav-item-link">logout</a></li>
       </ul>
     </div>
-    <div class="user-info" id="user-info">{{ current_user.email }}</div>
+    <div class="user-info flex-horizontal" id="user-info">
+      <span class="username flex-text-item">{{ current_user.name }}</span>
+      <img class="user-image" id="user-image" src={{ user_avatar(current_user.name|lower) }}>
+    </div>
         {% else %}
           <li class="nav-item flex-text-item"><a href="/login" class="nav-item-link">login</a></li>
           <li class="nav-item flex-text-item"><a href="/register" class="nav-item-link">signup</a></li>
