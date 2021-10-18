@@ -131,6 +131,10 @@ main {
     height: var(--section-height-primary);
 }
 
+.window-top > header{
+    transition: opacity 500ms ease-in-out;
+}
+
 .window-bottom {
     height: var(--section-height-reduced);
 }

@@ -16,14 +16,21 @@
 .title{
     line-height: 2;
     margin: auto;
+    font-size: 4rem;
+}
+
+.title > a{
+    text-decoration: none;
+    color: var(--colour-dark);
 }
 
 .subtitle{
     font-family: var(--ff-sans);
+    color: var(--colour-dark);
 }
 
 #logo{
-    height: 120px;
+    height: 8rem;
     margin: auto;
 }
 
@@ -111,11 +118,6 @@
     #forgot-password:hover{
         color: var(--colour-dark);
         text-decoration: underline;
-    }
-
-    .form-register > .button:hover{
-        color: var(--colour-white);
-        background-color: var(--colour-accent);
     }
 
     .form-errors{
