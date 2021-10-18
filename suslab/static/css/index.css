@@ -243,7 +243,7 @@ main {
     .slideshow,
     .slideshow:after { 
         position: absolute;
-        height: calc(var(--nav-height) + 2 * var(--section-height-primary) + var(--section-height-reduced) + var(--section-height-strip));
+        height: calc(var(--nav-height) + 2 * var(--section-height-primary) + var(--section-height-reduced) + 2 * var(--section-height-strip));
     }
 
     .slideshow > li > span { 
