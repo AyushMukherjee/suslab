@@ -4,5 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     navToggle.addEventListener('click', () => {
         document.querySelector('nav').classList.toggle('nav-open');
         document.querySelector('.window-top>header').classList.toggle('hide');
+        document.querySelector('.next-section').classList.toggle('hide');
     });
 });
