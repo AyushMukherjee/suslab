@@ -89,7 +89,8 @@ input[type="submit"].button-primary{
 #logo {
     height: 130%;
     text-align: center;
-    margin: 0 auto -2em 5vw;
+    margin-left: 5vw;
+    padding-top: 1px;
     border-radius: 50%;
 }
 
@@ -123,7 +124,7 @@ input[type="submit"].button-primary{
     font-size: 2em;
     line-height: 1.6;
     text-decoration: none;
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem auto;
 }
 
 .nav-item-link {
