@@ -212,17 +212,18 @@ main {
 }
 
 .app-section {
-    background: var(--colour-transparent);
     height: var(--section-height-primary);
     padding-top: var(--nav-height);
     padding-bottom: var(--nav-height);
 }
 
 .app-component {
+    background: var(--colour-transparent);
     position: relative;
     height: 80%;
     margin-top: 2em;
     margin-bottom: 2em;
+    border-radius: 10%;
 }
 
 .card {

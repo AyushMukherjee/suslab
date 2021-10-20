@@ -76,9 +76,13 @@ input[type="submit"].button-primary{
     width: 100%;
     height: var(--nav-height);
     left: 50%;
+    background-color: var(--colour-primary);
     transform: translateX(-50%);
-    background: var(--colour-primary);
     z-index: 999;
+}
+
+html:not([data-scroll='0']) .navbar {
+    background-color: var(--colour-primary-opaque);
 }
 
 .home {
