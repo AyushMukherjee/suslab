@@ -41,10 +41,11 @@ h1, h2, h3, h4, h5, h6{
     color: var(--colour-black);
 }
 
-.button-primary,
-input[type="submit"].button-primary{
-    background-color: var(--colour-dark) !important;
-    border-color: var(--colour-dark) !important;
+.button.button-primary,
+button.button-primary,
+input[type="submit"] {
+    background-color: var(--colour-dark);
+    border-color: var(--colour-dark);
 }
 
 .hide {
@@ -290,16 +291,18 @@ html:not([data-scroll='0']) .navbar {
 }
 
 @media (hover: hover) {
-    .button:hover{
-        color: var(--colour-white) !important;
-        background-color: var(--colour-dark) !important;
+    .button:hover,
+    button:hover{
+        color: var(--colour-white);
+        background-color: var(--colour-dark);
     }
 
-    .button-primary:hover,
+    .button.button-primary:hover,
+    button.button-primary:hover,
     input[type="submit"].button-primary:hover{
-        background-color: var(--colour-transparent) !important;
-        border-color: var(--colour-dark) !important;
-        color: var(--colour-dark) !important;
+        background-color: var(--colour-transparent);
+        border-color: var(--colour-dark);
+        color: var(--colour-dark);
     }
 
     a:hover {
