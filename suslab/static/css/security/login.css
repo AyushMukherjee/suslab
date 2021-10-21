@@ -108,8 +108,8 @@
     text-decoration: none;
 }
 
-#forgot-password:hover {
-    @apply --colour-link;
+#forgot-password:is(:hover, :focus){
+    text-decoration: underline;
 }
 
 @media (min-width: 700px) {
@@ -117,11 +117,6 @@
         0%, 100% {transform: translateX(0);} 
         10%, 50% {transform: translateX(-10px);} 
         25%, 75% {transform: translateX(10px);} 
-    }
-
-    #forgot-password:hover{
-        color: var(--colour-dark);
-        text-decoration: underline;
     }
 
     .form-errors{

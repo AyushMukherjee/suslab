@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6{
     color: var(--colour-black);
 }
 
-a:not(.button, .button-primary):hover {
+a:not(.button, .button-primary):is(:hover, :focus) {
     color: var(--colour-dark-opaque) !important;
 }
 
@@ -52,15 +52,15 @@ input[type="submit"].button-primary {
     border-color: var(--colour-dark);
 }
 
-.button:hover,
-button:hover{
+.button:is(:hover, :focus),
+button:is(:hover, :focus) {
     color: var(--colour-white);
     background-color: var(--colour-dark);
 }
 
-.button.button-primary:hover,
-button.button-primary:hover,
-input[type="submit"].button-primary:hover{
+.button.button-primary:is(:hover, :focus),
+button.button-primary:is(:hover, :focus),
+input[type="submit"].button-primary:is(:hover, :focus) {
     background-color: var(--colour-transparent);
     border-color: var(--colour-dark);
     color: var(--colour-dark);
