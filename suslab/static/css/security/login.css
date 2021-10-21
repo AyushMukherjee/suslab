@@ -103,9 +103,13 @@
     justify-content: flex-end;
 }
 
-#forgot-password{
+#forgot-password {
     color: var(--colour-accent);
     text-decoration: none;
+}
+
+#forgot-password:hover {
+    @apply --colour-link;
 }
 
 @media (min-width: 700px) {

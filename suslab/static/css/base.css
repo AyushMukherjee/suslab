@@ -41,11 +41,29 @@ h1, h2, h3, h4, h5, h6{
     color: var(--colour-black);
 }
 
+a:not(.button, .button-primary):hover {
+    color: var(--colour-dark-opaque) !important;
+}
+
 .button.button-primary,
 button.button-primary,
-input[type="submit"] {
+input[type="submit"].button-primary {
     background-color: var(--colour-dark);
     border-color: var(--colour-dark);
+}
+
+.button:hover,
+button:hover{
+    color: var(--colour-white);
+    background-color: var(--colour-dark);
+}
+
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover{
+    background-color: var(--colour-transparent);
+    border-color: var(--colour-dark);
+    color: var(--colour-dark);
 }
 
 .hide {
@@ -100,7 +118,7 @@ html:not([data-scroll='0']) .navbar {
 
 .nav-group {
     flex-direction: column;
-    background: var(--colour-primary-opaque);
+    background: var(--colour-primary);
     position: absolute;
     right: 0;
     box-shadow: 0 0 3em rgba(0,0,0,.15);
@@ -280,34 +298,17 @@ html:not([data-scroll='0']) .navbar {
 }
 
 @media (max-width: 700px) {
-    .username::after{
+    .nav-group {
+        padding-top: var(--nav-height);
+    }
+    
+    .username::after {
         content: "";
         display: block;
         width: 120%;
         height: 3px;
         background: var(--colour-dark-opaque);
         margin: 2rem auto 0 -10%;
-    }
-}
-
-@media (hover: hover) {
-    .button:hover,
-    button:hover{
-        color: var(--colour-white);
-        background-color: var(--colour-dark);
-    }
-
-    .button.button-primary:hover,
-    button.button-primary:hover,
-    input[type="submit"].button-primary:hover{
-        background-color: var(--colour-transparent);
-        border-color: var(--colour-dark);
-        color: var(--colour-dark);
-    }
-
-    a:hover {
-        color: var(--colour-dark-opaque);
-        font-weight: 900;
     }
 }
 
