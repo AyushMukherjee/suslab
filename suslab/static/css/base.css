@@ -273,3 +273,8 @@ footer {
     text-decoration: none;
     color: var(--colour-white);
 }
+
+#togglePassword{
+    margin-right: 6 px;
+    font-size: small;
+}
