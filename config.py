@@ -30,13 +30,5 @@ SECRET_KEY = "secret"
 
 # Security login and registration
 SECURITY_REGISTERABLE = True
-SECURITY_SEND_REGISTER_EMAIL = True
+SECURITY_SEND_REGISTER_EMAIL = False
 SECURITY_PASSWORD_SALT = bytes(231297738)
-SECURITY_EMAIL_SENDER = 'ayushm03+suslab@gmail.com'
-
-MAIL_SERVER = "smtp.gmail.com"
-MAIL_PORT = 465
-MAIL_USE_SSL = True
-MAIL_DEFAULT_SENDER = 'ayushm03+suslab@gmail.com'
-MAIL_USERNAME = 'ayushm03@gmail.com'
-MAIL_PASSWORD = 'pbqiadwnwdbisure'
