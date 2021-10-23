@@ -1,0 +1,28 @@
+{% extends 'form_base.html' %}
+
+{% block tagline %}Contact Us{% endblock %}
+
+{% block formarea %}
+{% if contact_form.errors %}
+    <div class="form-errors flex-horizontal">
+        {% for field in contact_form.errors %}
+            {% for error in contact_form[field].errors %}
+                <h6>{{ error }}</h6>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form class="login-form flex-horizontal" action="{{ url_for('info.contact') }}" method="POST" name="contact_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ contact_form.hidden_tag() }}
+        {{ contact_form.name(placeholder="Name:") }}
+        {{ contact_form.email(placeholder="Email Address:") }}
+        {{ contact_form.message(placeholder="Message:") }}
+    </div>
+    {{ contact_form.submit(class="button-primary") }}
+</form>
+{% endblock %}
+
+{% block altlogin %}
+{% endblock %}
