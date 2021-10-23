@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security
 from flask_wtf.csrf import CSRFProtect
@@ -19,6 +20,7 @@ app.register_blueprint(info)
 
 db = SQLAlchemy(app)
 security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
+mail = Mail(app)
 
 csrf = CSRFProtect(app)
 

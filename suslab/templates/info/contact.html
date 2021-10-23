@@ -2,17 +2,25 @@
 
 {% block tagline %}Contact Us{% endblock %}
 
-{%block formarea %}
-<form class="login-form flex-horizontal" action="{{ url_for_security('login') }}" method="POST" name="contact_form" autocomplete="off">
-    <div class="form-fields flex-horizontal">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="Name:" required="">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Email Address:" required="">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="20" cols="50" placeholder="Message:"></textarea> 
+{% block formarea %}
+{% if contact_form.errors %}
+    <div class="form-errors flex-horizontal">
+        {% for field in contact_form.errors %}
+            {% for error in contact_form[field].errors %}
+                <h6>{{ error }}</h6>
+            {% endfor %}
+        {% endfor %}
     </div>
-    <input type="submit" class="button-primary" value="Email Us">
+{% endif %}
+
+<form class="login-form flex-horizontal" action="{{ url_for('info.contact') }}" method="POST" name="contact_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ contact_form.hidden_tag() }}
+        {{ contact_form.name(placeholder="Name:") }}
+        {{ contact_form.email(placeholder="Email Address:") }}
+        {{ contact_form.message(placeholder="Message:") }}
+    </div>
+    {{ contact_form.submit(class="button-primary") }}
 </form>
 {% endblock %}
 

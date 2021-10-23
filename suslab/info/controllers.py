@@ -1,29 +1,30 @@
 from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
-from suslab.library.forms import ProductForm
+from flask_mail import Message
+
+from suslab.info.forms import ContactForm
 
 
 info = Blueprint('info', __name__, url_prefix='/')
 
 
-@info.route('/contact')
-def contact():
-    # Verify the form
-    # if form.validate_on_submit():
-    #     borrower = Borrower(
-    #         user = current_user,
-    #     )
-    #     item = Product(
-    #         name=form.item.data,
-    #         description=form.description.data,
-    #         borrower = borrower,
-    #     )
-    #     try:
-    #         db.session.add(borrower)
-    #         db.session.add(item)
-    #         db.session.commit()
-    #         return redirect(url_for('library.index'))
-    #     except:
-    #         return 'There was an issue adding your item'
+def _mailer_conn():
+    from suslab import mail
+    return mail
 
-    return render_template('info/contact.html')
+
+@info.route('/contact', methods=['GET', 'POST'])
+def contact():
+    mail = _mailer_conn()
+    form = ContactForm()
+
+    # Verify the form
+    if form.validate_on_submit():
+        message = Message(
+            recipients=['suslab@example.com'],
+            subject=f'Message from {form.name.data}',
+            body=form.message.data,
+        )
+        mail.send(message)
+
+    return render_template('info/contact.html', contact_form=form)
