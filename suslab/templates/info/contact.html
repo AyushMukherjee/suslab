@@ -1,0 +1,20 @@
+{% extends 'form_base.html' %}
+
+{% block tagline %}Contact Us{% endblock %}
+
+{%block formarea %}
+<form class="login-form flex-horizontal" action="{{ url_for_security('login') }}" method="POST" name="contact_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Name:" required="">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Email Address:" required="">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="20" cols="50" placeholder="Message:"></textarea> 
+    </div>
+    <input type="submit" class="button-primary" value="Email Us">
+</form>
+{% endblock %}
+
+{% block altlogin %}
+{% endblock %}

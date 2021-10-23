@@ -1,0 +1,99 @@
+.action-box{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+.box-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.title{
+    line-height: 2;
+    margin: auto;
+    font-size: 4rem;
+}
+
+.title > a{
+    text-decoration: none;
+    color: var(--colour-dark);
+}
+
+.subtitle{
+    font-family: var(--ff-sans);
+    color: var(--colour-dark);
+}
+
+#logo{
+    height: 8rem;
+    margin: auto;
+}
+
+.login-form{
+    flex-direction: column;
+}
+
+.form-errors{
+    width: 20vw;
+    flex-direction: column;
+    background-color: #F8F1AE;
+    gap: 0;
+}
+
+.form-errors > h6{
+    margin: 0;
+    padding-left: 20px;
+    font-family: var(--ff-sans);
+    color: var(--colour-warn);
+    text-align: left;
+    width: 20vw;
+}
+
+.form-fields{
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-fields label{
+    display: none;
+}
+
+.form-fields input[type="text"],
+.form-fields input[type="email"],
+.form-fields input[type="password"],
+.form-fields textarea{
+    width: clamp(350px, 20vw, 500px);
+    border-radius: 20px;
+}
+
+.form-fields textarea{
+    min-height: 120px;
+    height: 20vh;
+    resize: none;
+}
+
+.form-fields input::placeholder,
+.form-fields textarea::placeholder{
+    color: var(--colour-accent);
+    opacity: 0.8;
+    font-family: var(--ff-sans);
+}
+
+.form-links{
+    font-family: var(--ff-sans);
+    gap: 4em;
+}
+
+.form-links *{
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.form-links *{
+    margin: 0;
+}

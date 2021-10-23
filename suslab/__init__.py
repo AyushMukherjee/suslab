@@ -5,6 +5,7 @@ from flask_wtf.csrf import CSRFProtect
 
 from suslab.library.controllers import library
 from suslab.pool.controllers import pool
+from suslab.info.controllers import info
 from suslab.users.controllers import get_user_datastore
 from suslab.users.forms import ExtendedRegisterForm
 
@@ -14,6 +15,7 @@ app.config.from_object('config')
 # register apps
 app.register_blueprint(library)
 app.register_blueprint(pool)
+app.register_blueprint(info)
 
 db = SQLAlchemy(app)
 security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)

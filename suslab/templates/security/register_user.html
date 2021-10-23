@@ -1,4 +1,10 @@
-{% extends './security/login_base.html' %}
+{% extends 'form_base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/security/login.css') }}">
+{% endblock %}
+
+{% block tagline %}Share, Save and Sustain{% endblock %}
 
 {%block formarea %}
 {% include "security/_messages.html" %}
