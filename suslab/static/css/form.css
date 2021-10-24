@@ -66,6 +66,8 @@
 .form-fields input[type="text"],
 .form-fields input[type="email"],
 .form-fields input[type="password"],
+.form-fields input[type="date"],
+.form-fields input[type="time"],
 .form-fields textarea{
     width: clamp(350px, 20vw, 500px);
     border-radius: 20px;

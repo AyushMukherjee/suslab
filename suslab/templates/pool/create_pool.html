@@ -1,0 +1,17 @@
+{% extends 'form_base.html' %}
+
+{% block mainline %}Pool Spots{% endblock %}
+{% block tagline %}Create New Pool Request{% endblock %}
+
+{%block formarea %}
+<form class="login-form flex-horizontal" action="{{ url_for('pool.create_pool') }}" method="POST" name="pool_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.from_(placeholder='From:') }}
+        {{ form.to_(placeholder='To:') }}
+        {{ form.date(placeholder='Date', type='date') }}
+        {{ form.time(placeholder='Time', type='time') }}
+    </div>
+    {{ form.submit(class='button-primary') }}
+</form>
+{% endblock %}

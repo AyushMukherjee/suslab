@@ -27,4 +27,4 @@ def contact():
         )
         mail.send(message)
 
-    return render_template('info/contact.html', contact_form=form)
+    return render_template('info/contact.html', form=form)

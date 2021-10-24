@@ -14,6 +14,14 @@ def _db_conn():
 
 @pool.route('/', methods=['GET', 'POST'])
 def index():
+    Pool, _, _, _ = _db_conn()
+
+    pools = Pool.query.order_by(Pool.time).all()
+    return render_template('pool/index.html', pools=pools)
+
+
+@pool.route('/create-pool/', methods=['GET', 'POST'])
+def create_pool():
     Pool, Pooler, _, db = _db_conn()
     form = PoolForm()
 
@@ -36,9 +44,9 @@ def index():
             return redirect(url_for('pool.index'))
         except:
             return 'There was an issue adding your item'
+    
+    return render_template('pool/create_pool.html', form=form)
 
-    pools = Pool.query.order_by(Pool.time).all()
-    return render_template('pool/index.html', pools=pools)
 
 @pool.route('/signup/<int:id>')
 def signup(id):
