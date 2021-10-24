@@ -10,6 +10,7 @@ Pool Spots
 {% block body %}
 <h1>Pool Spots</h1>
 
+<!--TODO: add create pool button if current user is authenticated-->>
 <table class="center">
     <tr>
         <th>Index</th>
@@ -34,21 +35,4 @@ Pool Spots
         </tr>
     {% endfor %}
 </table>
-<hr></hr>
-{% if current_user.is_authenticated %}
-    <div>
-        <form action="/pool/" method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <label for="from_">From</label><br>
-            <input type="text" name="from_" id="from_" required><br>
-            <label for="to_">To</label><br>
-            <input type="text" name="to_" id="to_" required><br>
-            <label for="date">Date</label><br>
-            <input type="date" name="date" id="date" required><br>
-            <label for="time">Time</label><br>
-            <input type="time" name="time" id="time" required><br>
-            <input type="submit" value="Post">
-        </form>
-    </div>
-{% endif %}
 {% endblock %}
