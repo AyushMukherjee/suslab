@@ -41,6 +41,10 @@ h1, h2, h3, h4, h5, h6{
     color: var(--colour-black);
 }
 
+.spacer {
+    height: var(--nav-height);
+}
+
 a:not(.button, .button-primary):is(:hover, :focus) {
     color: var(--colour-dark-opaque) !important;
 }

@@ -128,7 +128,7 @@ main {
 }
 
 .window-top {
-    height: var(--section-height-primary);
+    height: calc(var(--section-height-primary) - var(--nav-height));
 }
 
 .window-top > header{

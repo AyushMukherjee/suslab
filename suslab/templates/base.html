@@ -28,7 +28,6 @@
 </head>
 
 <body>
-
   <!-- Add your site or application content here -->
   <script src="{{ url_for('static', filename='js/vendor/modernizr-3.11.2.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
@@ -38,7 +37,7 @@
   
   <nav class="navbar">
     <div class="home" id="home">
-      <a href="/" class="logo" >
+      <a href="/" class="logo">
         <img class="logo" id="logo" src="https://picsum.photos/200">
       </a>
     </div>
@@ -66,9 +65,9 @@
           {% endif %}
       </ul>
     </div>
-  </nav>
-  
+  </nav>  
 
+  <div class="spacer"></div>
   {% block body %}{% endblock %}
 
   <section class="social-media flex-horizontal">
