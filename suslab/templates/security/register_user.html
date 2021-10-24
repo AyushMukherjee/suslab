@@ -4,9 +4,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/security/login.css') }}">
 {% endblock %}
 
-{% block tagline %}Share, Save and Sustain{% endblock %}
-
-{%block formarea %}
+{%block formerrors %}
 {% include "security/_messages.html" %}
 {% if register_user_form.errors %}
     <div class="form-errors flex-horizontal">
@@ -17,7 +15,9 @@
         {% endfor %}
     </div>
 {% endif %}
+{% endblock %}
 
+{%block formarea %}
 <form class="login-form flex-horizontal" action="{{ url_for_security('register') }}" method="POST" name="register_user_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ register_user_form.hidden_tag() }}
