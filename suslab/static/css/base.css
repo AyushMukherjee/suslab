@@ -1,32 +1,3 @@
-:root {
-    /* colour scheme for the index*/
-    --colour-primary: rgba(236, 255, 220, 0.33);
-    --colour-accent: rgba(120, 103, 88, 0.8);
-    --colour-dark: rgba(56, 31, 7, 0.7);
-
-    --colour-primary-opaque: rgba(236, 255, 220, 1);
-    --colour-accent-opaque: rgba(120, 103, 88, 1);
-    --colour-dark-opaque: rgba(56, 31, 7, 1);
-
-    --colour-white: rgb(242, 237, 221);
-    --colour-black: black;
-    --colour-transparent: rgba(255, 255, 255, 0.16);
-
-    --colour-warn: red;
-
-    /* font scheme for the index*/
-    --ff-accent: 'Open Sans', sans-serif;
-    --ff-sans: 'Source Sans Pro', sans-serif;
-
-    /* nav height */
-    --nav-height: 8vh;
-    
-    /* dimension params */
-    --section-height-primary: 100vh;
-    --section-height-reduced: 55vh;
-    --section-height-strip: 4vh;
-}
-
 html {
     scroll-behavior: smooth;
 }
@@ -43,31 +14,6 @@ h1, h2, h3, h4, h5, h6{
 
 .spacer {
     height: var(--nav-height);
-}
-
-a:not(.button, .button-primary):is(:hover, :focus) {
-    color: var(--colour-dark-opaque) !important;
-}
-
-.button.button-primary,
-button.button-primary,
-input[type="submit"].button-primary {
-    background-color: var(--colour-dark);
-    border-color: var(--colour-dark);
-}
-
-.button:is(:hover, :focus),
-button:is(:hover, :focus) {
-    color: var(--colour-white);
-    background-color: var(--colour-dark);
-}
-
-.button.button-primary:is(:hover, :focus),
-button.button-primary:is(:hover, :focus),
-input[type="submit"].button-primary:is(:hover, :focus) {
-    background-color: var(--colour-transparent);
-    border-color: var(--colour-dark);
-    color: var(--colour-dark);
 }
 
 .hide {
