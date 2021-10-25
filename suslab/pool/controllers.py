@@ -16,7 +16,7 @@ def _db_conn():
 
 @pool.route('/', methods=['GET', 'POST'])
 def index():
-    Pool, _, _, _ = _db_conn()
+    Pool, *_ = _db_conn()
 
     pools = Pool.query.order_by(Pool.time).all()
     return render_template('pool/index.html', pools=pools)
@@ -24,9 +24,6 @@ def index():
 @pool.route('/create-pool/', methods=['GET', 'POST'])
 @login_required
 def create_pool():
-    if not current_user.is_authenticated:
-        redirect(url_for('pool.index'))
-
     Pool, Pooler, _, db = _db_conn()
     form = PoolForm()
 
@@ -61,10 +58,7 @@ def signup(id):
     signup = current_user.signup or Signup(
         user = current_user,
     )
-    print(signup)
-    pool.signups = [signup]
-    print(pool)
-    print(not current_user.signup)
+    pool.signups = (pool.signups or []) + [signup]
 
     try:
         if not current_user.signup:
