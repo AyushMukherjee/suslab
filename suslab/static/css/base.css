@@ -18,7 +18,8 @@
 
 /* Document
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth; }
 
 body {
     min-height: 100vh;
@@ -31,9 +32,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.spacer { height: var(--nav-height); }
+.spacer {
+    height: var(--nav-height); }
 
-.hide { opacity: 0; }
+.hide {
+    opacity: 0; }
 
 .flex-horizontal {
     display: flex;
@@ -47,7 +50,8 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     margin-bottom: 0; }
 
-.flex-text-item { margin: 0 1em 0 0; }
+.flex-text-item {
+    margin: 0 1em 0 0; }
 
 
 /* Navigation
@@ -64,10 +68,12 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 999; }
 
 /* Attribute from Javascript */
-html:not([data-scroll='0']) .navbar { background-color: var(--colour-primary-opaque); }
+html:not([data-scroll='0']) .navbar {
+    background-color: var(--colour-primary-opaque); }
 
 /* Site logo */
-.home { flex: 1; }
+.home {
+    flex: 1; }
 
 #logo {
     height: 130%;
@@ -170,7 +176,8 @@ footer {
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media (min-width: 700px) {
-    .nav-toggle { display: none; }
+    .nav-toggle {
+        display: none; }
 
     .nav-group {
         flex: 4;
@@ -238,7 +245,8 @@ footer {
     .hamburger::before { bottom: 6px; }
     .hamburger::after { top: 6px; }
 
-    .nav-open .nav-group { transform: translateX(0); }
+    .nav-open .nav-group {
+        transform: translateX(0); }
 
     .nav-open .nav-toggle .hamburger::before,
     .nav-open .nav-toggle .hamburger::after,
@@ -248,10 +256,12 @@ footer {
         left: 0.9em; }
 
     .nav-open .nav-toggle .hamburger::before,
-    .nav-open .nav-toggle:hover .hamburger::before { transform: rotate(45deg); }
+    .nav-open .nav-toggle:hover .hamburger::before {
+        transform: rotate(45deg); }
 
     .nav-open .nav-toggle .hamburger::after,
-    .nav-open .nav-toggle:hover .hamburger::after  { transform: rotate(-45deg); }
+    .nav-open .nav-toggle:hover .hamburger::after  {
+        transform: rotate(-45deg); }
 
     .nav-toggle:hover .hamburger::before,
     .nav-toggle:hover .hamburger::after {
@@ -261,7 +271,11 @@ footer {
     .nav-toggle:hover .hamburger::before { transform: rotate(-50deg); }
     .nav-toggle:hover .hamburger::after { transform: rotate(50deg); }
 
-    .nav-group { padding-top: var(--nav-height); }
+    .nav-toggle:is(:hover, :focus) {
+        background-color: var(--colour-white);}
+
+    .nav-group {
+        padding-top: var(--nav-height); }
     
     .username::after {
         content: "";

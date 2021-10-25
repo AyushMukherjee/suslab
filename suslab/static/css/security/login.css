@@ -3,9 +3,13 @@
     justify-content: flex-end;
     gap: 0.5em; }
 
-.remember-field > input { flex: 0.1; }
+.remember-field > input {
+    flex: 0.1; }
 
-.forgot-field { justify-content: flex-end; }
+.forgot-field {
+    justify-content: flex-end; }
 
-#forgot-password { text-decoration: none; }
-#forgot-password:is(:hover, :focus){ text-decoration: underline; }
+#forgot-password {
+    text-decoration: none; }
+#forgot-password:is(:hover, :focus){
+    text-decoration: underline; }

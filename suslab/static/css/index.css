@@ -35,9 +35,12 @@ main {
     background-position: center center; }
 
 /* Windows */
-.window { width: 100%; }
-.window-top { height: calc(var(--section-height-primary) - var(--nav-height)); }
-.window-bottom { height: var(--section-height-reduced); }
+.window {
+    width: 100%; }
+.window-top {
+    height: calc(var(--section-height-primary) - var(--nav-height)); }
+.window-bottom {
+    height: var(--section-height-reduced); }
 
 .window-top > header {
     position: absolute;
@@ -77,13 +80,15 @@ main {
     background-repeat: no-repeat;
     z-index: 0; }
 
-.slideshow li:nth-child(1) span { background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg'); }
+.slideshow li:nth-child(1) span {
+    background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg'); }
 
 
 /* Keyframes
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @keyframes divein {
-    0% { opacity: 0; }
+    0% {
+        opacity: 0; }
     25% {
         opacity: 0.5;
         transform: var(--transform) translate(-15px, -15px); }
@@ -96,7 +101,8 @@ main {
 }
 
 @keyframes diveout {
-    0% { opacity: 1; }
+    0% {
+        opacity: 1; }
     25% {
         opacity: 0.5;
         transform: var(--transform) translate(10px, 10px); }
@@ -164,7 +170,8 @@ main {
     font-family: var(--ff-sans);
     font-size: 3rem; }
 
-.card * { color: var(--colour-dark); }
+.card * {
+    color: var(--colour-dark); }
 
 .app-icon {
     content: '';
@@ -191,9 +198,12 @@ main {
         16.67% {
             opacity: 1;
             animation-timing-function: ease-out; }
-        33.33% { opacity: 1; }
-        50% { opacity: 0; }
-        100% { opacity: 0; }
+        33.33% {
+            opacity: 1; }
+        50% {
+            opacity: 0; }
+        100% {
+            opacity: 0; }
     }
 
     /* Slideshow */
@@ -203,7 +213,8 @@ main {
         height: calc(var(--nav-height) + 2 * var(--section-height-primary) + var(--section-height-reduced) + 2 * var(--section-height-strip));
         --animation-delay: 6s; }
     
-    .slideshow:after { content: ''; }
+    .slideshow:after {
+        content: ''; }
 
     .slideshow > li > span {
         position: absolute;
@@ -214,7 +225,8 @@ main {
         animation-iteration-count: infinite;
         animation-delay: 0s; }
 
-    .slideshow li:nth-child(1) span { animation-delay: calc(var(--animation-delay) * 0); }
+    .slideshow li:nth-child(1) span {
+        animation-delay: calc(var(--animation-delay) * 0); }
 
     .slideshow li:nth-child(2) span { 
         /* background-image: url('https://wallpapercave.com/wp/wp9064392.jpg'); */
