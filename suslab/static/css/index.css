@@ -1,10 +1,46 @@
-section, main {
-    position: relative;
-}
+/*
+* SusLab Index V1.0
+* Copyright 2021, Ayush Mukherjee
+* Free to use under the MIT license.
+* 10/25/2021
+*/
+
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Document
+- Background
+- Keyframes
+- Elements
+- App Section
+- Media Queries
+*/
+
+
+/* Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+section {
+    position: relative; }
 
 main {
-    --border-radius: 30px;
-}
+    position: relative;
+    --border-radius: 30px; }
+
+
+/* Background
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.background {
+    width: 100%;
+    background: #FFFFFF;
+    background-position: center center; }
+
+/* Windows */
+.window {
+    width: 100%; }
+.window-top {
+    height: calc(var(--section-height-primary) - var(--nav-height)); }
+.window-bottom {
+    height: var(--section-height-reduced); }
 
 .window-top > header {
     position: absolute;
@@ -12,32 +48,15 @@ main {
     top: 40%;
     transform: translate(-50%, -40%);
     text-align: center;
-}
+    transition: opacity 500ms ease-in-out; }
 
 .window-top :is(h1, h2, h3, h4, h5, h6) {
     font-family: var(--ff-sans);
     font-weight: 600;
     color: var(--colour-dark);
-    letter-spacing: 0.01em;
-}
+    letter-spacing: 0.01em; }
 
-.arrow {
-    --transform: rotate(45deg);
-    position: absolute;
-    border-color: var(--colour-white);
-    border-style: solid;
-    border-width: 3px;
-    cursor: pointer;
-    transform: var(--transform);
-    z-index: 99;
-}
-
-.background {
-    width: 100%;
-    background: #FFFFFF;
-    background-position: center center;
-}
-
+/* Slideshow */
 .slideshow,
 .slideshow:after { 
     position: fixed;
@@ -46,8 +65,7 @@ main {
     top: 0px;
     left: 0px;
     z-index: 0; 
-    list-style: none;
-}
+    list-style: none; }
 
 .slideshow > li > span { 
     width: 100%;
@@ -60,162 +78,82 @@ main {
     background-size: cover;
     background-position: 0% 0%;
     background-repeat: no-repeat;
-    z-index: 0;
+    z-index: 0; }
+
+.slideshow li:nth-child(1) span {
+    background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg'); }
+
+
+/* Keyframes
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@keyframes divein {
+    0% {
+        opacity: 0; }
+    25% {
+        opacity: 0.5;
+        transform: var(--transform) translate(-15px, -15px); }
+    50% {
+        opacity: 1;
+        transform: var(--transform) translate(-10px, -10px); }
+    100% {
+        opacity: 1;
+        transform: var(--transform) translate(0px, 0px); }
 }
 
-.slideshow li:nth-child(1) span { 
-    background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
-}
-
-@media (min-width: 700px) {
-    @keyframes imageAnimation { 
-        0% {
-            opacity: 0;
-            animation-timing-function: ease-in;
-        }
-        16.67% {
-            opacity: 1;
-            animation-timing-function: ease-out;
-        }
-        33.33% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
-
-    .slideshow,
-    .slideshow:after {
-        --animation-delay: 6s;
-    }
-
-    .slideshow:after { 
-        content: '';
-    }
-
-    .slideshow > li > span {
+@keyframes diveout {
+    0% {
+        opacity: 1; }
+    25% {
+        opacity: 0.5;
+        transform: var(--transform) translate(10px, 10px); }
+    50% {
         opacity: 0;
-        animation-name: imageAnimation;
-        animation-duration: calc(var(--animation-delay) * 3);
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-delay: 0s;
-    }
-
-    .slideshow li:nth-child(1) span {
-        animation-delay: calc(var(--animation-delay) * 0);
-    }
-
-    .slideshow li:nth-child(2) span { 
-        /* background-image: url('https://wallpapercave.com/wp/wp9064392.jpg'); */
-        background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
-        animation-delay: calc(var(--animation-delay) * 1);
-    }
-    
-    .slideshow li:nth-child(3) span { 
-        /* background-image: url('https://wallpapercave.com/wp/wp5716268.jpg'); */
-        background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
-        animation-delay: calc(var(--animation-delay) * 2);
-    }
+        transform: var(--transform) translate(15px, 15px); }
+    100% {
+        opacity: 0;
+        transform: var(--transform) translate(20px, 20px); }
 }
 
-.window {
-    width: 100%;
-}
 
-.window-top {
-    height: calc(var(--section-height-primary) - var(--nav-height));
-}
-
-.window-top > header{
-    transition: opacity 500ms ease-in-out;
-}
-
-.window-bottom {
-    height: var(--section-height-reduced);
-}
-
+/* Elements
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .next-section {
     position: absolute;
     bottom: 20px;
     left: 50%;
     width: 30px;
-    height: 30px;
-}
+    height: 30px; }
 
-.next-section-arrow {
+.arrow {
+    --transform: rotate(45deg);
+    position: absolute;
+    border-color: var(--colour-dark);
+    border-style: solid;
+    border-width: 3px;
+    cursor: pointer;
+    transform: var(--transform);
+    z-index: 99;
     --animation-time: 1s;
     width: 20px;
     height: 20px;
     border-top: 0;
-    border-left: 0;
-}
+    border-left: 0; }
 
 #arrow1 {
-    display: none;
-    transform: var(--transform) translate(-20px, -20px);
-}
-
-@keyframes divein {
-    0% {
-        opacity: 0;
-    }
-
-    25% {
-        opacity: 0.5;
-        transform: var(--transform) translate(-15px, -15px);
-    }
-
-    50% {
-        opacity: 1;
-        transform: var(--transform) translate(-10px, -10px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: var(--transform) translate(0px, 0px);
-    }
-}
-
-@keyframes diveout {
-    0% {
-        opacity: 1;
-    }
-
-    25% {
-        opacity: 0.5;
-        transform: var(--transform) translate(10px, 10px);
-    }
-
-    50% {
-        opacity: 0;
-        transform: var(--transform) translate(15px, 15px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: var(--transform) translate(20px, 20px);
-    }
-}
-
-#arrow1{
     display: block;
-    animation: divein var(--animation-time) linear infinite
-}
+    transform: var(--transform) translate(-20px, -20px);
+    animation: divein var(--animation-time) linear infinite }
 
-#arrow2{
-    animation: diveout var(--animation-time) linear infinite
-}
+#arrow2 {
+    animation: diveout var(--animation-time) linear infinite }
 
+
+/* Applications
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .app-section {
     height: var(--section-height-primary);
     padding-top: var(--nav-height);
-    padding-bottom: var(--nav-height);
-}
+    padding-bottom: var(--nav-height); }
 
 .app-component {
     background: var(--colour-transparent);
@@ -223,38 +161,17 @@ main {
     height: 80%;
     margin-top: 2em;
     margin-bottom: 2em;
-    border-radius: 10%;
-}
+    border-radius: 10%; }
 
 .card {
     flex-direction: column;
     height: 30rem;
     padding: 30px;
     font-family: var(--ff-sans);
-    font-size: 3rem;
-}
+    font-size: 3rem; }
 
 .card * {
-    color: var(--colour-dark);
-}
-
-@media (max-width: 960px) {
-    .card h2 {
-        overflow-wrap: break-word;
-    }
-}
-
-@media (min-width: 700px){
-    .slideshow,
-    .slideshow:after { 
-        position: absolute;
-        height: calc(var(--nav-height) + 2 * var(--section-height-primary) + var(--section-height-reduced) + 2 * var(--section-height-strip));
-    }
-
-    .slideshow > li > span { 
-        position: absolute;
-    }
-}
+    color: var(--colour-dark); }
 
 .app-icon {
     content: '';
@@ -263,5 +180,61 @@ main {
     border-radius: var(--border-radius);
     background: url('https://picsum.photos/400/800');
     background-position: 0 100%;
-    background-size: 100% 200%;
+    background-size: 100% 200%; }
+
+
+/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (max-width: 960px) {
+    .card h2 { overflow-wrap: break-word; }
+}
+
+@media (min-width: 700px) {
+    /* Keyframes */
+    @keyframes imageAnimation { 
+        0% {
+            opacity: 0;
+            animation-timing-function: ease-in; }
+        16.67% {
+            opacity: 1;
+            animation-timing-function: ease-out; }
+        33.33% {
+            opacity: 1; }
+        50% {
+            opacity: 0; }
+        100% {
+            opacity: 0; }
+    }
+
+    /* Slideshow */
+    .slideshow,
+    .slideshow:after { 
+        position: absolute;
+        height: calc(var(--nav-height) + 2 * var(--section-height-primary) + var(--section-height-reduced) + 2 * var(--section-height-strip));
+        --animation-delay: 6s; }
+    
+    .slideshow:after {
+        content: ''; }
+
+    .slideshow > li > span {
+        position: absolute;
+        opacity: 0;
+        animation-name: imageAnimation;
+        animation-duration: calc(var(--animation-delay) * 3);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-delay: 0s; }
+
+    .slideshow li:nth-child(1) span {
+        animation-delay: calc(var(--animation-delay) * 0); }
+
+    .slideshow li:nth-child(2) span { 
+        /* background-image: url('https://wallpapercave.com/wp/wp9064392.jpg'); */
+        background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
+        animation-delay: calc(var(--animation-delay) * 1); }
+    
+    .slideshow li:nth-child(3) span { 
+        /* background-image: url('https://wallpapercave.com/wp/wp5716268.jpg'); */
+        background-image: url('https://images.pexels.com/photos/6843561/pexels-photo-6843561.jpeg');
+        animation-delay: calc(var(--animation-delay) * 2); }
 }
