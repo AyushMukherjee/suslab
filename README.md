@@ -1,7 +1,5 @@
 # suslab
 
-Uses a modified version of skeleton
-
 ## things-library
 A university things library
 
