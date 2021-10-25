@@ -1,3 +1,22 @@
+/*
+* SusLab Form V1.0
+* Copyright 2021, Ayush Mukherjee
+* Free to use under the MIT license.
+* 10/25/2021
+*/
+
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Box Design
+- Headings
+- Form
+- Media Queries
+*/
+
+
+/* Box Design
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .action-box{
     position: absolute;
     top: 20%;
@@ -13,37 +32,36 @@
     gap: 2rem;
 }
 
+
+/* Headings
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .title{
     line-height: 2;
     margin: auto;
-    font-size: 4rem;
-}
+    font-size: 4rem; }
 
 .title > a{
     text-decoration: none;
-    color: var(--colour-dark);
-}
+    color: var(--colour-dark); }
 
 .subtitle{
     font-family: var(--ff-sans);
-    color: var(--colour-dark);
-}
+    color: var(--colour-dark); }
 
 #logo{
     height: 8rem;
-    margin: auto;
-}
+    margin: auto; }
 
-.login-form{
-    flex-direction: column;
-}
+
+/* Form
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.login-form{ flex-direction: column; }
 
 .form-errors{
     width: 20vw;
     flex-direction: column;
     background-color: #F8F1AE;
-    gap: 0;
-}
+    gap: 0; }
 
 .form-errors > h6{
     margin: 0;
@@ -51,17 +69,13 @@
     font-family: var(--ff-sans);
     color: var(--colour-warn);
     text-align: left;
-    width: 20vw;
-}
+    width: 20vw; }
 
 .form-fields{
     flex-direction: column;
-    gap: 5px;
-}
+    gap: 5px; }
 
-.form-fields label{
-    display: none;
-}
+.form-fields label{ display: none; }
 
 .form-fields input[type="text"],
 .form-fields input[type="email"],
@@ -70,36 +84,33 @@
 .form-fields input[type="time"],
 .form-fields textarea{
     width: clamp(350px, 20vw, 500px);
-    border-radius: 20px;
-}
+    border-radius: 20px; }
 
 .form-fields textarea{
     min-height: 120px;
     height: 20vh;
-    resize: none;
-}
+    resize: none; }
 
 .form-fields input::placeholder,
 .form-fields textarea::placeholder{
     color: var(--colour-accent);
     opacity: 0.8;
-    font-family: var(--ff-sans);
-}
+    font-family: var(--ff-sans); }
 
 .form-links{
     font-family: var(--ff-sans);
-    gap: 4em;
-}
+    gap: 4em; }
 
 .form-links *{
     font-size: 1.5rem;
-    font-weight: 400;
-}
+    font-weight: 400; }
 
 .form-links *{
-    margin: 0;
-}
+    margin: 0; }
 
+
+/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media (min-width: 700px) {
     @keyframes shake{
         0%, 100% {transform: translateX(0);} 
