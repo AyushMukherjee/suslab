@@ -100,6 +100,27 @@ class Product(ProductBase):
 
 
 # Pool Tables
+pool_signup_table = db.Table(
+    'pools_signups',
+    db.Column('pools', db.Integer, db.ForeignKey('pools.id')),
+    db.Column('signups', db.Integer, db.ForeignKey('signups.id')),
+)
+
+class Pool(ProductBase):
+    __tablename__ = 'pools'
+
+    from_ = db.Column(db.String(32), nullable=False)
+    to_ = db.Column(db.String(32), nullable=False)
+    time = db.Column(db.DateTime)
+
+    # pooler-pool relationship: parent=pool, child=pooler, many-one relationship
+    pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
+    pooler = db.relationship('Pooler', backref=db.backref('pools'))
+
+    # pool-signup relationship: parent=pool, child=signup, many-many relationship
+    signups = db.relationship('Signup', secondary='pools_signups', backref=db.backref('pools'))
+
+
 class Pooler(db.Model):
     __tablename__ = 'poolers'
 
@@ -107,9 +128,6 @@ class Pooler(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship("User", backref=db.backref("pooler", uselist=False))
-
-    # pooler-pool relationship
-    pool = db.relationship('Pool', backref=db.backref('pooler'))
 
 
 class Signup(db.Model):
@@ -119,20 +137,3 @@ class Signup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship("User", backref=db.backref("signup", uselist=False))
-
-    # pool-signup relationship
-    signup_id = db.Column(db.Integer, db.ForeignKey('pools.id'))
-
-
-class Pool(ProductBase):
-    __tablename__ = 'pools'
-
-    from_ = db.Column(db.String(32), nullable=False)
-    to_ = db.Column(db.String(32), nullable=False)
-    time = db.Column(db.DateTime)
-
-    # pooler-pool relationship
-    pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
-
-    # pool-signup relationship
-    signups = db.relationship('Signup', backref=db.backref('pooler'))

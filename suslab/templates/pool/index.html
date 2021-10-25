@@ -10,11 +10,9 @@ Pool Spots
 
 {% block body %}
 <h1 class="title">Pool Spots</h1>
-{% if current_user.is_authenticated %}
-    <div id="bulletin-form-link">
-        <a href="/pool/create-pool" class="button button-primary">Create New Pool</a>
-    </div>
-{% endif %}
+<div id="bulletin-form-link">
+    <a href="/pool/create-pool" class="button button-primary">Create New Pool</a>
+</div>
 
 <!--TODO: add create pool button if current user is authenticated-->
 <div class="container">
@@ -38,7 +36,13 @@ Pool Spots
                         <td>{{ pool.to_ }}</td>
                         <td>{{ pool.time }}</td>
                         <td>{{ pool.pooler.user.name }}</td>
-                        <td>{%if pool.signups %}{{ pool.signups[0].user.name }}{% endif %}</td>
+                        <td>
+                            {%if pool.signups %}
+                                {% for signup in pool.signups %}
+                                    <li>{{ signup.user.name }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="/pool/signup/{{pool.id}}">Signup</a>
                         </td>
