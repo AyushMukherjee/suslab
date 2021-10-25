@@ -1,11 +1,30 @@
-.action-box{
+/*
+* SusLab Form V1.0
+* Copyright 2021, Ayush Mukherjee
+* Free to use under the MIT license.
+* 10/25/2021
+*/
+
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Box Design
+- Headings
+- Form
+- Media Queries
+*/
+
+
+/* Box Design
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.action-box {
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -20%);
 }
 
-.box-section{
+.box-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,101 +32,90 @@
     gap: 2rem;
 }
 
-.title{
+
+/* Headings
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.title {
     line-height: 2;
     margin: auto;
-    font-size: 4rem;
-}
+    font-size: 4rem; }
 
-.title > a{
+.title>a {
     text-decoration: none;
-    color: var(--colour-dark);
-}
+    color: var(--colour-dark); }
 
-.subtitle{
+.subtitle {
     font-family: var(--ff-sans);
-    color: var(--colour-dark);
-}
+    color: var(--colour-dark); }
 
-#logo{
+#logo {
     height: 8rem;
-    margin: auto;
-}
+    margin: auto; }
 
-.login-form{
-    flex-direction: column;
-}
 
-.form-errors{
+/* Form
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.login-form { flex-direction: column; }
+
+.form-errors {
     width: 20vw;
     flex-direction: column;
     background-color: #F8F1AE;
-    gap: 0;
-}
+    gap: 0; }
 
-.form-errors > h6{
+.form-errors>h6 {
     margin: 0;
     padding-left: 20px;
     font-family: var(--ff-sans);
     color: var(--colour-warn);
     text-align: left;
-    width: 20vw;
-}
+    width: 20vw; }
 
-.form-fields{
+.form-fields {
     flex-direction: column;
-    gap: 5px;
-}
+    gap: 5px; }
 
-.form-fields label{
-    display: none;
-}
+.form-fields label{ display: none; }
 
 .form-fields input[type="text"],
 .form-fields input[type="email"],
 .form-fields input[type="password"],
 .form-fields input[type="date"],
 .form-fields input[type="time"],
-.form-fields textarea{
+.form-fields textarea {
     width: clamp(350px, 20vw, 500px);
-    border-radius: 20px;
-}
+    border-radius: 20px; }
 
-.form-fields textarea{
+.form-fields textarea {
     min-height: 120px;
     height: 20vh;
-    resize: none;
-}
+    resize: none; }
 
 .form-fields input::placeholder,
-.form-fields textarea::placeholder{
+.form-fields textarea::placeholder {
     color: var(--colour-accent);
     opacity: 0.8;
-    font-family: var(--ff-sans);
-}
+    font-family: var(--ff-sans); }
 
-.form-links{
+.form-links {
     font-family: var(--ff-sans);
-    gap: 4em;
-}
+    gap: 4em; }
 
-.form-links *{
+.form-links * {
     font-size: 1.5rem;
-    font-weight: 400;
-}
+    font-weight: 400; }
 
-.form-links *{
-    margin: 0;
-}
+.form-links * { margin: 0; }
 
+
+/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media (min-width: 700px) {
-    @keyframes shake{
+    @keyframes shake {
         0%, 100% {transform: translateX(0);} 
         10%, 50% {transform: translateX(-10px);} 
         25%, 75% {transform: translateX(10px);} 
     }
 
-    .form-errors{
-        animation: shake 0.5s ease-in-out;
-    }
+    .form-errors { animation: shake 0.5s ease-in-out; }
 }
