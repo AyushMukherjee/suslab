@@ -147,7 +147,7 @@ html:not([data-scroll='0']) .navbar { background-color: var(--colour-primary-opa
     height: var(--section-height-strip);
     background: var(--colour-accent); }
 
-.social-media-icon>a {
+.social-media-icon > a {
     text-decoration: none;
     color: var(--colour-white); }
 

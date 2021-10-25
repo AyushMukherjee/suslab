@@ -40,7 +40,7 @@
     margin: auto;
     font-size: 4rem; }
 
-.title>a {
+.title > a {
     text-decoration: none;
     color: var(--colour-dark); }
 
@@ -63,7 +63,7 @@
     background-color: #F8F1AE;
     gap: 0; }
 
-.form-errors>h6 {
+.form-errors > h6 {
     margin: 0;
     padding-left: 20px;
     font-family: var(--ff-sans);
