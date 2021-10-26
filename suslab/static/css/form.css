@@ -75,7 +75,7 @@
 
 .form-fields {
     flex-direction: column;
-    gap: 5px; }
+    --gap: 5px; }
 
 .form-fields label{
     display: none; }
@@ -85,14 +85,25 @@
 .form-fields input[type="password"],
 .form-fields input[type="date"],
 .form-fields input[type="time"],
+.form-fields input[type="number"],
 .form-fields textarea {
-    width: clamp(350px, 20vw, 500px);
+    width: clamp(350px, 30vw, 400px);
     border-radius: 20px; }
 
 .form-fields textarea {
     min-height: 120px;
     height: 20vh;
     resize: none; }
+
+input[type="text"].reduced,
+input[type="email"].reduced,
+input[type="password"].reduced,
+input[type="date"].reduced,
+input[type="time"].reduced,
+input[type="number"].reduced {
+    width: clamp(150px, 15vw, 200px);
+    border-radius: 20px; }
+}
 
 .form-fields input::placeholder,
 .form-fields textarea::placeholder {

@@ -9,8 +9,14 @@
         {{ form.hidden_tag() }}
         {{ form.from_(placeholder='From:') }}
         {{ form.to_(placeholder='To:') }}
-        {{ form.date(placeholder='Date:', type='text', onfocus="setDate(this, infocus=false)", onfocusout="setDate(this)") }}
-        {{ form.time(placeholder='Time:', type='text', onfocus="(this.type='time')", onfocusout="(this.type='text')") }}
+        <div class="flex-horizontal">
+            {{ form.date(placeholder='Date:', type='text', class='reduced', onfocus="setDate(this, infocus=false)", onfocusout="setDate(this)") }}
+            {{ form.time(placeholder='Time:', type='text', class='reduced', onfocus="(this.type='time')", onfocusout="(this.type='text')") }}
+        </div>
+        <div class="flex-horizontal">
+            {{ form.vehicle(placeholder='Vehicle:', class='reduced') }}
+            {{ form.spots(placeholder='Number of spots:', type='number', class='reduced', min='1', max='5') }}
+        </div>
     </div>
     {{ form.submit(class='button-primary') }}
 </form>

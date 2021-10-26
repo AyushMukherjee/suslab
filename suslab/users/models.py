@@ -111,7 +111,9 @@ class Pool(ProductBase):
 
     from_ = db.Column(db.String(32), nullable=False)
     to_ = db.Column(db.String(32), nullable=False)
-    time = db.Column(db.DateTime)
+    time = db.Column(db.DateTime, nullable=False)
+    vehicle = db.Column(db.String(32), nullable=False)
+    spots = db.Column(db.Integer, nullable=False)
 
     # pooler-pool relationship: parent=pool, child=pooler, many-one relationship
     pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
