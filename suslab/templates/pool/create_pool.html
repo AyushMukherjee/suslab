@@ -9,9 +9,13 @@
         {{ form.hidden_tag() }}
         {{ form.from_(placeholder='From:') }}
         {{ form.to_(placeholder='To:') }}
-        {{ form.date(placeholder='Date:', type='text', onfocus="(this.type='date')", onfocusout="(this.type='text')") }}
+        {{ form.date(placeholder='Date:', type='text', onfocus="setDate(this, infocus=false)", onfocusout="setDate(this)") }}
         {{ form.time(placeholder='Time:', type='text', onfocus="(this.type='time')", onfocusout="(this.type='text')") }}
     </div>
     {{ form.submit(class='button-primary') }}
 </form>
+{% endblock %}
+
+{% block body %}
+<script src="{{ url_for('static', filename='js/datetime-diddle.js') }}"></script>
 {% endblock %}
