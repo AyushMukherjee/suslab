@@ -56,12 +56,12 @@
         <li class="nav-item flex-text-item"><a class="nav-item-link">faq</a></li>
         <li class="nav-item flex-text-item"><a class="nav-item-link" href="/contact">contact</a></li>
         {% if current_user.is_authenticated %}
-        <li class="nav-item flex-text-item"><a href="/logout"class="nav-item-link">logout</a></li>
+        <li class="nav-item flex-text-item"><a href="{{ url_for('security.logout', next=url_for(request.endpoint)) }}"class="nav-item-link">logout</a></li>
       </ul>
     </div>
         {% else %}
-          <li class="nav-item flex-text-item"><a href="/login" class="nav-item-link">login</a></li>
-          <li class="nav-item flex-text-item"><a href="/register" class="nav-item-link">signup</a></li>
+          <li class="nav-item flex-text-item"><a href="{{ url_for('security.login', next=url_for(request.endpoint)) }}" class="nav-item-link">login</a></li>
+          <li class="nav-item flex-text-item"><a href="{{ url_for('security.register', next=url_for(request.endpoint)) }}" class="nav-item-link">signup</a></li>
           {% endif %}
       </ul>
     </div>
