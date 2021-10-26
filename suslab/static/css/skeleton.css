@@ -56,7 +56,10 @@
   /* dimension params */
   --section-height-primary: 100vh;
   --section-height-reduced: 55vh;
-  --section-height-strip: 4vh; }
+  --section-height-strip: 4vh;
+
+  /* others */
+  --gap: 2 rem; }
 
 
 /* Grid

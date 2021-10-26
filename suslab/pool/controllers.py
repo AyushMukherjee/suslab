@@ -37,12 +37,12 @@ def create_pool():
             from_ = form.from_.data,
             to_ = form.to_.data,
             time = pool_datetime,
+            vehicle = form.vehicle.data,
+            spots = form.spots.data,
             pooler = pooler,
         )
         try:
-            if not current_user.pooler:
-                db.session.add(pooler)
-            db.session.add(pool)
+            db.session.add_all([pooler, pool])
             db.session.commit()
             return redirect(url_for('pool.index'))
         except:
@@ -61,8 +61,7 @@ def signup(id):
     pool.signups = (pool.signups or []) + [signup]
 
     try:
-        if not current_user.signup:
-            db.session.add(signup)
+        db.session.add(signup)
         db.session.commit()
         return redirect(url_for('pool.index'))
     except:

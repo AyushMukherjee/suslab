@@ -26,6 +26,8 @@ Pool Spots
                     <th>Pool To</th>
                     <th>Pool Time</th>
                     <th>Pooler</th>
+                    <th>Vehicle</th>
+                    <th>Number of Spots</th>
                     <th>Signups</th>
                     <th>Actions</th>
                 </tr>
@@ -36,6 +38,8 @@ Pool Spots
                         <td>{{ pool.to_ }}</td>
                         <td>{{ pool.time }}</td>
                         <td>{{ pool.pooler.user.name }}</td>
+                        <td>{{ pool.vehicle }}</td>
+                        <td>{{ pool.spots }}</td>
                         <td>
                             {%if pool.signups %}
                                 {% for signup in pool.signups %}
