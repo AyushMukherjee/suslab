@@ -1,6 +1,6 @@
 from sqlalchemy.ext.declarative import declared_attr
 from flask_login import UserMixin
-from flask_security import RoleMixin, UserMixin, current_user
+from flask_security import RoleMixin, UserMixin
 
 from suslab import db
 
@@ -34,6 +34,17 @@ class User(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+
+
+class ReferenceUserMixin():
+    @declared_attr
+    def user_id(cls):
+        return db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    @declared_attr
+    def user(cls):
+        return db.relationship('User', backref=db.backref(cls.__name__.lower(), uselist=False))
+
 
 # Library User Tables
 # Same borrower can have many lenders and same lender can have many borrowers
@@ -123,19 +134,13 @@ class Pool(ProductBase):
     signups = db.relationship('Signup', secondary='pools_signups', backref=db.backref('pools'))
 
 
-class Pooler(db.Model):
+class Pooler(ReferenceUserMixin, db.Model):
     __tablename__ = 'poolers'
 
-    # pooler-user relationship
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", backref=db.backref("pooler", uselist=False))
 
 
-class Signup(db.Model):
+class Signup(ReferenceUserMixin, db.Model):
     __tablename__ = 'signups'
 
-    # signup-user relationship
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", backref=db.backref("signup", uselist=False))
