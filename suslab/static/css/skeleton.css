@@ -308,7 +308,7 @@ input[type="date"]:focus,
 input[type="time"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
+  border: 1px solid var(--colour-accent);
   outline: 0; }
 label,
 legend {

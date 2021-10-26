@@ -37,11 +37,11 @@
         <div class="box-section">
             <div class="title-bar flex-horizontal">
                 <div class="home">
-                    <a href="/" class="logo" >
+                    <a href="{{ homelink|default('/') }}" class="logo" >
                       <img class="logo" id="logo" src="https://picsum.photos/200">
                     </a>
                 </div>
-                <h1 class="title"><a href="/">{% block mainline %}SusLab{% endblock %}</a></h1>
+                <h1 class="title"><a href="{{ homelink|default('/') }}"">{% block mainline %}SusLab{% endblock %}</a></h1>
             </div>
             <h5 class="subtitle flex-horizontal">{% block tagline %}Share, Save and Sustain{% endblock %}</h5>
         </div>

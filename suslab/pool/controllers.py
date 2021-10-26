@@ -48,7 +48,7 @@ def create_pool():
         except:
             return 'There was an issue adding your item'
     
-    return render_template('pool/create_pool.html', form=form)
+    return render_template('pool/create_pool.html', form=form, homelink='/pool')
 
 
 @pool.route('/signup/<int:id>')
