@@ -9,20 +9,23 @@ from .forms import PoolForm
 pool = Blueprint('pool', __name__, url_prefix='/pool',
                  template_folder='templates', static_folder='static')
 
+
 def _db_conn():
     from suslab.users.models import Pool, Pooler, Signup
     from suslab import db
 
     return Pool, Pooler, Signup, db
 
-@pool.route('/', methods=['GET', 'POST'])
+
+@pool.route('/')
 def index():
     Pool, *_ = _db_conn()
 
     pools = Pool.query.order_by(Pool.time).all()
     return render_template('pool/index.html', pools=pools)
 
-@pool.route('/create-pool/', methods=['GET', 'POST'])
+
+@pool.route('/create-pool', methods=['GET', 'POST'])
 @login_required
 def create_pool():
     Pool, Pooler, _, db = _db_conn()
@@ -49,10 +52,11 @@ def create_pool():
         except:
             return 'There was an issue adding your item'
     
-    return render_template('pool/create_pool.html', form=form, homelink='/pool')
+    return render_template('pool/create_pool.html', form=form, homelink='/pool/')
 
 
 @pool.route('/signup/<int:id>')
+@login_required
 def signup(id):
     Pool, _, Signup, db = _db_conn()
     pool = Pool.query.get_or_404(id)

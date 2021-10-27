@@ -1,0 +1,15 @@
+{% extends 'form_base.html' %}
+
+{% block mainline %}Things Library{% endblock %}
+{% block tagline %}Create New Borrow Request{% endblock %}
+
+{%block formarea %}
+<form class="login-form flex-horizontal" action="{{ url_for('.create_borrow_request') }}" method="POST" name="library_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.item(placeholder='Item:') }}
+        {{ form.description(placeholder='Item Description:') }}
+    </div>
+    {{ form.submit(class='button-primary') }}
+</form>
+{% endblock %}

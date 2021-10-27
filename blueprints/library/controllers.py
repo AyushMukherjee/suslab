@@ -14,8 +14,17 @@ def _db_conn():
     return Product, Borrower, Lender, db
 
 
-@library.route('/', methods=['GET', 'POST'])
+@library.route('/')
 def index():
+    Product, *_ = _db_conn()
+
+    items = Product.query.order_by(Product.date_created).all()
+    return render_template('library/index.html', items=items)
+
+
+@library.route('/create-borrow-request', methods=['GET', 'POST'])
+@login_required
+def create_borrow_request():
     Product, Borrower, _, db = _db_conn()
     form = ProductForm()
 
@@ -25,25 +34,23 @@ def index():
             user = current_user,
         )
         item = Product(
-            name=form.item.data,
-            description=form.description.data,
+            name = form.item.data,
+            description = form.description.data,
             borrower = borrower,
         )
         try:
-            db.session.add(borrower)
-            db.session.add(item)
+            db.session.add_all([borrower, item])
             db.session.commit()
             return redirect(url_for('.index'))
         except:
             return 'There was an issue adding your item'
 
-    items = Product.query.order_by(Product.date_created).all()
-    return render_template('library/index.html', items=items)
+    return render_template('library/create_borrow_request.html', form=form, homelink='/library/')
 
 
 @library.route('/delete/<int:id>')
 def delete(id):
-    Product, Borrower, _, db = _db_conn()
+    Product, _, _, db = _db_conn()
     item = Product.query.get_or_404(id)
 
     try:
@@ -55,15 +62,13 @@ def delete(id):
 
 
 @library.route('/lend/<int:id>')
+@login_required
 def lend(id):
-    Product, Borrower, Lender, db = _db_conn()
+    Product, _, Lender, db = _db_conn()
     item = Product.query.get_or_404(id)
-    borrower = item.borrower
-    lender = Lender(
+    lender = current_user.lender or Lender(
         user = current_user,
-        borrowers = [borrower],
     )
-
     item.lender = lender
 
     try:
@@ -71,4 +76,4 @@ def lend(id):
         db.session.commit()
         return redirect(url_for('.index'))
     except:
-        return 'There was a problem deleting that task'
+        return 'There was a problem lending'
