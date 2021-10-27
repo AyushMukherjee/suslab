@@ -1,5 +1,7 @@
 from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
+from flask_security.decorators import login_required
+
 from .forms import ProductForm
 
 
@@ -30,19 +32,21 @@ def create_borrow_request():
 
     # Verify the form
     if form.validate_on_submit():
-        borrower = Borrower(
+        borrower = current_user.borrower or Borrower(
             user = current_user,
         )
         item = Product(
             name = form.item.data,
             description = form.description.data,
             borrower = borrower,
+            duration = form.duration.data,
         )
         try:
             db.session.add_all([borrower, item])
             db.session.commit()
             return redirect(url_for('.index'))
-        except:
+        except Exception as e:
+            print(e)
             return 'There was an issue adding your item'
 
     return render_template('library/create_borrow_request.html', form=form, homelink='/library/')

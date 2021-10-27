@@ -9,6 +9,7 @@
         {{ form.hidden_tag() }}
         {{ form.item(placeholder='Item:') }}
         {{ form.description(placeholder='Item Description:') }}
+        {{ form.duration(placeholder='Duration in Days:', min=1, max=14, type='number') }}
     </div>
     {{ form.submit(class='button-primary') }}
 </form>

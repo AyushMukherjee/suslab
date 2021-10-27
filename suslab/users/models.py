@@ -65,11 +65,11 @@ class Product(ProductBase):
 
     # borrower-product relationship: parent=product, child=borrower, many-one relationship
     borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'))
-    borrower = db.relationship('Borrower', backref=db.backref('borrower'))
+    borrower = db.relationship('Borrower', backref=db.backref('products'))
 
     # lender-product relationship: parent=product, child=lender, many-one relationship
     lender_id = db.Column(db.Integer, db.ForeignKey('lenders.id'))
-    lender = db.relationship('Lender', backref=db.backref('lender'))
+    lender = db.relationship('Lender', backref=db.backref('products'))
 
 
 class Borrower(ReferenceUserMixin, db.Model):

@@ -5,46 +5,47 @@ Things Library
 {% endblock %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bulletin.css') }}">
 {% endblock %}
 
 {% block body %}
-<h1>Things Library</h1>
+<h1 class="title">Things Library</h1>
+<div id="bulletin-form-link">
+    <a href="/library/create-borrow-request" class="button button-primary">Create New Borrow Request</a>
+</div>
 
-<table class="center">
-    <tr>
-        <th>Index</th>
-        <th>Item</th>
-        <th>Description</th>
-        <th>Date Created</th>
-        <th>Borrower</th>
-        <th>Lender</th>
-        <th>Actions</th>
-    </tr>
-    {% for item in items %}
-        <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.date_created.date() }}</td>
-            <td>{{ item.borrower.user.email }}</td>
-            <td>{%if item.lender %}{{ item.lender.user.email }}{% endif %}</td>
-            <td>
-                <a href="/library/lend/{{item.id}}">Lend</a>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
-<hr></hr>
-{% if current_user.is_authenticated %}
-    <div>
-        <form action="/library/" method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <label for="item">Item Name</label><br>
-            <input type="text" name="item" id="item"><br>
-            <label for="description">Description</label><br>
-            <textarea name="description" id="description">Please describe the item</textarea><br>
-            <input type="submit" value="Post">
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="one column"></div>
+        <div class="ten columns">
+            <table class="center">
+                <tr>
+                    <th>Index</th>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Date Created</th>
+                    <th>Duration in days</th>
+                    <th>Borrower</th>
+                    <th>Lender</th>
+                    <th>Actions</th>
+                </tr>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.date_created.date() }}</td>
+                        <td>{{ item.duration }}</td>
+                        <td>{{ item.borrower.user.name }}</td>
+                        <td>{%if item.lender %}{{ item.lender.user.name }}{% endif %}</td>
+                        <td>
+                            <a href="/library/lend/{{item.id}}">Lend</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="one column"></div>
     </div>
-{% endif %}
+</div>
 {% endblock %}
