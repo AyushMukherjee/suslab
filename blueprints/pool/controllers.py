@@ -4,9 +4,9 @@ from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
 from flask_security.decorators import login_required
 
-from suslab.pool.forms import PoolForm
+from .forms import PoolForm
 
-pool = Blueprint('pool', __name__, url_prefix='/pool')
+pool = Blueprint('pool', __name__, url_prefix='/pool', template_folder='templates', static_folder='static')
 
 def _db_conn():
     from suslab.users.models import Pool, Pooler, Signup
@@ -44,7 +44,7 @@ def create_pool():
         try:
             db.session.add_all([pooler, pool])
             db.session.commit()
-            return redirect(url_for('pool.index'))
+            return redirect(url_for('.index'))
         except:
             return 'There was an issue adding your item'
     
@@ -63,6 +63,6 @@ def signup(id):
     try:
         db.session.add(signup)
         db.session.commit()
-        return redirect(url_for('pool.index'))
+        return redirect(url_for('.index'))
     except:
         return 'There was a problem signing up'
