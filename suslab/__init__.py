@@ -4,8 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security
 from flask_wtf.csrf import CSRFProtect
 
-from suslab.library.controllers import library
+from blueprints.library.controllers import library
 from blueprints.pool.controllers import pool
+
 from suslab.info.controllers import info
 from suslab.users.controllers import get_user_datastore
 from suslab.users.forms import ExtendedRegisterForm

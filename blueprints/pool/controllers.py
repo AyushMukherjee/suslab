@@ -6,7 +6,8 @@ from flask_security.decorators import login_required
 
 from .forms import PoolForm
 
-pool = Blueprint('pool', __name__, url_prefix='/pool', template_folder='templates', static_folder='static')
+pool = Blueprint('pool', __name__, url_prefix='/pool',
+                 template_folder='templates', static_folder='static')
 
 def _db_conn():
     from suslab.users.models import Pool, Pooler, Signup
