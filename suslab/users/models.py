@@ -46,51 +46,6 @@ class ReferenceUserMixin():
         return db.relationship('User', backref=db.backref(cls.__name__.lower(), uselist=False))
 
 
-# Library User Tables
-# Same borrower can have many lenders and same lender can have many borrowers
-class LibraryUser(User):
-    # @declared_attr
-    # def products(cls):
-    #     return db.relationship('Product', backref=db.backref(cls.__tablename__))
-    
-    loan_date = db.Column(db.DateTime, default=db.func.current_timestamp())
-    due_date = db.Column(db.DateTime, default=db.func.current_timestamp())
-
-borrowers_lenders = db.Table(
-    'borrowers_lenders',
-    db.Column('borrowers', db.Integer(), db.ForeignKey('borrowers.id')),
-    db.Column('lenders', db.Integer(), db.ForeignKey('lenders.id'))
-)
-
-# TODO: abstract to mixin
-class Borrower(db.Model):
-    __tablename__ = 'borrowers'
-    
-    # borrower-user relationship
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", backref=db.backref("borrower", uselist=False))
-
-    # borrower-product relationship
-    products = db.relationship('Product', backref=db.backref('borrower'))
-
-# TODO: abstract to mixin
-class Lender(db.Model):
-    __tablename__ = 'lenders'
-
-    # lender-user relationship
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", backref=db.backref("lender", uselist=False))
-
-    # lender-product relationship
-    products = db.relationship('Product', backref=db.backref('lender'))
-
-    # lender-borrower relationship
-    borrowers = db.relationship('Borrower', secondary='borrowers_lenders',
-                                backref=db.backref('lenders'))
-
-# Library Tables
 class ProductBase(db.Model):
     __abstract__ = True
 
@@ -100,14 +55,33 @@ class ProductBase(db.Model):
                               onupdate=db.func.current_timestamp())
 
 
+# Library Tables
 class Product(ProductBase):
     __tablename__ = 'products'
 
     name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(512), nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
 
+    # borrower-product relationship: parent=product, child=borrower, many-one relationship
     borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'))
+    borrower = db.relationship('Borrower', backref=db.backref('borrower'))
+
+    # lender-product relationship: parent=product, child=lender, many-one relationship
     lender_id = db.Column(db.Integer, db.ForeignKey('lenders.id'))
+    lender = db.relationship('Lender', backref=db.backref('lender'))
+
+
+class Borrower(ReferenceUserMixin, db.Model):
+    __tablename__ = 'borrowers'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+
+class Lender(ReferenceUserMixin, db.Model):
+    __tablename__ = 'lenders'
+    
+    id = db.Column(db.Integer, primary_key=True)
 
 
 # Pool Tables
