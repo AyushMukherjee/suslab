@@ -6,8 +6,8 @@ from flask_wtf.csrf import CSRFProtect
 
 from blueprints.library.controllers import library
 from blueprints.pool.controllers import pool
+from blueprints.info.controllers import info
 
-from suslab.info.controllers import info
 from suslab.users.controllers import get_user_datastore
 from suslab.users.forms import ExtendedRegisterForm
 
