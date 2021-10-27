@@ -4,7 +4,7 @@
 
 {% block formarea %}
 
-<form class="login-form flex-horizontal" action="{{ url_for('info.contact') }}" method="POST" name="contact_form" autocomplete="off">
+<form class="login-form flex-horizontal" action="{{ url_for('.contact') }}" method="POST" name="contact_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ form.hidden_tag() }}
         {{ form.name(placeholder="Name:") }}

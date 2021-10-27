@@ -2,10 +2,11 @@ from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
 from flask_mail import Message
 
-from suslab.info.forms import ContactForm
+from .forms import ContactForm
 
 
-info = Blueprint('info', __name__, url_prefix='/')
+info = Blueprint('info', __name__, url_prefix='/',
+                 template_folder='templates', static_folder='static')
 
 
 def _mailer_conn():
