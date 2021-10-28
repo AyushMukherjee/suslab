@@ -45,17 +45,21 @@ def create_borrow_request():
             db.session.add_all([borrower, item])
             db.session.commit()
             return redirect(url_for('.index'))
-        except Exception as e:
-            print(e)
+        except Exception:
             return 'There was an issue adding your item'
 
     return render_template('library/create_borrow_request.html', form=form, homelink='/library/')
 
 
+# TODO: Add flash error for deleting
 @library.route('/delete/<int:id>')
+@login_required
 def delete(id):
     Product, _, _, db = _db_conn()
     item = Product.query.get_or_404(id)
+
+    if item.borrower.user != current_user:
+        return redirect(url_for('.index'))
 
     try:
         db.session.delete(item)
@@ -65,19 +69,42 @@ def delete(id):
         return 'There was a problem deleting that task'
 
 
+# TODO: Add flash error for lending
 @library.route('/lend/<int:id>')
 @login_required
 def lend(id):
     Product, _, Lender, db = _db_conn()
     item = Product.query.get_or_404(id)
+    if item.lender:
+        return redirect(url_for('.index'))
+
     lender = current_user.lender or Lender(
         user = current_user,
     )
     item.lender = lender
 
     try:
-        db.session.add(lender)
+        db.session.add_all([lender, item])
         db.session.commit()
         return redirect(url_for('.index'))
     except:
         return 'There was a problem lending'
+
+
+# TODO: Add flash error for withdrawing
+@library.route('/withdraw/<int:id>')
+@login_required
+def withdraw(id):
+    Product, _, Lender, db = _db_conn()
+    item = Product.query.get_or_404(id)
+    if not item.lender or item.lender.user != current_user:
+        return redirect(url_for('.index'))
+    
+    item.lender = None
+
+    try:
+        db.session.add(item)
+        db.session.commit()
+        return redirect(url_for('.index'))
+    except:
+        return 'There was a problem withdrawing'

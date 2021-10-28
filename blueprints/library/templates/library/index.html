@@ -37,9 +37,16 @@ Things Library
                         <td>{{ item.date_created.date() }}</td>
                         <td>{{ item.duration }}</td>
                         <td>{{ item.borrower.user.name }}</td>
-                        <td>{%if item.lender %}{{ item.lender.user.name }}{% endif %}</td>
+                        <td>{{ item.lender.user.name if item.lender}}</td>
                         <td>
-                            <a href="/library/lend/{{item.id}}">Lend</a>
+                            {% if item.borrower.user == current_user %}
+                                <a href="/library/delete/{{item.id}}">Delete</a>
+                                <a href="">Edit</a>
+                            {% elif item.lender.user == current_user %}
+                                <a href="/library/withdraw/{{item.id}}">Withdraw</a>
+                            {% elif not item.lender %}
+                                <a href="/library/lend/{{item.id}}">Lend</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

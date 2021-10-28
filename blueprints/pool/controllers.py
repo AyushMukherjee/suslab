@@ -66,7 +66,7 @@ def signup(id):
     pool.signups = (pool.signups or []) + [signup]
 
     try:
-        db.session.add(signup)
+        db.session.add_all([signup, pool])
         db.session.commit()
         return redirect(url_for('.index'))
     except:
