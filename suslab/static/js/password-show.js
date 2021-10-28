@@ -8,5 +8,3 @@ document.addEventListener('DOMContentLoaded', function () {
     togglePassword.classList.toggle('fa-eye-slash');
   });
   });
-
-  

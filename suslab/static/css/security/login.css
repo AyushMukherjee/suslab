@@ -31,6 +31,11 @@
     flex-direction: column;
 }
 
+i{
+    margin-left: 270px;
+    position: relative; top: -45px;
+}
+
 .form-errors{
     width: 20vw;
     flex-direction: column;
