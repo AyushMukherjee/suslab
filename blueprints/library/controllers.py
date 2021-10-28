@@ -66,7 +66,7 @@ def delete(id):
         db.session.commit()
         return redirect(url_for('.index'))
     except:
-        return 'There was a problem deleting that task'
+        return 'There was a problem deleting that item'
 
 
 # TODO: Add flash error for lending
@@ -75,7 +75,8 @@ def delete(id):
 def lend(id):
     Product, _, Lender, db = _db_conn()
     item = Product.query.get_or_404(id)
-    if item.lender:
+    
+    if item.lender or item.borrower.user == current_user:
         return redirect(url_for('.index'))
 
     lender = current_user.lender or Lender(

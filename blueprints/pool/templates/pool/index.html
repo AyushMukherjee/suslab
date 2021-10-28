@@ -47,7 +47,14 @@ Pool Spots
                             {% endif %}
                         </td>
                         <td>
-                            <a href="/pool/signup/{{pool.id}}">Signup</a>
+                            {% if pool.pooler.user == current_user %}
+                                <a href="/pool/delete/{{pool.id}}">Delete</a>
+                                <a href="">Edit</a>
+                            {% elif current_user.signup in (pool.signups or []) %}
+                                <a href="/pool/withdraw/{{pool.id}}">Withdraw</a>
+                            {% elif (pool.signups or [])|length < pool.spots %}
+                                <a href="/pool/signup/{{pool.id}}">Signup</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

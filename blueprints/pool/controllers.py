@@ -46,7 +46,7 @@ def create_pool():
             pooler = pooler,
         )
         try:
-            db.session.add_all([pooler, pool])
+            db.session.add(pool)
             db.session.commit()
             return redirect(url_for('.index'))
         except:
@@ -55,19 +55,65 @@ def create_pool():
     return render_template('pool/create_pool.html', form=form, homelink='/pool/')
 
 
+# TODO: Add flash error for deleting
+@pool.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    Pool, _, _, db = _db_conn()
+    pool = Pool.query.get_or_404(id)
+
+    if pool.pooler.user != current_user:
+        return redirect(url_for('.index'))
+
+    try:
+        db.session.delete(pool)
+        db.session.commit()
+        return redirect(url_for('.index'))
+    except:
+        return 'There was a problem deleting that pool'
+
+
+# TODO: Add flash error for signing up
 @pool.route('/signup/<int:id>')
 @login_required
 def signup(id):
     Pool, _, Signup, db = _db_conn()
     pool = Pool.query.get_or_404(id)
+
     signup = current_user.signup or Signup(
         user = current_user,
     )
+    if len(pool.signups or []) >= pool.spots or signup in pool.signups or pool.pooler.user == current_user:
+        return redirect(url_for('.index'))
+
     pool.signups = (pool.signups or []) + [signup]
 
     try:
-        db.session.add_all([signup, pool])
+        db.session.add(pool)
         db.session.commit()
         return redirect(url_for('.index'))
     except:
         return 'There was a problem signing up'
+
+
+# TODO: Add flash error for withdrawing
+@pool.route('/withdraw/<int:id>')
+@login_required
+def withdraw(id):
+    Pool, _, Signup, db = _db_conn()
+    pool = Pool.query.get_or_404(id)
+    signup = current_user.signup or Signup(
+        user = current_user,
+    )
+
+    if signup not in (pool.signups or []):
+        return redirect(url_for('.index'))
+
+    pool.signups.remove(signup)
+
+    try:
+        db.session.add(pool)
+        db.session.commit()
+        return redirect(url_for('.index'))
+    except:
+        return 'There was a problem withdrawing'
