@@ -26,12 +26,12 @@ class Role(db.Model, RoleMixin):
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(128), unique=True)
+    id = db.Column(db.Integer, primary_key=True, supports_json=True)
+    email = db.Column(db.String(128), unique=True, supports_json=True)
     password = db.Column(db.String(32))
-    name = db.Column(db.String(64))
-    active = db.Column(db.Boolean())
-    confirmed_at = db.Column(db.DateTime())
+    name = db.Column(db.String(64), supports_json=True)
+    active = db.Column(db.Boolean(), supports_json=True)
+    confirmed_at = db.Column(db.DateTime(), supports_json=True)
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
 
@@ -39,20 +39,20 @@ class User(db.Model, UserMixin):
 class ReferenceUserMixin():
     @declared_attr
     def user_id(cls):
-        return db.Column(db.Integer, db.ForeignKey('users.id'))
+        return db.Column(db.Integer, db.ForeignKey('users.id'), supports_json=True)
     
     @declared_attr
     def user(cls):
-        return db.relationship('User', backref=db.backref(cls.__name__.lower(), uselist=False))
+        return db.relationship('User', backref=db.backref(cls.__name__.lower(), uselist=False), supports_json=True)
 
 
 class ProductBase(db.Model):
     __abstract__ = True
 
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
+    id = db.Column(db.Integer, primary_key=True, supports_json=True)
+    date_created = db.Column(db.DateTime, default=db.func.current_timestamp(), supports_json=True)
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
+                              onupdate=db.func.current_timestamp(), supports_json=True)
 
 
 # Library Tables
@@ -94,27 +94,27 @@ pool_signup_table = db.Table(
 class Pool(ProductBase):
     __tablename__ = 'pools'
 
-    from_ = db.Column(db.String(32), nullable=False)
-    to_ = db.Column(db.String(32), nullable=False)
-    time = db.Column(db.DateTime, nullable=False)
-    vehicle = db.Column(db.String(32), nullable=False)
-    spots = db.Column(db.Integer, nullable=False)
+    from_ = db.Column(db.String(32), nullable=False, supports_json=True)
+    to_ = db.Column(db.String(32), nullable=False, supports_json=True)
+    time = db.Column(db.DateTime, nullable=False, supports_json=True)
+    vehicle = db.Column(db.String(32), nullable=False, supports_json=True)
+    spots = db.Column(db.Integer, nullable=False, supports_json=True)
 
     # pooler-pool relationship: parent=pool, child=pooler, many-one relationship
-    pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
-    pooler = db.relationship('Pooler', backref=db.backref('pools'))
+    pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'), supports_json=True)
+    pooler = db.relationship('Pooler', backref=db.backref('pools'), supports_json=True)
 
     # pool-signup relationship: parent=pool, child=signup, many-many relationship
-    signups = db.relationship('Signup', secondary='pools_signups', backref=db.backref('pools'))
+    signups = db.relationship('Signup', secondary='pools_signups', backref=db.backref('pools'), supports_json=True)
 
 
 class Pooler(ReferenceUserMixin, db.Model):
     __tablename__ = 'poolers'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, supports_json=True)
 
 
 class Signup(ReferenceUserMixin, db.Model):
     __tablename__ = 'signups'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, supports_json=True)

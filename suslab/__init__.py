@@ -1,3 +1,5 @@
+from sqlathanor import FlaskBaseModel, initialize_flask_sqlathanor
+
 from flask import Flask, render_template
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
@@ -19,7 +21,9 @@ app.register_blueprint(library)
 app.register_blueprint(pool)
 app.register_blueprint(info)
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, model_class = FlaskBaseModel)
+db = initialize_flask_sqlathanor(db)
+
 security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
 mail = Mail(app)
 

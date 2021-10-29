@@ -28,7 +28,8 @@ def index():
 @pool.route('/api/data')
 def data():
     Pool, *_ = _db_conn()
-    pass # how to get data?
+
+    return {'data': [pool.to_json(max_nesting=4) for pool in Pool.query]}
 
 
 @pool.route('/create-pool', methods=['GET', 'POST'])
