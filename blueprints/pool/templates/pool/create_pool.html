@@ -1,0 +1,27 @@
+{% extends 'form_base.html' %}
+
+{% block mainline %}Pool Spots{% endblock %}
+{% block tagline %}Create New Pool Request{% endblock %}
+
+{%block formarea %}
+<form class="login-form flex-horizontal" action="{{ url_for('.create_pool') }}" method="POST" name="pool_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.from_(placeholder='From:') }}
+        {{ form.to_(placeholder='To:') }}
+        <div class="flex-horizontal">
+            {{ form.date(placeholder='Date:', type='text', class='reduced', onfocus="setDate(this, infocus=false)", onfocusout="setDate(this)") }}
+            {{ form.time(placeholder='Time:', type='text', class='reduced', onfocus="(this.type='time')", onfocusout="(this.type='text')") }}
+        </div>
+        <div class="flex-horizontal">
+            {{ form.vehicle(placeholder='Vehicle:', class='reduced') }}
+            {{ form.spots(placeholder='Number of spots:', type='number', class='reduced', min='1', max='5') }}
+        </div>
+    </div>
+    {{ form.submit(class='button-primary') }}
+</form>
+{% endblock %}
+
+{% block body %}
+<script src="{{ url_for('.static', filename='js/datetime-diddle.js') }}"></script>
+{% endblock %}

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/security/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
     <meta name="theme-color" content="#fafafa">
     {% block head %}{% endblock %}
 </head>
@@ -40,16 +40,28 @@
         <div class="box-section">
             <div class="title-bar flex-horizontal">
                 <div class="home">
-                    <a href="/" class="logo" >
+                    <a href="{{ homelink|default('/') }}" class="logo" >
                       <img class="logo" id="logo" src="https://picsum.photos/200">
                     </a>
                 </div>
-                <h1 class="title">Suslab</h1>
+                <h1 class="title"><a href="{{ homelink|default('/') }}"">{% block mainline %}SusLab{% endblock %}</a></h1>
             </div>
-            <h5 class="subtitle flex-horizontal">Share, Save and Sustain</h5>
+            <h5 class="subtitle flex-horizontal">{% block tagline %}Share, Save and Sustain{% endblock %}</h5>
         </div>
         <div class="box-section">
-            {% block formarea %}{% endblock %}</div>
+            {% block formerrors %}
+                {% if form.errors %}
+                    <div class="form-errors flex-horizontal">
+                        {% for field in form.errors %}
+                            {% for error in form[field].errors %}
+                                <h6>{{ error }}</h6>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endblock %}
+            {% block formarea %}{% endblock %}
+        </div>
         <div class="box-section">
             <div class="form-register flex-horizontal">
                 {% block altlogin %}{% endblock %}

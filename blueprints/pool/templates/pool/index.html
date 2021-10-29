@@ -1,0 +1,60 @@
+{% extends './base.html' %}
+
+{% block title %}
+Pool Spots
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bulletin.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1 class="title">Pool Spots</h1>
+<div id="bulletin-form-link">
+    <a href="/pool/create-pool" class="button button-primary">Create New Pool</a>
+</div>
+
+<!--TODO: add create pool button if current user is authenticated-->
+<div class="container">
+    <div class="row">
+        <div class="one column"></div>
+        <div class="ten columns">
+            <table class="center">
+                <tr>
+                    <th>Index</th>
+                    <th>Pool From</th>
+                    <th>Pool To</th>
+                    <th>Pool Time</th>
+                    <th>Pooler</th>
+                    <th>Vehicle</th>
+                    <th>Number of Spots</th>
+                    <th>Signups</th>
+                    <th>Actions</th>
+                </tr>
+                {% for pool in pools %}
+                    <tr>
+                        <td>{{ pool.id }}</td>
+                        <td>{{ pool.from_ }}</td>
+                        <td>{{ pool.to_ }}</td>
+                        <td>{{ pool.time.strftime('%d-%m-%Y %I:%M %p') }}</td>
+                        <td>{{ pool.pooler.user.name }}</td>
+                        <td>{{ pool.vehicle }}</td>
+                        <td>{{ pool.spots }}</td>
+                        <td>
+                            {%if pool.signups %}
+                                {% for signup in pool.signups %}
+                                    <li>{{ signup.user.name }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/pool/signup/{{pool.id}}">Signup</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="one column"></div>
+    </div>
+</div>
+{% endblock %}

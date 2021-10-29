@@ -1,6 +1,6 @@
 from sqlalchemy.ext.declarative import declared_attr
 from flask_login import UserMixin
-from flask_security import RoleMixin, UserMixin, current_user
+from flask_security import RoleMixin, UserMixin
 
 from suslab import db
 
@@ -34,6 +34,17 @@ class User(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+
+
+class ReferenceUserMixin():
+    @declared_attr
+    def user_id(cls):
+        return db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    @declared_attr
+    def user(cls):
+        return db.relationship('User', backref=db.backref(cls.__name__.lower(), uselist=False))
+
 
 # Library User Tables
 # Same borrower can have many lenders and same lender can have many borrowers
@@ -100,39 +111,36 @@ class Product(ProductBase):
 
 
 # Pool Tables
-class Pooler(db.Model):
-    __tablename__ = 'poolers'
-
-    # pooler-user relationship
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", backref=db.backref("pooler", uselist=False))
-
-    # pooler-pool relationship
-    pool = db.relationship('Pool', backref=db.backref('pooler'))
-
-
-class Signup(db.Model):
-    __tablename__ = 'signups'
-
-    # signup-user relationship
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", backref=db.backref("signup", uselist=False))
-
-    # pool-signup relationship
-    signup_id = db.Column(db.Integer, db.ForeignKey('pools.id'))
-
+pool_signup_table = db.Table(
+    'pools_signups',
+    db.Column('pools', db.Integer, db.ForeignKey('pools.id')),
+    db.Column('signups', db.Integer, db.ForeignKey('signups.id')),
+)
 
 class Pool(ProductBase):
     __tablename__ = 'pools'
 
     from_ = db.Column(db.String(32), nullable=False)
     to_ = db.Column(db.String(32), nullable=False)
-    time = db.Column(db.DateTime)
+    time = db.Column(db.DateTime, nullable=False)
+    vehicle = db.Column(db.String(32), nullable=False)
+    spots = db.Column(db.Integer, nullable=False)
 
-    # pooler-pool relationship
+    # pooler-pool relationship: parent=pool, child=pooler, many-one relationship
     pooler_id = db.Column(db.Integer, db.ForeignKey('poolers.id'))
+    pooler = db.relationship('Pooler', backref=db.backref('pools'))
 
-    # pool-signup relationship
-    signups = db.relationship('Signup', backref=db.backref('pooler'))
+    # pool-signup relationship: parent=pool, child=signup, many-many relationship
+    signups = db.relationship('Signup', secondary='pools_signups', backref=db.backref('pools'))
+
+
+class Pooler(ReferenceUserMixin, db.Model):
+    __tablename__ = 'poolers'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+
+class Signup(ReferenceUserMixin, db.Model):
+    __tablename__ = 'signups'
+
+    id = db.Column(db.Integer, primary_key=True)

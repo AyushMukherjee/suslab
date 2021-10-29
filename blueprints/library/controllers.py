@@ -1,9 +1,10 @@
 from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
-from suslab.library.forms import ProductForm
+from .forms import ProductForm
 
 
-library = Blueprint('library', __name__, url_prefix='/library')
+library = Blueprint('library', __name__, url_prefix='/library',
+                    template_folder='templates', static_folder='static')
 
 
 def _db_conn():
@@ -32,7 +33,7 @@ def index():
             db.session.add(borrower)
             db.session.add(item)
             db.session.commit()
-            return redirect(url_for('library.index'))
+            return redirect(url_for('.index'))
         except:
             return 'There was an issue adding your item'
 
@@ -48,7 +49,7 @@ def delete(id):
     try:
         db.session.delete(item)
         db.session.commit()
-        return redirect(url_for('library.index'))
+        return redirect(url_for('.index'))
     except:
         return 'There was a problem deleting that task'
 
@@ -68,6 +69,6 @@ def lend(id):
     try:
         db.session.add(lender)
         db.session.commit()
-        return redirect(url_for('library.index'))
+        return redirect(url_for('.index'))
     except:
         return 'There was a problem deleting that task'

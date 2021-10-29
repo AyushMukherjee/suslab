@@ -1,6 +1,10 @@
-{% extends './security/login_base.html' %}
+{% extends 'form_base.html' %}
 
-{%block formarea %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/security/login.css') }}">
+{% endblock %}
+
+{%block formerrors %}
 {% include "security/_messages.html" %}
 {% if login_user_form.errors %}
     <div class="form-errors flex-horizontal">
@@ -11,7 +15,9 @@
         {% endfor %}
     </div>
 {% endif %}
+{% endblock %}
 
+{%block formarea %}
 <form class="login-form flex-horizontal" action="{{ url_for_security('login') }}" method="POST" name="login_user_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ login_user_form.hidden_tag() }}
