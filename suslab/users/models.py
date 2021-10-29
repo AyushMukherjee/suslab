@@ -11,7 +11,7 @@ from suslab import db
 roles_users = db.Table(
     'roles_users',
     db.Column('users', db.Integer(), db.ForeignKey('users.id')),
-    db.Column('roles', db.Integer(), db.ForeignKey('roles.id'))
+    db.Column('roles', db.Integer(), db.ForeignKey('roles.id')),
 )
 
 

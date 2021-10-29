@@ -25,6 +25,12 @@ def index():
     return render_template('pool/index.html', pools=pools)
 
 
+@pool.route('/api/data')
+def data():
+    Pool, *_ = _db_conn()
+    pass # how to get data?
+
+
 @pool.route('/create-pool', methods=['GET', 'POST'])
 @login_required
 def create_pool():
