@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const togglePassword = document.querySelector('#togglePassword');
-  const password = document.querySelector('#password');
+  const togglePasswordList = document.querySelectorAll('.toggle-password');
   
-  togglePassword.addEventListener('click', () => {
+  togglePasswordList.forEach(button => button.addEventListener('click', () => {
+    password = button.previousElementSibling;
     type = password.getAttribute('type') === 'password' ? 'text' : 'password';
     password.setAttribute('type', type);
-    togglePassword.classList.toggle('fa-eye-slash');
-  });
-  });
+    button.classList.toggle('fa-eye-slash');
+  }));
+});

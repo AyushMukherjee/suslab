@@ -17,10 +17,16 @@
         {{ register_user_form.hidden_tag() }}
         <label for="email">Email</label>
         <input type="text" name="email" id="email" placeholder="Email Address:" required="">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Password:" required="">
-        <label for="password_confirm">Retype Password</label>
-        <input type="password" name="password_confirm" id="password_confirm" placeholder="Retype Password:" required="">
+        <div class="password-field">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password:" required="">
+            <i class="fa fa-eye toggle-password"></i>
+        </div>
+        <div class="password-field">
+            <label for="password_confirm">Retype Password</label>
+            <input type="password" name="password_confirm" id="password_confirm" placeholder="Retype Password:" required="">
+            <i class="fa fa-eye toggle-password"></i>
+        </div>
     </div>
     <input type="submit" class="button-primary" value="Sign Up">
 </form>

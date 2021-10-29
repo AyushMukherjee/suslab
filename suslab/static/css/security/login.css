@@ -31,9 +31,18 @@
     flex-direction: column;
 }
 
-i {
-    margin-left: 270px;
-    position: relative; top: -45px; }
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    font-size: 1.2em;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 50%;
+    transform: translate(5%, -50%);
+    padding-bottom: 1.5rem; }
 
 .form-errors{
     width: 20vw;
