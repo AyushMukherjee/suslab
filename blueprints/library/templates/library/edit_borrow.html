@@ -1,0 +1,17 @@
+{% extends 'form_base.html' %}
+
+{% block mainline %}Things Library{% endblock %}
+{% block tagline %}Create New Borrow Request{% endblock %}
+
+{% block formarea %}
+<form class="form flex-horizontal" action="{{ url_for('.edit', id=item.id) }}" method="POST" name="library_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.name(placeholder='Item:', value=item.name) }}
+        {% set _ = form.description.__setattr__('data', item.description) %}
+        {{ form.description(placeholder='Item Description:') }}
+        {{ form.duration(placeholder='Duration in Days:', min=1, max=14, type='number', value=item.duration) }}
+    </div>
+    {{ form.submit(class='button-primary', value='Edit Request') }}
+</form>
+{% endblock %}

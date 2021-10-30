@@ -5,8 +5,8 @@ from wtforms.validators import DataRequired, Length, NumberRange
 
 
 class ProductForm(FlaskForm):
-    item = StringField(
-        'item',
+    name = StringField(
+        'name',
         validators=[
             DataRequired(message='Please specify an item name'),
             Length(min=1, max=128, message='Please specify a valid item'),

@@ -11,7 +11,7 @@ Things Library
 {% block body %}
 <h1 class="title">Things Library</h1>
 <div id="bulletin-form-link">
-    <a href="/library/create-borrow-request" class="button button-primary">Create New Borrow Request</a>
+    <a href="/library/create-borrow" class="button button-primary">Create New Borrow Request</a>
 </div>
 
 <div class="container">
@@ -41,7 +41,7 @@ Things Library
                         <td>
                             {% if item.borrower.user == current_user %}
                                 <a href="/library/delete/{{item.id}}">Delete</a>
-                                <a href="">Edit</a>
+                                <a href="/library/edit/{{item.id}}">Edit</a>
                             {% elif item.lender.user == current_user %}
                                 <a href="/library/withdraw/{{item.id}}">Withdraw</a>
                             {% elif not item.lender %}

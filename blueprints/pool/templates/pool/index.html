@@ -49,7 +49,7 @@ Pool Spots
                         <td>
                             {% if pool.pooler.user == current_user %}
                                 <a href="/pool/delete/{{pool.id}}">Delete</a>
-                                <a href="">Edit</a>
+                                <a href="/pool/edit/{{pool.id}}">Edit</a>
                             {% elif current_user.signup in (pool.signups or []) %}
                                 <a href="/pool/withdraw/{{pool.id}}">Withdraw</a>
                             {% elif (pool.signups or [])|length < pool.spots %}

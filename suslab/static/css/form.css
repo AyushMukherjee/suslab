@@ -53,7 +53,7 @@
 
 /* Form
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.login-form {
+.form {
     flex-direction: column; }
 
 .form-errors,

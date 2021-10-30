@@ -57,27 +57,24 @@ def create_pool():
 
 @pool.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit_pool(id):
-    Pool, Pooler, _, db = _db_conn()
+def edit(id):
+    Pool, _, _, db = _db_conn()
     pool = Pool.query.get_or_404(id)
     pool_date, pool_time = pool.time.strftime('%Y-%m-%d'), pool.time.strftime('%H:%M')
 
     form = PoolForm()
 
-    print(form.data)
+    if pool.pooler.user != current_user or pool.signups:
+        return redirect(url_for('.index'))
 
     if form.validate_on_submit():
         pool_datetime = dt.strptime(f'{form.date.data} {form.time.data}', '%Y-%m-%d %H:%M:%S')
-        pooler = current_user.pooler or Pooler(
-            user = current_user,
-        )
 
         pool.from_ = form.from_.data
         pool.to_ = form.to_.data
         pool.time = pool_datetime
         pool.vehicle = form.vehicle.data
         pool.spots = form.spots.data
-        pool.pooler = pooler
 
         try:
             db.session.add(pool)

@@ -24,9 +24,9 @@ def index():
     return render_template('library/index.html', items=items)
 
 
-@library.route('/create-borrow-request', methods=['GET', 'POST'])
+@library.route('/create-borrow', methods=['GET', 'POST'])
 @login_required
-def create_borrow_request():
+def create_borrow():
     Product, Borrower, _, db = _db_conn()
     form = ProductForm()
 
@@ -36,7 +36,7 @@ def create_borrow_request():
             user = current_user,
         )
         item = Product(
-            name = form.item.data,
+            name = form.name.data,
             description = form.description.data,
             borrower = borrower,
             duration = form.duration.data,
@@ -48,7 +48,33 @@ def create_borrow_request():
         except Exception:
             return 'There was an issue adding your item'
 
-    return render_template('library/create_borrow_request.html', form=form, homelink='/library/')
+    return render_template('library/create_borrow.html', form=form, homelink='/library/')
+
+
+@library.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    Product, _, _, db = _db_conn()
+    item = Product.query.get_or_404(id)
+
+    form = ProductForm()
+
+    if item.borrower.user != current_user or item.lender:
+        return redirect(url_for('.index'))
+
+    if form.validate_on_submit():
+        item.name = form.name.data
+        item.description = form.description.data
+        item.duration = form.duration.data
+
+        try:
+            db.session.add(item)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return 'There was an issue editing your item'
+
+    return render_template('library/edit_borrow.html', item=item, form=form, homelink='/item/')
 
 
 # TODO: Add flash error for deleting
