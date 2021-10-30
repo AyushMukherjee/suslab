@@ -34,14 +34,14 @@ Things Library
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.description }}</td>
-                        <td>{{ item.needed_by }}</td>
+                        <td>{{ item.needed_by.strftime('%d-%m-%Y') }}</td>
                         <td>{{ item.duration }}</td>
                         <td>{{ item.borrower.user.name }}</td>
                         <td>{{ item.lender.user.name if item.lender}}</td>
                         <td>
-                            {% if item.borrower.user == current_user %}
+                            {% if item.borrower.user == current_user and not item.lender %}
                                 <a href="/library/delete/{{item.id}}">Delete</a>
-                                <a href="/library/edit/{{item.id}}">Edit</a>
+                                {% if not item.lender %}<a href="/library/edit/{{item.id}}">Edit</a>{% endif %}
                             {% elif item.lender.user == current_user %}
                                 <a href="/library/withdraw/{{item.id}}">Withdraw</a>
                             {% elif not item.lender %}

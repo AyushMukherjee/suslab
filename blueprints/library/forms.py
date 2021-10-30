@@ -15,7 +15,7 @@ class ProductForm(FlaskForm):
         'description',
         validators=[
             DataRequired(message='Please specify an item description'),
-            Length(min=32, max=128, message='Please specify a valid description'),
+            Length(min=8, max=256, message='Please specify a valid description'),
         ]
     )
     duration = IntegerField(
