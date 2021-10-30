@@ -10,8 +10,15 @@
         {{ form.name(placeholder='Item:', value=item.name) }}
         {% set _ = form.description.__setattr__('data', item.description) %}
         {{ form.description(placeholder='Item Description:') }}
-        {{ form.duration(placeholder='Duration in Days:', min=1, max=14, type='number', value=item.duration) }}
+        <div class="flex-horizontal">
+            {{ form.duration(placeholder='Duration in Days:', type='number', class='reduced', min=1, max=14, value=item.duration) }}
+            {{ form.needed_by(placeholder='Date:', type='text', class='reduced', onfocus="setDate(this)", onfocusout="setDate(this)", value=needed_by) }}
+        </div>
     </div>
     {{ form.submit(class='button-primary', value='Edit Request') }}
 </form>
+{% endblock %}
+
+{% block body %}
+<script src="{{ url_for('static', filename='js/datetime-diddle.js') }}"></script>
 {% endblock %}

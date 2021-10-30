@@ -23,7 +23,7 @@ Things Library
                     <th>Index</th>
                     <th>Item</th>
                     <th>Description</th>
-                    <th>Date Created</th>
+                    <th>Needed By</th>
                     <th>Duration in days</th>
                     <th>Borrower</th>
                     <th>Lender</th>
@@ -34,7 +34,7 @@ Things Library
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.description }}</td>
-                        <td>{{ item.date_created.date() }}</td>
+                        <td>{{ item.needed_by }}</td>
                         <td>{{ item.duration }}</td>
                         <td>{{ item.borrower.user.name }}</td>
                         <td>{{ item.lender.user.name if item.lender}}</td>

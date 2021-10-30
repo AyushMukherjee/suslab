@@ -1,5 +1,5 @@
-setDate = (obj, inFocus=true) => {
-    if(inFocus) {
+setDate = (obj) => {
+    if(obj.type === 'date') {
         obj.type = 'text';
         return;
     }
@@ -12,3 +12,5 @@ setDate = (obj, inFocus=true) => {
     obj.min = today.toISOString().split('T')[0];
     obj.max = cutoff.toISOString().split('T')[0];
 }
+
+setTime = (obj) => obj.type === 'date'? 'text': 'date';
