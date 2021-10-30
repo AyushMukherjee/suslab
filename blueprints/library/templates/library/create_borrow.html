@@ -1,0 +1,23 @@
+{% extends 'form_base.html' %}
+
+{% block mainline %}Things Library{% endblock %}
+{% block tagline %}Create New Borrow Request{% endblock %}
+
+{% block formarea %}
+<form class="form flex-horizontal" action="{{ url_for('.create_borrow') }}" method="POST" name="library_form" autocomplete="off">
+    <div class="form-fields flex-horizontal">
+        {{ form.hidden_tag() }}
+        {{ form.name(placeholder='Item:') }}
+        {{ form.description(placeholder='Item Description:') }}
+        <div class="flex-horizontal">
+            {{ form.duration(placeholder='Duration in Days:', type='number', class='reduced', min=1, max=14) }}
+            {{ form.needed_by(placeholder='Needed By:', type='text', class='reduced', onfocus="setDate(this)", onfocusout="setDate(this)") }}
+        </div>
+    </div>
+    {{ form.submit(class='button-primary') }}
+</form>
+{% endblock %}
+
+{% block body %}
+<script src="{{ url_for('static', filename='js/datetime-diddle.js') }}"></script>
+{% endblock %}

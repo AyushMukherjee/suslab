@@ -14,7 +14,6 @@ Pool Spots
     <a href="/pool/create-pool" class="button button-primary">Create New Pool</a>
 </div>
 
-<!--TODO: add create pool button if current user is authenticated-->
 <div class="container">
     <div class="row">
         <div class="one column"></div>
@@ -48,7 +47,14 @@ Pool Spots
                             {% endif %}
                         </td>
                         <td>
-                            <a href="/pool/signup/{{pool.id}}">Signup</a>
+                            {% if pool.pooler.user == current_user %}
+                                <a href="/pool/delete/{{pool.id}}">Delete</a>
+                                <a href="/pool/edit/{{pool.id}}">Edit</a>
+                            {% elif current_user.signup in (pool.signups or []) %}
+                                <a href="/pool/withdraw/{{pool.id}}">Withdraw</a>
+                            {% elif (pool.signups or [])|length < pool.spots %}
+                                <a href="/pool/signup/{{pool.id}}">Signup</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
