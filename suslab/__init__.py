@@ -3,6 +3,7 @@ from sqlathanor import FlaskBaseModel, initialize_flask_sqlathanor
 from flask import Flask, render_template
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO
 from flask_security import Security
 from flask_wtf.csrf import CSRFProtect
 
