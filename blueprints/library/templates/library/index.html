@@ -11,7 +11,7 @@ Things Library
 {% block body %}
 <h1 class="title">Things Library</h1>
 <div id="bulletin-form-link">
-    <a href="/library/create-borrow-request" class="button button-primary">Create New Borrow Request</a>
+    <a href="/library/create-borrow" class="button button-primary">Create New Borrow Request</a>
 </div>
 
 <div class="container">
@@ -23,7 +23,7 @@ Things Library
                     <th>Index</th>
                     <th>Item</th>
                     <th>Description</th>
-                    <th>Date Created</th>
+                    <th>Needed By</th>
                     <th>Duration in days</th>
                     <th>Borrower</th>
                     <th>Lender</th>
@@ -34,14 +34,14 @@ Things Library
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.description }}</td>
-                        <td>{{ item.date_created.date() }}</td>
+                        <td>{{ item.needed_by.strftime('%d-%m-%Y') }}</td>
                         <td>{{ item.duration }}</td>
                         <td>{{ item.borrower.user.name }}</td>
                         <td>{{ item.lender.user.name if item.lender}}</td>
                         <td>
-                            {% if item.borrower.user == current_user %}
+                            {% if item.borrower.user == current_user and not item.lender %}
                                 <a href="/library/delete/{{item.id}}">Delete</a>
-                                <a href="">Edit</a>
+                                {% if not item.lender %}<a href="/library/edit/{{item.id}}">Edit</a>{% endif %}
                             {% elif item.lender.user == current_user %}
                                 <a href="/library/withdraw/{{item.id}}">Withdraw</a>
                             {% elif not item.lender %}

@@ -3,8 +3,8 @@
 {% block mainline %}Pool Spots{% endblock %}
 {% block tagline %}Create New Pool Request{% endblock %}
 
-{%block formarea %}
-<form class="login-form flex-horizontal" action="{{ url_for('.create_pool') }}" method="POST" name="pool_form" autocomplete="off">
+{% block formarea %}
+<form class="form flex-horizontal" action="{{ url_for('.create_pool') }}" method="POST" name="pool_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ form.hidden_tag() }}
         {{ form.from_(placeholder='From:') }}
@@ -23,5 +23,5 @@
 {% endblock %}
 
 {% block body %}
-<script src="{{ url_for('.static', filename='js/datetime-diddle.js') }}"></script>
+<script src="{{ url_for('static', filename='js/datetime-diddle.js') }}"></script>
 {% endblock %}

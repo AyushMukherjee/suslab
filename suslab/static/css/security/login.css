@@ -1,3 +1,16 @@
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    font-size: 1.2em;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 50%;
+    transform: translate(5%, -50%);
+    padding-bottom: 1.5rem; }
+
 .remember-field {
     flex-direction: row-reverse;
     justify-content: flex-end;

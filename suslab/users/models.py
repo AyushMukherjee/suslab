@@ -62,6 +62,7 @@ class Product(ProductBase):
     name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(512), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
+    needed_by = db.Column(db.DateTime, nullable=False)
 
     # borrower-product relationship: parent=product, child=borrower, many-one relationship
     borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'))

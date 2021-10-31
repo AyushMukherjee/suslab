@@ -62,6 +62,38 @@ def create_pool():
     return render_template('pool/create_pool.html', form=form, homelink='/pool/')
 
 
+@pool.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    Pool, _, _, db = _db_conn()
+    pool = Pool.query.get_or_404(id)
+    pool_date, pool_time = pool.time.strftime('%Y-%m-%d'), pool.time.strftime('%H:%M')
+
+    form = PoolForm()
+
+    if pool.pooler.user != current_user or pool.signups:
+        return redirect(url_for('.index'))
+
+    if form.validate_on_submit():
+        pool_datetime = dt.strptime(f'{form.date.data} {form.time.data}', '%Y-%m-%d %H:%M:%S')
+
+        pool.from_ = form.from_.data
+        pool.to_ = form.to_.data
+        pool.time = pool_datetime
+        pool.vehicle = form.vehicle.data
+        pool.spots = form.spots.data
+
+        try:
+            db.session.add(pool)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return 'There was an issue editing your item'
+
+    return render_template('pool/edit_pool.html', pool=pool, form=form,
+                           homelink='/pool/', pool_date=pool_date, pool_time=pool_time)
+
+
 # TODO: Add flash error for deleting
 @pool.route('/delete/<int:id>')
 @login_required

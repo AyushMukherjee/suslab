@@ -1,3 +1,5 @@
+from datetime import datetime as dt, timedelta
+
 from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
 from flask_security.decorators import login_required
@@ -24,9 +26,9 @@ def index():
     return render_template('library/index.html', items=items)
 
 
-@library.route('/create-borrow-request', methods=['GET', 'POST'])
+@library.route('/create-borrow', methods=['GET', 'POST'])
 @login_required
-def create_borrow_request():
+def create_borrow():
     Product, Borrower, _, db = _db_conn()
     form = ProductForm()
 
@@ -35,20 +37,51 @@ def create_borrow_request():
         borrower = current_user.borrower or Borrower(
             user = current_user,
         )
+        needed_by = form.needed_by.data or dt.today() + timedelta(weeks=1)
         item = Product(
-            name = form.item.data,
+            name = form.name.data,
             description = form.description.data,
             borrower = borrower,
             duration = form.duration.data,
+            needed_by = needed_by,
         )
         try:
-            db.session.add_all([borrower, item])
+            db.session.add(item)
             db.session.commit()
             return redirect(url_for('.index'))
         except Exception:
             return 'There was an issue adding your item'
 
-    return render_template('library/create_borrow_request.html', form=form, homelink='/library/')
+    return render_template('library/create_borrow.html', form=form, homelink='/library/')
+
+
+@library.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    Product, _, _, db = _db_conn()
+    item = Product.query.get_or_404(id)
+
+    needed_by = item.needed_by.strftime('%Y-%m-%d')
+
+    form = ProductForm()
+
+    if item.borrower.user != current_user or item.lender:
+        return redirect(url_for('.index'))
+
+    if form.validate_on_submit():
+        item.name = form.name.data
+        item.description = form.description.data
+        item.duration = form.duration.data
+
+        try:
+            db.session.add(item)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return 'There was an issue editing your item'
+
+    return render_template('library/edit_borrow.html', item=item, form=form,
+                           needed_by=needed_by, homelink='/item/')
 
 
 # TODO: Add flash error for deleting
@@ -85,7 +118,7 @@ def lend(id):
     item.lender = lender
 
     try:
-        db.session.add_all([lender, item])
+        db.session.add(item)
         db.session.commit()
         return redirect(url_for('.index'))
     except:

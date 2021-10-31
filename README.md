@@ -1,4 +1,4 @@
-# suslab
+# SusLab
 A sustainability lab project
 
 ## things-library
