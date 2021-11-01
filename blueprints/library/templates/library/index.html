@@ -9,6 +9,9 @@ Things Library
 {% endblock %}
 
 {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script src="{{ url_for('.static', filename='js/socket.js') }}" ></script>
+
 <h1 class="title">Things Library</h1>
 <div id="bulletin-form-link">
     <a href="/library/create-borrow" class="button button-primary">Create New Borrow Request</a>
@@ -55,4 +58,5 @@ Things Library
         <div class="one column"></div>
     </div>
 </div>
+
 {% endblock %}

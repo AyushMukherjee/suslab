@@ -1,8 +1,12 @@
 from sqlalchemy.ext.declarative import declared_attr
-from flask_login import UserMixin
-from flask_security import RoleMixin, UserMixin
+from sqlathanor import FlaskBaseModel, initialize_flask_sqlathanor
 
-from suslab import db
+from flask_sqlalchemy import SQLAlchemy
+from flask_security import RoleMixin, UserMixin
+from werkzeug.local import LocalProxy
+
+db = SQLAlchemy(model_class = FlaskBaseModel)
+db = initialize_flask_sqlathanor(db)
 
 # TODO: Split files
 

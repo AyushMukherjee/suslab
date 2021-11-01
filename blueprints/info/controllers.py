@@ -1,7 +1,8 @@
-from flask import request, render_template, Blueprint, url_for, redirect
+from flask import request, render_template, Blueprint
 from flask_security import current_user
 from flask_mail import Message
 
+from suslab import mail
 from .forms import ContactForm
 
 
@@ -9,14 +10,8 @@ info = Blueprint('info', __name__, url_prefix='/',
                  template_folder='templates', static_folder='static')
 
 
-def _mailer_conn():
-    from suslab import mail
-    return mail
-
-
 @info.route('/contact', methods=['GET', 'POST'])
 def contact():
-    mail = _mailer_conn()
     form = ContactForm()
 
     # Verify the form
