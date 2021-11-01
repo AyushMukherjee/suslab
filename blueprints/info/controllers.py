@@ -12,7 +12,6 @@ info = Blueprint('info', __name__, url_prefix='/',
 
 @info.route('/contact', methods=['GET', 'POST'])
 def contact():
-    mail = _mailer_conn()
     form = ContactForm()
 
     # Verify the form
