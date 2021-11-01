@@ -6,7 +6,7 @@ from flask_security import current_user
 from flask_security.decorators import login_required
 
 from suslab.models import db, Product, Borrower, Lender
-from suslab.socket import library as library_data
+from suslab.socket import broadcast
 from .forms import ProductForm
 
 library = Blueprint('library', __name__, url_prefix='/library',
@@ -40,11 +40,10 @@ def create_borrow():
         try:
             db.session.add(item)
             db.session.commit()
-            library_data()
+            broadcast('library')
             return redirect(url_for('.index'))
         except Exception as e:
-            print(e)
-            return 'There was an issue adding your item'
+                return f'There is some error. Please send this to the admin:\n{e}'
 
     return render_template('library/create_borrow.html', form=form, homelink='/library/')
 
@@ -69,6 +68,7 @@ def edit(id):
         try:
             db.session.add(item)
             db.session.commit()
+            broadcast('library')
             return redirect(url_for('.index'))
         except:
             return 'There was an issue editing your item'
@@ -89,6 +89,7 @@ def delete(id):
     try:
         db.session.delete(item)
         db.session.commit()
+        broadcast('library')
         return redirect(url_for('.index'))
     except Exception as e:
         print(e)
@@ -112,6 +113,7 @@ def lend(id):
     try:
         db.session.add(item)
         db.session.commit()
+        broadcast('library')
         return redirect(url_for('.index'))
     except:
         return 'There was a problem lending'
@@ -130,6 +132,7 @@ def withdraw(id):
     try:
         db.session.add(item)
         db.session.commit()
+        broadcast('library')
         return redirect(url_for('.index'))
     except:
         return 'There was a problem withdrawing'
