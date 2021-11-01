@@ -1,4 +1,4 @@
-'This module creates simple database utils'
+'This module implementes simple database utility functions'
 
 from functools import wraps
 

@@ -1,3 +1,5 @@
+'This module implements the routes for the things library app'
+
 from datetime import datetime as dt, timedelta
 
 from flask import render_template, Blueprint, url_for, redirect
@@ -47,14 +49,14 @@ def create_borrow_post():
         )
     return item
 
-@library.route('/edit/<int:id>')
+@library.route('/edit/<int:item_id>')
 @login_required
-def edit(id):
+def edit(item_id):
     '''Renders an editing form for the given item
 
-    id: int, the id of the item to be edited
+    item_id: int, the item_id of the item to be edited
     '''
-    item = Product.query.get_or_404(id)
+    item = Product.query.get_or_404(item_id)
     needed_by = item.needed_by.strftime('%Y-%m-%d')
 
     form = ProductForm()
@@ -66,15 +68,15 @@ def edit(id):
                            needed_by=needed_by, homelink='/item/')
 
 
-@library.route('/edit/<int:id>', methods=['POST'])
+@library.route('/edit/<int:item_id>', methods=['POST'])
 @login_required
 @db_commit(broadcast_data='library')
-def edit_post(id):
+def edit_post(item_id):
     '''Accepts editing submissions for the given item
 
-    id: int, the id of the item to be edited
+    item_id: int, the item_id of the item to be edited
     '''
-    item = Product.query.get_or_404(id)
+    item = Product.query.get_or_404(item_id)
     form = ProductForm()
 
     if item.borrower.user != current_user or item.lender:
@@ -90,15 +92,15 @@ def edit_post(id):
 
 
 # TODO: Add flash error for deleting
-@library.route('/delete/<int:id>')
+@library.route('/delete/<int:item_id>')
 @login_required
 @db_commit(broadcast_data='library', action='delete')
-def delete(id):
+def delete(item_id):
     '''Deletes entry for the given item
 
-    id: int, the id of the item to be edited
+    item_id: int, the item_id of the item to be deleted
     '''
-    item = Product.query.get_or_404(id)
+    item = Product.query.get_or_404(item_id)
 
     if item.borrower.user != current_user:
         return redirect(url_for('.index'))
@@ -107,15 +109,15 @@ def delete(id):
 
 
 # TODO: Add flash error for lending
-@library.route('/lend/<int:id>')
+@library.route('/lend/<int:item_id>')
 @login_required
 @db_commit(broadcast_data='library')
-def lend(id):
+def lend(item_id):
     '''Creates a lend request for the given item
 
-    id: int, the id of the item to be edited
+    item_id: int, the item_id of the item to be lent to
     '''
-    item = Product.query.get_or_404(id)
+    item = Product.query.get_or_404(item_id)
 
     if item.lender or item.borrower.user == current_user:
         return redirect(url_for('.index'))
@@ -128,15 +130,15 @@ def lend(id):
 
 
 # TODO: Add flash error for withdrawing
-@library.route('/withdraw/<int:id>')
+@library.route('/withdraw/<int:item_id>')
 @login_required
 @db_commit(broadcast_data='library')
-def withdraw(id):
+def withdraw(item_id):
     '''Removes a lend request for the given item
 
-    id: int, the id of the item to be edited
+    item_id: int, the item_id of the item to be withdrawn from lending
     '''
-    item = Product.query.get_or_404(id)
+    item = Product.query.get_or_404(item_id)
     if not item.lender or item.lender.user != current_user:
         return redirect(url_for('.index'))
 

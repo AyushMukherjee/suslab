@@ -4,7 +4,7 @@
 {% block tagline %}Edit Pool Request{% endblock %}
 
 {% block formarea %}
-<form class="form flex-horizontal" action="{{ url_for('.edit', id=pool.id) }}" method="POST" name="pool_form" autocomplete="off">
+<form class="form flex-horizontal" action="{{ url_for('.edit', pool_id=pool.id) }}" method="POST" name="pool_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ form.hidden_tag() }}
         {{ form.from_(placeholder='From:', value=pool.from_) }}

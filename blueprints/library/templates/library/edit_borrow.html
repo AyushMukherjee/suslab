@@ -4,7 +4,7 @@
 {% block tagline %}Create New Borrow Request{% endblock %}
 
 {% block formarea %}
-<form class="form flex-horizontal" action="{{ url_for('.edit', id=item.id) }}" method="POST" name="library_form" autocomplete="off">
+<form class="form flex-horizontal" action="{{ url_for('.edit', item_id=item.id) }}" method="POST" name="library_form" autocomplete="off">
     <div class="form-fields flex-horizontal">
         {{ form.hidden_tag() }}
         {{ form.name(placeholder='Item:', value=item.name) }}

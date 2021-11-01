@@ -1,6 +1,8 @@
+'This module implements the routes for the pool spots app'
+
 from datetime import datetime as dt
 
-from flask import request, render_template, Blueprint, url_for, redirect
+from flask import render_template, Blueprint, url_for, redirect
 from flask_security import current_user
 from flask_security.decorators import login_required
 
@@ -14,6 +16,7 @@ pool = Blueprint('pool', __name__, url_prefix='/pool',
 
 @pool.route('/')
 def index():
+    'Renders the pool spots bulletin'
     pools = Pool.query.order_by(Pool.time).all()
     return render_template('pool/index.html', pools=pools)
 
@@ -26,6 +29,7 @@ def data():
 @pool.route('/create-pool')
 @login_required
 def create_pool():
+    'Renders a pool request form'
     form = PoolForm()    
     return render_template('pool/create_pool.html', form=form, homelink='/pool/')
 
@@ -34,13 +38,14 @@ def create_pool():
 @login_required
 @db_commit(broadcast_data='pool')
 def create_pool_post():
-    form, pool = PoolForm(), None
+    'Accepts pool requests'
+    form, pool_ = PoolForm(), None
     if form.validate_on_submit():
         pool_datetime = dt.strptime(f'{form.date.data} {form.time.data}', '%Y-%m-%d %H:%M:%S')
         pooler = current_user.pooler or Pooler(
             user = current_user,
         )
-        pool = Pool(
+        pool_ = Pool(
             from_ = form.from_.data,
             to_ = form.to_.data,
             time = pool_datetime,
@@ -48,88 +53,111 @@ def create_pool_post():
             spots = form.spots.data,
             pooler = pooler,
         )
-    return pool
+    return pool_
 
 
-@pool.route('/edit/<int:id>')
+@pool.route('/edit/<int:pool_id>')
 @login_required
-def edit(id):
-    pool = Pool.query.get_or_404(id)
-    pool_date, pool_time = pool.time.strftime('%Y-%m-%d'), pool.time.strftime('%H:%M')
+def edit(pool_id):
+    '''Renders an editing form for the given pool
+
+    pool_id: int, the id of the pool to be edited
+    '''
+    pool_ = Pool.query.get_or_404(pool_id)
+    pool_date, pool_time = pool_.time.strftime('%Y-%m-%d'), pool_.time.strftime('%H:%M')
 
     form = PoolForm()
 
-    if pool.pooler.user != current_user or pool.signups:
+    if pool_.pooler.user != current_user or pool_.signups:
         return redirect(url_for('.index'))
 
-    return render_template('pool/edit_pool.html', pool=pool, form=form,
+    return render_template('pool/edit_pool.html', pool=pool_, form=form,
                            homelink='/pool/', pool_date=pool_date, pool_time=pool_time)
 
 
-@pool.route('/edit/<int:id>', methods=['POST'])
+@pool.route('/edit/<int:pool_id>', methods=['POST'])
 @login_required
 @db_commit(broadcast_data='pool')
-def edit_post(id):
-    pool = Pool.query.get_or_404(id)
+def edit_post(pool_id):
+    '''Accepts editing submissions for the given pool
+
+    pool_id: int, the id of the pool to be edited
+    '''
+    pool_ = Pool.query.get_or_404(pool_id)
     form = PoolForm()
 
-    if pool.pooler.user != current_user or pool.signups:
+    if pool_.pooler.user != current_user or pool_.signups:
         return redirect(url_for('.index'))
 
     if form.validate_on_submit():
         pool_datetime = dt.strptime(f'{form.date.data} {form.time.data}', '%Y-%m-%d %H:%M:%S')
 
-        pool.from_ = form.from_.data
-        pool.to_ = form.to_.data
-        pool.time = pool_datetime
-        pool.vehicle = form.vehicle.data
-        pool.spots = form.spots.data
+        pool_.from_ = form.from_.data
+        pool_.to_ = form.to_.data
+        pool_.time = pool_datetime
+        pool_.vehicle = form.vehicle.data
+        pool_.spots = form.spots.data
 
-    return pool
+    return pool_
 
 
 # TODO: Add flash error for deleting
-@pool.route('/delete/<int:id>')
+@pool.route('/delete/<int:pool_id>')
 @login_required
 @db_commit(broadcast_data='pool', action='delete')
-def delete(id):
-    pool = Pool.query.get_or_404(id)
+def delete(pool_id):
+    '''Deletes entry for given pool
 
-    if pool.pooler.user != current_user:
+    pool_id: int, the id of the pool to be deleted
+    '''
+    pool_ = Pool.query.get_or_404(pool_id)
+
+    if pool_.pooler.user != current_user:
         return redirect(url_for('.index'))
 
-    return pool
+    return pool_
 
 
 # TODO: Add flash error for signing up
-@pool.route('/signup/<int:id>')
+@pool.route('/signup/<int:pool_id>')
 @login_required
 @db_commit(broadcast_data='pool')
-def signup(id):
-    pool = Pool.query.get_or_404(id)
+def signup(pool_id):
+    '''Creates a signup request for given pool
 
-    signup = current_user.signup or Signup(
+    pool_id: int, the id of the pool to be signed up for
+    '''
+    pool_ = Pool.query.get_or_404(pool_id)
+
+    signup_ = current_user.signup or Signup(
         user = current_user,
     )
-    if len(pool.signups or []) >= pool.spots or signup in pool.signups or pool.pooler.user == current_user:
+    if len(pool_.signups or []) >= pool_.spots \
+        or signup_ in pool_.signups \
+        or pool_.pooler.user == current_user:
+        # return a redirect here
         return redirect(url_for('.index'))
 
-    pool.signups = (pool.signups or []) + [signup]
+    pool_.signups = (pool_.signups or []) + [signup_]
     return pool
 
 
 # TODO: Add flash error for withdrawing
-@pool.route('/withdraw/<int:id>')
+@pool.route('/withdraw/<int:pool_id>')
 @login_required
 @db_commit(broadcast_data='pool')
-def withdraw(id):
-    pool = Pool.query.get_or_404(id)
-    signup = current_user.signup or Signup(
+def withdraw(pool_id):
+    '''Removes a signup request for given pool
+
+    pool_id: int, the id of the pool to be signed up for
+    '''
+    pool_ = Pool.query.get_or_404(pool_id)
+    signup_ = current_user.signup or Signup(
         user = current_user,
     )
 
-    if signup not in (pool.signups or []):
+    if signup_ not in (pool_.signups or []):
         return redirect(url_for('.index'))
 
-    pool.signups.remove(signup)
-    return pool
+    pool_.signups.remove(signup_)
+    return pool_
