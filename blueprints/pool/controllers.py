@@ -3,39 +3,29 @@ from datetime import datetime as dt
 from flask import request, render_template, Blueprint, url_for, redirect
 from flask_security import current_user
 from flask_security.decorators import login_required
+from werkzeug.local import LocalProxy
 
 from .forms import PoolForm
+from suslab.users.models import db, Pool, Pooler, Signup
 
 pool = Blueprint('pool', __name__, url_prefix='/pool',
                  template_folder='templates', static_folder='static')
 
 
-def _db_conn():
-    from suslab.users.models import Pool, Pooler, Signup
-    from suslab import db
-
-    return Pool, Pooler, Signup, db
-
-
 @pool.route('/')
 def index():
-    Pool, *_ = _db_conn()
-
     pools = Pool.query.order_by(Pool.time).all()
     return render_template('pool/index.html', pools=pools)
 
 
 @pool.route('/api/data')
 def data():
-    Pool, *_ = _db_conn()
-
     return {'data': [pool.to_json(max_nesting=4) for pool in Pool.query]}
 
 
 @pool.route('/create-pool', methods=['GET', 'POST'])
 @login_required
 def create_pool():
-    Pool, Pooler, _, db = _db_conn()
     form = PoolForm()
 
     # Verify the form
@@ -65,7 +55,6 @@ def create_pool():
 @pool.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit(id):
-    Pool, _, _, db = _db_conn()
     pool = Pool.query.get_or_404(id)
     pool_date, pool_time = pool.time.strftime('%Y-%m-%d'), pool.time.strftime('%H:%M')
 
@@ -98,7 +87,6 @@ def edit(id):
 @pool.route('/delete/<int:id>')
 @login_required
 def delete(id):
-    Pool, _, _, db = _db_conn()
     pool = Pool.query.get_or_404(id)
 
     if pool.pooler.user != current_user:
@@ -116,7 +104,6 @@ def delete(id):
 @pool.route('/signup/<int:id>')
 @login_required
 def signup(id):
-    Pool, _, Signup, db = _db_conn()
     pool = Pool.query.get_or_404(id)
 
     signup = current_user.signup or Signup(
@@ -139,7 +126,6 @@ def signup(id):
 @pool.route('/withdraw/<int:id>')
 @login_required
 def withdraw(id):
-    Pool, _, Signup, db = _db_conn()
     pool = Pool.query.get_or_404(id)
     signup = current_user.signup or Signup(
         user = current_user,

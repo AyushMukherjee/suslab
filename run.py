@@ -1,6 +1,7 @@
-from suslab import app, get_app
+from flask import g
+from suslab import create_app
 
-handler = get_app()
+handler, socketio = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(handler, debug=True)

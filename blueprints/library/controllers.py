@@ -1,27 +1,23 @@
 from datetime import datetime as dt, timedelta
 
 from flask import request, render_template, Blueprint, url_for, redirect
+from flask import g
 from flask_security import current_user
 from flask_security.decorators import login_required
 
 from .forms import ProductForm
-
+from suslab.users.models import db, Product, Borrower, Lender
 
 library = Blueprint('library', __name__, url_prefix='/library',
                     template_folder='templates', static_folder='static')
 
-
-def _db_conn():
-    from suslab.users.models import Product, Borrower, Lender
-    from suslab import db
-
-    return Product, Borrower, Lender, db
+def _socketio_conn():
+    from suslab import library_data
+    return library_data
 
 
 @library.route('/')
 def index():
-    Product, *_ = _db_conn()
-
     items = Product.query.order_by(Product.date_created).all()
     return render_template('library/index.html', items=items)
 
@@ -29,7 +25,7 @@ def index():
 @library.route('/create-borrow', methods=['GET', 'POST'])
 @login_required
 def create_borrow():
-    Product, Borrower, _, db = _db_conn()
+    # library_data = _socketio_conn()
     form = ProductForm()
 
     # Verify the form
@@ -48,6 +44,7 @@ def create_borrow():
         try:
             db.session.add(item)
             db.session.commit()
+            # library_data()
             return redirect(url_for('.index'))
         except Exception:
             return 'There was an issue adding your item'
@@ -58,9 +55,7 @@ def create_borrow():
 @library.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit(id):
-    Product, _, _, db = _db_conn()
     item = Product.query.get_or_404(id)
-
     needed_by = item.needed_by.strftime('%Y-%m-%d')
 
     form = ProductForm()
@@ -72,6 +67,7 @@ def edit(id):
         item.name = form.name.data
         item.description = form.description.data
         item.duration = form.duration.data
+        item.needed_by = form.needed_by.data
 
         try:
             db.session.add(item)
@@ -88,7 +84,6 @@ def edit(id):
 @library.route('/delete/<int:id>')
 @login_required
 def delete(id):
-    Product, _, _, db = _db_conn()
     item = Product.query.get_or_404(id)
 
     if item.borrower.user != current_user:
@@ -98,7 +93,8 @@ def delete(id):
         db.session.delete(item)
         db.session.commit()
         return redirect(url_for('.index'))
-    except:
+    except Exception as e:
+        print(e)
         return 'There was a problem deleting that item'
 
 
@@ -106,7 +102,6 @@ def delete(id):
 @library.route('/lend/<int:id>')
 @login_required
 def lend(id):
-    Product, _, Lender, db = _db_conn()
     item = Product.query.get_or_404(id)
     
     if item.lender or item.borrower.user == current_user:
@@ -129,7 +124,6 @@ def lend(id):
 @library.route('/withdraw/<int:id>')
 @login_required
 def withdraw(id):
-    Product, _, Lender, db = _db_conn()
     item = Product.query.get_or_404(id)
     if not item.lender or item.lender.user != current_user:
         return redirect(url_for('.index'))
