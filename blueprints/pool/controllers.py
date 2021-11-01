@@ -6,7 +6,7 @@ from flask_security.decorators import login_required
 from werkzeug.local import LocalProxy
 
 from .forms import PoolForm
-from suslab.users.models import db, Pool, Pooler, Signup
+from suslab.models import db, Pool, Pooler, Signup
 
 pool = Blueprint('pool', __name__, url_prefix='/pool',
                  template_folder='templates', static_folder='static')

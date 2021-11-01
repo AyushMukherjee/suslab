@@ -5,15 +5,12 @@ from flask import g
 from flask_security import current_user
 from flask_security.decorators import login_required
 
+from suslab.models import db, Product, Borrower, Lender
+from suslab.socket import library as library_data
 from .forms import ProductForm
-from suslab.users.models import db, Product, Borrower, Lender
 
 library = Blueprint('library', __name__, url_prefix='/library',
                     template_folder='templates', static_folder='static')
-
-def _socketio_conn():
-    from suslab import library_data
-    return library_data
 
 
 @library.route('/')
@@ -25,7 +22,6 @@ def index():
 @library.route('/create-borrow', methods=['GET', 'POST'])
 @login_required
 def create_borrow():
-    # library_data = _socketio_conn()
     form = ProductForm()
 
     # Verify the form
@@ -44,9 +40,10 @@ def create_borrow():
         try:
             db.session.add(item)
             db.session.commit()
-            # library_data()
+            library_data()
             return redirect(url_for('.index'))
-        except Exception:
+        except Exception as e:
+            print(e)
             return 'There was an issue adding your item'
 
     return render_template('library/create_borrow.html', form=form, homelink='/library/')
