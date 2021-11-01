@@ -9,10 +9,11 @@ def library():
 
 @socketio.on('pool', namespace='/pool')
 def pool():
-    socketio.emit('pool', 'you have reached the pool')
+    socketio.emit('pool', f'you have reached the pool at {dt.now().time()}')
 
 def broadcast(broadcast_data=None):
     if broadcast_data == 'library':
         library()
     if broadcast_data == 'pool':
+        print('trying')
         pool()

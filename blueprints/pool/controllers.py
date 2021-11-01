@@ -5,8 +5,9 @@ from flask_security import current_user
 from flask_security.decorators import login_required
 from werkzeug.local import LocalProxy
 
-from .forms import PoolForm
 from suslab.models import db, Pool, Pooler, Signup
+from suslab.socket import broadcast
+from .forms import PoolForm
 
 pool = Blueprint('pool', __name__, url_prefix='/pool',
                  template_folder='templates', static_folder='static')
@@ -45,6 +46,7 @@ def create_pool():
         try:
             db.session.add(pool)
             db.session.commit()
+            broadcast('pool')
             return redirect(url_for('.index'))
         except:
             return 'There was an issue adding your item'
@@ -75,6 +77,7 @@ def edit(id):
         try:
             db.session.add(pool)
             db.session.commit()
+            broadcast('pool')
             return redirect(url_for('.index'))
         except:
             return 'There was an issue editing your item'
@@ -95,6 +98,7 @@ def delete(id):
     try:
         db.session.delete(pool)
         db.session.commit()
+        broadcast('pool')
         return redirect(url_for('.index'))
     except:
         return 'There was a problem deleting that pool'
@@ -117,6 +121,7 @@ def signup(id):
     try:
         db.session.add(pool)
         db.session.commit()
+        broadcast('pool')
         return redirect(url_for('.index'))
     except:
         return 'There was a problem signing up'
@@ -139,6 +144,7 @@ def withdraw(id):
     try:
         db.session.add(pool)
         db.session.commit()
+        broadcast('pool')
         return redirect(url_for('.index'))
     except:
         return 'There was a problem withdrawing'

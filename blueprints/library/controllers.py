@@ -1,7 +1,6 @@
 from datetime import datetime as dt, timedelta
 
 from flask import request, render_template, Blueprint, url_for, redirect
-from flask import g
 from flask_security import current_user
 from flask_security.decorators import login_required
 
