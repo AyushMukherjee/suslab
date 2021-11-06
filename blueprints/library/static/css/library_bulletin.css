@@ -1,0 +1,12 @@
+.id {
+    flex: 2; }
+
+.name {
+    flex: 5; }
+
+.description {
+    flex: 15; }
+
+.needed_by{
+    flex: 10;
+}
