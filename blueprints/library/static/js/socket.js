@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
     var socket = io('/library');
     socket.on('library', function(json) {
-        console.log('Received '+json.data.length+' elements.');
-        console.log(json.data)
-
         options = {
             valueNames: ['id', 'name', 'description', 'needed_by', 'duration', 'borrower', 'lender' ],
             item: `

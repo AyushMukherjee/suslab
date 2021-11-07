@@ -63,11 +63,26 @@ Things Library
     <div class="list-container" id="items">
         <ul class="item-row heading flex-horizontal">
             <li class="id item">Index</li>
-            <li class="name item">Name</li>
-            <li class="description item">Description</li>
-            <li class="needed_by item">Needed By</li>
+            <li class="name item flex-horizontal">
+                <span class="heading-item">Name</span>
+                <input type="text" class="search"  placeholder="Search" />
+                <i class="search-icon fa fa-search" data-search="name"></i>
+                <i class="sort-icon sort" data-sort="name"></i>
+            </li>
+            <li class="description item flex-horizontal">
+                <span class="heading-item">Description</span>
+                <input type="text" class="search"  placeholder="Search" />
+                <i class="search-icon fa fa-search" data-search="description"></i>
+                <i class="sort-icon sort" data-sort="description"></i>
+            </li>
+            <li class="needed_by item flex-horizontal">
+                <span class="heading-item">Needed By</span>
+                <input type="text" class="search"  placeholder="Search" />
+                <i class="search-icon fa fa-search" data-search="needed_by"></i>
+                <i class="sort-icon sort" data-sort="needed_by"></i>
+            </li>
         </ul>
-        <ul class="list"></ul>
+        <ul class="list" data-auth={{ current_user.is_authenticated }}></ul>
     </div>
 </div>
 
