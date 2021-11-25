@@ -8,3 +8,4 @@ A borrower-centric library app for the university
 A vehicle pooling app for the university
 
 ## slc
+A sustainable learning centre
