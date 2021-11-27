@@ -159,7 +159,9 @@ html:not([data-scroll='0']) .navbar {
 
 footer {
     position: relative;
-    background: var(--colour-black); }
+    background: var(--colour-black); 
+    margin-bottom: 0%;
+}
 
 .footer-group-list {
     height: var(--section-height-strip);

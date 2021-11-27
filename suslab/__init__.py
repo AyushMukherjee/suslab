@@ -11,7 +11,6 @@ from blueprints.library.controllers import library
 from blueprints.pool.controllers import pool
 from blueprints.info.controllers import info
 
-from suslab.users.controllers import get_user_datastore
 from suslab.users.forms import ExtendedRegisterForm
 
 app = Flask(__name__)
@@ -24,6 +23,8 @@ app.register_blueprint(info)
 
 db = SQLAlchemy(app, model_class = FlaskBaseModel)
 db = initialize_flask_sqlathanor(db)
+from suslab.users.controllers import get_user_datastore
+
 
 security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
 mail = Mail(app)
