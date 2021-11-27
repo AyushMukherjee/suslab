@@ -1,0 +1,18 @@
+{% block content %}
+
+{%if current_user.is_authenticated %}
+<div class="table">
+<h4>Username : {{ current_user.name }}</h4>
+<h4>Email : {{ current_user.email }}</h4>
+<h4>Address : {{ current_user.address }}</h4>
+<h4>Gender : {{ current_user.gender }}</h4>
+<h4>Contact Number : {{ current_user.contact_number }}</h4>
+<h4>Programme : {{ current_user.programme_name }}</h4>
+<h4>Date of Birth : {{ current_user.dob }}</h4>
+</div>
+
+ {% endif %}
+
+
+<a href="{{ url_for('.user_edit_view', id=current_user.id)}}">Edit User Details</a>
+{%endblock%}

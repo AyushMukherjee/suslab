@@ -1,0 +1,19 @@
+<form action="{{  url_for('.user_edit_view', id=current_user.id) }}" method="post">
+    {{form.hidden_tag()}}
+    Name: 
+    {{ form.name(placeholder='name:', value=user.name) }} <br>
+    Address: 
+    {{ form.address(placeholder='address:', value=user.address) }} <br>
+    Programme: 
+    {{ form.programme_name(placeholder='programme name:', value=user.programme_name) }} <br>
+    Contact: 
+    {{ form.contact_number(placeholder='Contact:', value=user.address) }} <br>
+
+    <!-- {{ form.dob(placeholder='dob:', value=user.dob) }} -->
+    <!-- {{ form.gender(placeholder='gender:', value=user.gender) }} -->
+    
+
+    
+    {{form.submit(class="primary-button", value="Edit user details")}}
+
+</form>

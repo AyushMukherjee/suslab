@@ -11,19 +11,27 @@ from blueprints.library.controllers import library
 from blueprints.pool.controllers import pool
 from blueprints.info.controllers import info
 
-from suslab.users.controllers import get_user_datastore
 from suslab.users.forms import ExtendedRegisterForm
 
 app = Flask(__name__)
 app.config.from_object('config')
 
+
+
+
+
+db = SQLAlchemy(app, model_class = FlaskBaseModel)
+db = initialize_flask_sqlathanor(db)
+
+#It was throwing circula import error because of this import before the db was created 
+# so i shifted it here 
+from suslab.users.controllers import get_user_datastore
+
+
 # register apps
 app.register_blueprint(library)
 app.register_blueprint(pool)
 app.register_blueprint(info)
-
-db = SQLAlchemy(app, model_class = FlaskBaseModel)
-db = initialize_flask_sqlathanor(db)
 
 security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
 mail = Mail(app)

@@ -1,3 +1,4 @@
+# from typing_extensions import Required
 from sqlalchemy.ext.declarative import declared_attr
 from flask_login import UserMixin
 from flask_security import RoleMixin, UserMixin
@@ -31,6 +32,11 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(32))
     name = db.Column(db.String(64), supports_json=True)
     active = db.Column(db.Boolean(), supports_json=True)
+    contact_number = db.Column(db.Integer, unique=True, support_json=True)
+    programme_name = db.Column(db.String, unique=False, support_json=True)
+    address  = db.Column(db.String, unique=False, support_json=True)
+    dob = db.Column(db.DateTime, unique=False, support_json=True)
+    gender = db.Column(db.String, unique=False, support_json=True)
     confirmed_at = db.Column(db.DateTime(), supports_json=True)
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
