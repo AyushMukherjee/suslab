@@ -114,6 +114,10 @@ html:not([data-scroll='0']) .navbar {
     color: var(--colour-dark);
     letter-spacing: 0.05em; }
 
+#app:focus{
+    color:black;
+}
+
 .nav-toggle {
     position: absolute;
     top: 1em;
