@@ -1,13 +1,12 @@
 from flask import request, render_template, templating, url_for, redirect
 from flask_security import SQLAlchemyUserDatastore, current_user
-from suslab import app
+
 from flask_security.decorators import login_required
 
 from suslab.users.forms import editUserInfoForm, usereditform
-from .models import User
 
 
-def _edit_db():
+def _edit_userinfo_db():
     from suslab.users.models import User, Role
     from suslab import db
     return User, Role, db
@@ -20,10 +19,11 @@ def get_user_datastore():
     return SQLAlchemyUserDatastore(db, User, Role)
 
 
-
+'''
 @login_required
-@app.route('/user-details')
+@app.route('/user-details/')
 def user_detail_view():
+    user
 
     return render_template('user_profile.html')
     
@@ -32,7 +32,7 @@ def user_detail_view():
 @app.route('/user-edit/<int:id>/', methods=['GET', 'POST'])
 @login_required
 def user_edit_view(id):
-    User, _, db = _edit_db()
+    User, _, db = _edit_userinfo_db()
     user = User.query.get_or_404(id)
     if current_user.email != user.email:
         print("users mismatch!")
@@ -60,5 +60,5 @@ def user_edit_view(id):
         return render_template('user_profile_edit.html', form=form, user=user)
 
 
-
+'''
     

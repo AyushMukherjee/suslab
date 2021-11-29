@@ -25,5 +25,3 @@ class editUserInfoForm(FlaskForm):
     submit = SubmitField("Edit user data")
 
 
-class usereditform(ModelForm):
-    pass

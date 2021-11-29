@@ -10,6 +10,7 @@ from flask_wtf.csrf import CSRFProtect
 from blueprints.library.controllers import library
 from blueprints.pool.controllers import pool
 from blueprints.info.controllers import info
+from suslab.users.controllers import get_user_datastore
 
 from suslab.users.forms import ExtendedRegisterForm
 
@@ -25,7 +26,6 @@ db = initialize_flask_sqlathanor(db)
 
 #It was throwing circula import error because of this import before the db was created 
 # so i shifted it here 
-from suslab.users.controllers import get_user_datastore
 
 
 # register apps
