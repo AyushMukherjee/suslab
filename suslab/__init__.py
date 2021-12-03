@@ -1,62 +1,78 @@
-from sqlathanor import FlaskBaseModel, initialize_flask_sqlathanor
-
-from flask import Flask, render_template
+from flask import Flask, render_template, g
 from flask_mail import Mail
-from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO
 from flask_security import Security
 from flask_wtf.csrf import CSRFProtect
 
-from blueprints.library.controllers import library
-from blueprints.pool.controllers import pool
-from blueprints.info.controllers import info
-from suslab.users.controllers import get_user_datastore
-
-from suslab.users.forms import ExtendedRegisterForm
-
-app = Flask(__name__)
-app.config.from_object('config')
 
 
 
 
 
-db = SQLAlchemy(app, model_class = FlaskBaseModel)
-db = initialize_flask_sqlathanor(db)
-
-#It was throwing circula import error because of this import before the db was created 
-# so i shifted it here 
 
 
-# register apps
-app.register_blueprint(library)
-app.register_blueprint(pool)
-app.register_blueprint(info)
+# db = SQLAlchemy(app, model_class = FlaskBaseModel)
+# db = initialize_flask_sqlathanor(db)
 
-security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
-mail = Mail(app)
-
-csrf = CSRFProtect(app)
+# #It was throwing circula import error because of this import before the db was created 
+# # so i shifted it here 
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# # register apps
+# app.register_blueprint(library)
+# app.register_blueprint(pool)
+# app.register_blueprint(info)
+
+# security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
+# mail = Mail(app)
 
 
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('404.html'), 404
-
-
-@app.context_processor
-def utility_processor():
-    def user_avatar(user_name, category='croodles-neutral'):
-        user_name_clean = '-'.join(user_name.split())
-        return f'https://avatars.dicebear.com/api/{category}/{user_name_clean}.svg'
-    return dict(user_avatar=user_avatar)
-
-
-def get_app():
+mail = Mail()
+def create_app():
     '''Return the app by initializing components'''
+    app = Flask(__name__)
+    app.config.from_object('config')
+
+    with app.app_context():
+        from suslab.models import db
+        from suslab.socket import socketio
+
+        from suslab.users.controllers import get_user_datastore
+        from suslab.users.forms import ExtendedRegisterForm
+
+        from blueprints.library.controllers import library
+        from blueprints.pool.controllers import pool
+        from blueprints.info.controllers import info
+        from suslab.users.controllers import users_blueprint
+
+
+        # create resources
+        db.init_app(app)
+        socketio.init_app(app)
+        security = Security(app, get_user_datastore(), register_form=ExtendedRegisterForm)
+        mail.init_app(app)
+        csrf = CSRFProtect(app)
+
+        # register blueprints
+        app.register_blueprint(users_blueprint)
+        app.register_blueprint(library)
+        app.register_blueprint(pool)
+        app.register_blueprint(info)
+
+        @app.route('/')
+        def index():
+            return render_template('index.html')
+
+
+        @app.errorhandler(404)
+        def not_found(error):
+            return render_template('404.html'), 404
+
+
+        @app.context_processor
+        def utility_processor():
+            def user_avatar(user_name, category='croodles-neutral'):
+                user_name_clean = '-'.join(user_name.split())
+                return f'https://avatars.dicebear.com/api/{category}/{user_name_clean}.svg'
+            return dict(user_avatar=user_avatar)
+
     return app

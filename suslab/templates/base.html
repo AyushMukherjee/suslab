@@ -47,7 +47,7 @@
     <div class="nav-group flex-horizontal">
       {% if current_user.is_authenticated %}
       <div class="user-info flex-horizontal" id="user-info">
-        <a href="/user-details"><span class="username flex-text-item">{{ current_user.name }}</span></a>
+        <a href="/users-details"><span class="username flex-text-item">{{ current_user.name }}</span></a>
         <div class="user-image" id="user-image"><img src={{ user_avatar(current_user.name|lower) }}></div>
       </div>
       {% endif %}

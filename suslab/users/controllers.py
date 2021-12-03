@@ -1,35 +1,33 @@
-from flask import request, render_template, templating, url_for, redirect
+from flask import request, render_template, templating, url_for, redirect, Blueprint
 from flask_security import SQLAlchemyUserDatastore, current_user
-
 from flask_security.decorators import login_required
+from suslab.users.forms import editUserInfoForm
 
-from suslab.users.forms import editUserInfoForm, usereditform
 
+users_blueprint = Blueprint('users_blueprint', __name__, url_prefix='/users-details',
+                 template_folder='templates', static_folder='static')
 
 def _edit_userinfo_db():
-    from suslab.users.models import User, Role
-    from suslab import db
+    from suslab.models import User, Role, db
+
     return User, Role, db
 
 
 def get_user_datastore():
-    from suslab.users.models import User, Role  
-    from suslab import db
+    from suslab.models import User, Role, db
 
     return SQLAlchemyUserDatastore(db, User, Role)
 
 
-'''
-@login_required
-@app.route('/user-details/')
-def user_detail_view():
-    user
 
+@login_required
+@users_blueprint.route('/')
+def user_detail_view():
     return render_template('user_profile.html')
     
 
 
-@app.route('/user-edit/<int:id>/', methods=['GET', 'POST'])
+@users_blueprint.route('/user-edit/<int:id>/', methods=['GET', 'POST'])
 @login_required
 def user_edit_view(id):
     User, _, db = _edit_userinfo_db()
@@ -60,5 +58,3 @@ def user_edit_view(id):
         return render_template('user_profile_edit.html', form=form, user=user)
 
 
-'''
-    

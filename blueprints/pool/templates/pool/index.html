@@ -9,6 +9,9 @@ Pool Spots
 {% endblock %}
 
 {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script src="{{ url_for('.static', filename='js/socket.js') }}" ></script>
+
 <h1 class="title">Pool Spots</h1>
 <div id="bulletin-form-link">
     <a href="/pool/create-pool" class="button button-primary">Create New Pool</a>

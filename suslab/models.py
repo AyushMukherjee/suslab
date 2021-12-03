@@ -1,9 +1,15 @@
 # from typing_extensions import Required
-from sqlalchemy.ext.declarative import declared_attr
-from flask_login import UserMixin
-from flask_security import RoleMixin, UserMixin
+'This module implements the data model classes'
 
-from suslab import db
+from sqlalchemy.ext.declarative import declared_attr
+from sqlathanor import FlaskBaseModel, initialize_flask_sqlathanor
+
+from flask_sqlalchemy import SQLAlchemy
+from flask_security import RoleMixin, UserMixin
+from werkzeug.local import LocalProxy
+
+db = SQLAlchemy(model_class = FlaskBaseModel)
+db = initialize_flask_sqlathanor(db)
 
 # TODO: Split files
 
@@ -32,8 +38,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(32))
     name = db.Column(db.String(64), supports_json=True)
     active = db.Column(db.Boolean(), supports_json=True)
-    contact_number = db.Column(db.Integer, unique=True, support_json=True)
-    programme_name = db.Column(db.String, unique=False, support_json=True)
+    contact_number = db.Column(db.Integer, unique=True)
+    programme_name = db.Column(db.String, unique=False)
     address  = db.Column(db.String, unique=False, support_json=True)
     dob = db.Column(db.DateTime, unique=False, support_json=True)
     gender = db.Column(db.String, unique=False, support_json=True)
@@ -65,30 +71,30 @@ class ProductBase(db.Model):
 class Product(ProductBase):
     __tablename__ = 'products'
 
-    name = db.Column(db.String(128), nullable=False)
-    description = db.Column(db.String(512), nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
-    needed_by = db.Column(db.DateTime, nullable=False)
+    name = db.Column(db.String(128), nullable=False, supports_json=True)
+    description = db.Column(db.String(512), nullable=False, supports_json=True)
+    duration = db.Column(db.Integer, nullable=False, supports_json=True)
+    needed_by = db.Column(db.DateTime, nullable=False, supports_json=True)
 
     # borrower-product relationship: parent=product, child=borrower, many-one relationship
-    borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'))
-    borrower = db.relationship('Borrower', backref=db.backref('products'))
+    borrower_id = db.Column(db.Integer, db.ForeignKey('borrowers.id'), supports_json=True)
+    borrower = db.relationship('Borrower', backref=db.backref('products'), supports_json=True)
 
     # lender-product relationship: parent=product, child=lender, many-one relationship
-    lender_id = db.Column(db.Integer, db.ForeignKey('lenders.id'))
-    lender = db.relationship('Lender', backref=db.backref('products'))
+    lender_id = db.Column(db.Integer, db.ForeignKey('lenders.id'), supports_json=True)
+    lender = db.relationship('Lender', backref=db.backref('products'), supports_json=True)
 
 
 class Borrower(ReferenceUserMixin, db.Model):
     __tablename__ = 'borrowers'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, supports_json=True)
 
 
 class Lender(ReferenceUserMixin, db.Model):
     __tablename__ = 'lenders'
     
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, supports_json=True)
 
 
 # Pool Tables

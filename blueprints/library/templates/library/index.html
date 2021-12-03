@@ -6,9 +6,15 @@ Things Library
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/bulletin.css') }}">
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/library_bulletin.css') }}">
 {% endblock %}
 
 {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.js" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/bulletin.js') }}" ></script>
+<script src="{{ url_for('.static', filename='js/socket.js') }}" ></script>
+
 <h1 class="title">Things Library</h1>
 <div id="bulletin-form-link">
     <a href="/library/create-borrow" class="button button-primary">Create New Borrow Request</a>
@@ -54,5 +60,30 @@ Things Library
         </div>
         <div class="one column"></div>
     </div>
+    <div class="list-container" id="items">
+        <ul class="item-row heading flex-horizontal">
+            <li class="id item">Index</li>
+            <li class="name item flex-horizontal">
+                <span class="heading-item">Name</span>
+                <input type="text" class="search"  placeholder="Search" />
+                <i class="search-icon fa fa-search" data-search="name"></i>
+                <i class="sort-icon sort" data-sort="name"></i>
+            </li>
+            <li class="description item flex-horizontal">
+                <span class="heading-item">Description</span>
+                <input type="text" class="search"  placeholder="Search" />
+                <i class="search-icon fa fa-search" data-search="description"></i>
+                <i class="sort-icon sort" data-sort="description"></i>
+            </li>
+            <li class="needed_by item flex-horizontal">
+                <span class="heading-item">Needed By</span>
+                <input type="text" class="search"  placeholder="Search" />
+                <i class="search-icon fa fa-search" data-search="needed_by"></i>
+                <i class="sort-icon sort" data-sort="needed_by"></i>
+            </li>
+        </ul>
+        <ul class="list" data-auth={{ current_user.is_authenticated }}></ul>
+    </div>
 </div>
+
 {% endblock %}

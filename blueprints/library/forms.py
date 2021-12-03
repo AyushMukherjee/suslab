@@ -1,9 +1,21 @@
+'This module creates the form for library borrow requests'
+
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, IntegerField, TextAreaField, DateField, SubmitField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
 class ProductForm(FlaskForm):
+    '''Creates a WT-Form for library borrow request
+
+    name: string, required, a 1-128 character name for the item
+        that the user may borrow
+    description: string, required, a 8-256 character description of
+        the item that the user may borrow
+    duration: int, required, an integer between 1 and 14 specifying
+        the number of days for which the item is borrowed
+    needed_by: date, required, a date by when the item is needed
+    '''
     name = StringField(
         'name',
         validators=[

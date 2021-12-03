@@ -1,38 +1,40 @@
+'This module implements the routes for the things library app'
+
 from datetime import datetime as dt, timedelta
 
-from flask import request, render_template, Blueprint, url_for, redirect
+from flask import render_template, Blueprint, url_for, redirect
 from flask_security import current_user
 from flask_security.decorators import login_required
 
+from suslab.models import Product, Borrower, Lender
+from suslab.database import db_commit
 from .forms import ProductForm
-
 
 library = Blueprint('library', __name__, url_prefix='/library',
                     template_folder='templates', static_folder='static')
 
 
-def _db_conn():
-    from suslab.users.models import Product, Borrower, Lender
-    from suslab import db
-
-    return Product, Borrower, Lender, db
-
-
 @library.route('/')
 def index():
-    Product, *_ = _db_conn()
-
+    'Renders the library bulletin'
     items = Product.query.order_by(Product.date_created).all()
     return render_template('library/index.html', items=items)
 
 
-@library.route('/create-borrow', methods=['GET', 'POST'])
+@library.route('/create-borrow')
 @login_required
 def create_borrow():
-    Product, Borrower, _, db = _db_conn()
+    'Renders a borrowing form'
     form = ProductForm()
+    return render_template('library/create_borrow.html', form=form, homelink='/library/')
 
-    # Verify the form
+
+@library.route('/create-borrow', methods=['POST'])
+@login_required
+@db_commit(broadcast_data='library')
+def create_borrow_post():
+    'Accepts borrowing submissions'
+    form, item = ProductForm(), None
     if form.validate_on_submit():
         borrower = current_user.borrower or Borrower(
             user = current_user,
@@ -45,24 +47,36 @@ def create_borrow():
             duration = form.duration.data,
             needed_by = needed_by,
         )
-        try:
-            db.session.add(item)
-            db.session.commit()
-            return redirect(url_for('.index'))
-        except Exception:
-            return 'There was an issue adding your item'
+    return item
 
-    return render_template('library/create_borrow.html', form=form, homelink='/library/')
-
-
-@library.route('/edit/<int:id>', methods=['GET', 'POST'])
+@library.route('/edit/<int:item_id>')
 @login_required
-def edit(id):
-    Product, _, _, db = _db_conn()
-    item = Product.query.get_or_404(id)
+def edit(item_id):
+    '''Renders an editing form for the given item
 
+    item_id: int, the item_id of the item to be edited
+    '''
+    item = Product.query.get_or_404(item_id)
     needed_by = item.needed_by.strftime('%Y-%m-%d')
 
+    form = ProductForm()
+
+    if item.borrower.user != current_user or item.lender:
+        return redirect(url_for('.index'))
+
+    return render_template('library/edit_borrow.html', item=item, form=form,
+                           needed_by=needed_by, homelink='/item/')
+
+
+@library.route('/edit/<int:item_id>', methods=['POST'])
+@login_required
+@db_commit(broadcast_data='library')
+def edit_post(item_id):
+    '''Accepts editing submissions for the given item
+
+    item_id: int, the item_id of the item to be edited
+    '''
+    item = Product.query.get_or_404(item_id)
     form = ProductForm()
 
     if item.borrower.user != current_user or item.lender:
@@ -72,43 +86,39 @@ def edit(id):
         item.name = form.name.data
         item.description = form.description.data
         item.duration = form.duration.data
+        item.needed_by = form.needed_by.data
 
-        try:
-            db.session.add(item)
-            db.session.commit()
-            return redirect(url_for('.index'))
-        except:
-            return 'There was an issue editing your item'
-
-    return render_template('library/edit_borrow.html', item=item, form=form,
-                           needed_by=needed_by, homelink='/item/')
+    return item
 
 
 # TODO: Add flash error for deleting
-@library.route('/delete/<int:id>')
+@library.route('/delete/<int:item_id>')
 @login_required
-def delete(id):
-    Product, _, _, db = _db_conn()
-    item = Product.query.get_or_404(id)
+@db_commit(broadcast_data='library', action='delete')
+def delete(item_id):
+    '''Deletes entry for the given item
+
+    item_id: int, the item_id of the item to be deleted
+    '''
+    item = Product.query.get_or_404(item_id)
 
     if item.borrower.user != current_user:
         return redirect(url_for('.index'))
 
-    try:
-        db.session.delete(item)
-        db.session.commit()
-        return redirect(url_for('.index'))
-    except:
-        return 'There was a problem deleting that item'
+    return item
 
 
 # TODO: Add flash error for lending
-@library.route('/lend/<int:id>')
+@library.route('/lend/<int:item_id>')
 @login_required
-def lend(id):
-    Product, _, Lender, db = _db_conn()
-    item = Product.query.get_or_404(id)
-    
+@db_commit(broadcast_data='library')
+def lend(item_id):
+    '''Creates a lend request for the given item
+
+    item_id: int, the item_id of the item to be lent to
+    '''
+    item = Product.query.get_or_404(item_id)
+
     if item.lender or item.borrower.user == current_user:
         return redirect(url_for('.index'))
 
@@ -116,29 +126,21 @@ def lend(id):
         user = current_user,
     )
     item.lender = lender
-
-    try:
-        db.session.add(item)
-        db.session.commit()
-        return redirect(url_for('.index'))
-    except:
-        return 'There was a problem lending'
+    return item
 
 
 # TODO: Add flash error for withdrawing
-@library.route('/withdraw/<int:id>')
+@library.route('/withdraw/<int:item_id>')
 @login_required
-def withdraw(id):
-    Product, _, Lender, db = _db_conn()
-    item = Product.query.get_or_404(id)
+@db_commit(broadcast_data='library')
+def withdraw(item_id):
+    '''Removes a lend request for the given item
+
+    item_id: int, the item_id of the item to be withdrawn from lending
+    '''
+    item = Product.query.get_or_404(item_id)
     if not item.lender or item.lender.user != current_user:
         return redirect(url_for('.index'))
-    
-    item.lender = None
 
-    try:
-        db.session.add(item)
-        db.session.commit()
-        return redirect(url_for('.index'))
-    except:
-        return 'There was a problem withdrawing'
+    item.lender = None
+    return item
