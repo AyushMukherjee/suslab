@@ -51,6 +51,7 @@ def user_edit_view(id):
             return render_template('user_profile.html')
         except Exception as e:
             print('user is not edited ', e)
+            return render_template('user_profile_edit.html')
 
     else:
         print("user did not validate ")
