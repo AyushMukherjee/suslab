@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/UserPro.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="main_div">
+    <div class="userInfo_Div">
+        <h3>Your Personal Details</h3>
+        <div class="photo_div">
+            <img src="https://picsum.photos/175/175">
+        </div>
+        <div>
+            {% if current_user.is_authenticated %}
+            <div>
+                <br>
+                <p>Username: <span>{{ current_user.name }}</span> </p>
+                <p>Address: </p>
+                <p>Programme: </p>
+                <p>Contact: </p>
+                <p>Gender: </p>
+                <p>D.O.B: </p>
+            </div>
+            <br>
+            <a class="button Edit_btn" href="/userinfoedit">Edit Details</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="userItems_Div">
+        <div class="menu_div">
+            <ul>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

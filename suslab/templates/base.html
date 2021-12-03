@@ -4,31 +4,25 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
-<!-- sub_menu.css was linked -->
- <!-- <link rel="stylesheet" href="sub_menu.css"> -->
-
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta property="og:title" content="">
   <meta property="og:type" content="">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-
   <!--link rel="manifest" href="site.webmanifest"-->
   <!--link rel="apple-touch-icon" href="icon.png"-->
   <!-- Place favicon.ico in the root directory -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Source+Sans+Pro&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Source+Sans+Pro&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   <meta name="theme-color" content="#fafafa">
-  {% block head %}{% endblock %}  
-  
+  {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -38,7 +32,7 @@
 
   <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
   <script src="{{ url_for('static', filename='js/debounce-scroll.js') }}"></script>
-  
+
   <nav class="navbar">
     <div class="home" id="home">
       <a href="/" class="logo">
@@ -46,12 +40,12 @@
       </a>
     </div>
     <button class="nav-toggle">
-        <span class="hamburger"></span>
+      <span class="hamburger"></span>
     </button>
     <div class="nav-group flex-horizontal">
       {% if current_user.is_authenticated %}
       <div class="user-info flex-horizontal" id="user-info">
-       <a href="/userinfo"><span class="username flex-text-item">{{ current_user.name }}</span></a> 
+        <a href="/userinfo"><span class="username flex-text-item">{{ current_user.name }}</span></a>
         <div class="user-image" id="user-image"><img src={{ user_avatar(current_user.name|lower) }}></div>
       </div>
       {% endif %}
@@ -60,36 +54,42 @@
         <li class="nav-item flex-text-item"><a class="nav-item-link">faq</a></li>
         <li class="nav-item flex-text-item"><a class="nav-item-link" href="/contact">contact</a></li>
         {% if current_user.is_authenticated %}
-        <li class="nav-item flex-text-item"><a href="{{ url_for('security.logout', next=url_for(request.endpoint)) }}"class="nav-item-link">logout</a></li>
+        <li class="nav-item flex-text-item"><a href="{{ url_for('security.logout', next=url_for(request.endpoint)) }}"
+            class="nav-item-link">logout</a></li>
       </ul>
     </div>
-      {% else %}    
-               
-      <li class="nav-item flex-text-item"><a href="{{ url_for('security.login', next=url_for(request.endpoint)) }}" class=" dropdown-item nav-item-link">login</a></li>
-      <li class="nav-item flex-text-item"><a href="{{ url_for('security.register', next=url_for(request.endpoint)) }}" class="dropdown-item nav-item-link">signup</a></li>    
-      
-      {% endif %}
+    {% else %}
 
-      </ul>
+    <li class="nav-item flex-text-item"><a href="{{ url_for('security.login', next=url_for(request.endpoint)) }}"
+        class=" dropdown-item nav-item-link">login</a></li>
+    <li class="nav-item flex-text-item"><a href="{{ url_for('security.register', next=url_for(request.endpoint)) }}"
+        class="dropdown-item nav-item-link">signup</a></li>
+
+    {% endif %}
+
+    </ul>
     </div>
-  </nav>  
+  </nav>
 
   <div class="spacer"></div>
   {% block body %}{% endblock %}
 
   <section class="social-media flex-horizontal">
-      <div class="social-media-icon facebook">
-        <a href="https://www.facebook.com/suscom.apu" target="_blank" rel="noopener noreferrer" class="fa fa-facebook"></a>
-      </div>
-      <div class="social-media-icon twitter">
-        <a href="https://twitter.com/ApuSuscom" target="_blank" rel="noopener noreferrer" class="fa fa-twitter"></a>
-      </div>
-      <div class="social-media-icon instagram">
-        <a href="https://www.instagram.com/suscom_apu" target="_blank" rel="noopener noreferrer" class="fa fa-instagram"></a>
-      </div>
-      <div class="social-media-icon linkedin">
-        <a href="https://www.linkedin.com/in/suscom-apu-511904211" target="_blank" rel="noopener noreferrer" class="fa fa-linkedin"></a>
-      </div>
+    <div class="social-media-icon facebook">
+      <a href="https://www.facebook.com/suscom.apu" target="_blank" rel="noopener noreferrer"
+        class="fa fa-facebook"></a>
+    </div>
+    <div class="social-media-icon twitter">
+      <a href="https://twitter.com/ApuSuscom" target="_blank" rel="noopener noreferrer" class="fa fa-twitter"></a>
+    </div>
+    <div class="social-media-icon instagram">
+      <a href="https://www.instagram.com/suscom_apu" target="_blank" rel="noopener noreferrer"
+        class="fa fa-instagram"></a>
+    </div>
+    <div class="social-media-icon linkedin">
+      <a href="https://www.linkedin.com/in/suscom-apu-511904211" target="_blank" rel="noopener noreferrer"
+        class="fa fa-linkedin"></a>
+    </div>
   </section>
 
   <footer>

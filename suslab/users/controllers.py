@@ -10,4 +10,9 @@ def get_user_datastore():
 
 @app.route('/userinfo')
 def userinfo():
-    return render_template('userinfo.html')
+    return render_template('UserPro.html')
+
+
+@app.route('/userinfoedit')
+def editdetails():
+    return render_template('UserProEdit.html')

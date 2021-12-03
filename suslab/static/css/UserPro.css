@@ -1,0 +1,73 @@
+.main_div {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.userInfo_Div {
+    width: 40%;
+    height: 100%;
+
+}
+
+.userItems_Div {
+    width: 60%;
+    height: 100%;
+
+}
+
+.photo_div {
+    width: 175px;
+    height: 175px;
+    margin-top: 40px;
+    margin-left: 150px;
+    margin-right: 100px;
+    border-radius: 50%;
+}
+
+.photo_div img {
+    border-radius: 50%;
+}
+
+h3 {
+    margin-top: 25px;
+    margin-left: 110px;
+}
+
+p {
+    margin-left: 120px;
+    margin-bottom: 8px;
+}
+
+span {
+    margin-left: 25px;
+}
+
+.Edit_btn {
+    margin-left: 150px;
+}
+
+.menu_div {
+    width: 100%;
+}
+
+.main_div ul {
+    list-style: none;
+    display: inline-flex;
+    text-align: center;
+}
+
+.main_div ul li {
+    width: 120px;
+    padding: 10px;
+    margin-top: 25px;
+}
+
+.main_div ul li a {
+    text-decoration: none;
+}
+
+.main_div ul li:hover {
+    border-bottom: 2px solid red;
+    cursor: pointer;
+}

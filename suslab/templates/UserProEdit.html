@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/UserPro.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/userProEdit.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="main_div">
+    <div class="userInfo_Div">
+        <h3>Your Personal Details</h3>
+        <div class="photo_div">
+            <img src="https://picsum.photos/175/175">
+        </div>
+        <br>
+        <div>
+            {% if current_user.is_authenticated %}
+            <div class="form_div">
+                <form>
+                    Username: <input type="text" placeholder="Enter Your Name"> <br>
+                    Address: &nbsp; &nbsp;<input type="text" placeholder="Enter Your Address"> <br>
+                    Programme: &nbsp; &nbsp;
+                    <select name="programme" id="programme">
+                        <option value="01">Select Your Programme</option>
+                        <option value="M.A Development">M.A Development</option>
+                        <option value="M.A Education">M.A Education</option>
+                        <option value="M.A Education">M.A Education</option>
+                        <option value="M.A Education">M.A Education</option>
+                        <option value="M.A Education">M.A Education</option>
+                    </select>
+                    <br>
+                    Contact: &nbsp; &nbsp; <input type="text" placeholder="Enter Your Contact"> <br>
+                </form>
+
+            </div>
+            <a class="button Edit_btn" href="/">Save Details</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="userItems_Div">
+        <div class="menu_div">
+            <ul>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+                <li> <a href="">Home</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
